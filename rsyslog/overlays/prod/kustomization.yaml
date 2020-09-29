@@ -1,0 +1,7 @@
+namespace: dh-prod-ingest
+resources:
+  - ../../bases/rsyslog
+patchesStrategicMerge:
+  - rsyslog.yaml
+generators:
+  - ./secret-generator.yaml

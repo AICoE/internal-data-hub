@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  name: rsyslog-ingest
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+        - name: rsyslog
+          imagePullPolicy: Always
+          env:
+            - name: KAFKA_BROKER
+              value: "kafka.datahub.redhat.com:443"
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2Gi
+          volumeMounts:
+            - mountPath: /etc/rsyslog.d
+              name: rsyslog-d
+              readOnly: true
+            - mountPath: /etc/kafka/certs/
+              name: kafka-cert
+              readOnly: true
