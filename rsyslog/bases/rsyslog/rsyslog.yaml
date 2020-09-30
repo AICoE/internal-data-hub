@@ -1,0 +1,128 @@
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    template: rsyslog-deployment-template
+  name: rsyslog
+
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: rsyslog-deployment
+  labels:
+    template: rsyslog-deployment-template
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: rsyslog:latest
+  source:
+    type: Git
+    contextDir: rsyslog/container-image
+    git:
+      ref: master
+      uri: https://github.com/aicoe/internal-data-hub.git
+  strategy:
+    type: Docker
+    dockerStrategy:
+      env:
+        - name: GIT_SSL_NO_VERIFY
+          value: 'true'
+  triggers:
+    - type: ConfigChange
+
+---
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: rsyslog
+    rsyslog-name: ingestor
+  name: rsyslog-ingest
+spec:
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: rsyslog
+        rsyslog-name: ingestor
+      name: rsyslog-ingest
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: rsyslog-name
+                      operator: In
+                      values:
+                        - ingestor
+                topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: kafka-cert
+          secret:
+            secretName: kafka-cert
+        - name: rsyslog-d
+          configMap:
+            default: 420
+            name: rsyslog-d-conf
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        from:
+          kind: ImageStreamTag
+          name: rsyslog:latest
+        containerNames:
+          - rsyslog
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: rsyslog
+  name: rsyslog
+spec:
+  ports:
+    - name: tcp
+      port: 10514
+      protocol: TCP
+      targetPort: 10514
+  selector:
+    app: rsyslog
+    rsyslog-name: ingestor
+  sessionAffinity: None
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: rsyslog
+  name: rsyslog-external
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - name: tcp
+      nodePort: 30514
+      port: 10514
+      protocol: TCP
+      targetPort: 10514
+    - name: udp
+      nodePort: 30514
+      port: 10514
+      protocol: UDP
+      targetPort: 10514
+  selector:
+    app: rsyslog
+    rsyslog-name: ingestor
+  sessionAffinity: None
+  type: NodePort

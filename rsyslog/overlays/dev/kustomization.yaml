@@ -1,0 +1,5 @@
+namespace: dh-dev-ingest
+resources:
+  - ../../bases/rsyslog
+patchesStrategicMerge:
+  - rsyslog.yaml
