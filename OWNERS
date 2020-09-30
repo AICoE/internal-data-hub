@@ -1,0 +1,19 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+  - accorvin
+  - anishasthana
+  - gmfrasca
+  - hemajv
+  - HumairAK
+  - maulikjs
+  - rimolive
+reviewers:
+  - accorvin
+  - anishasthana
+  - gmfrasca
+  - hemajv
+  - HumairAK
+  - kebab-mai-haddi
+  - maulikjs
+  - rimolive
