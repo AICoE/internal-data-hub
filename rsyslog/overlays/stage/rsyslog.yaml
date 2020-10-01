@@ -15,7 +15,7 @@ spec:
               value: "stage-kafka-bootstrap-dh-stage-message-bus.cloud.paas.stage.psi.redhat.com:443"
           resources:
             limits:
-              cpu: 1000m
+              cpu: 1
               memory: 1Gi
           volumeMounts:
             - mountPath: /etc/rsyslog.d
