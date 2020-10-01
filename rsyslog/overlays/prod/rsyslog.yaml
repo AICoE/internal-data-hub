@@ -15,7 +15,7 @@ spec:
               value: "kafka.datahub.redhat.com:443"
           resources:
             limits:
-              cpu: 1000m
+              cpu: 1
               memory: 2Gi
           volumeMounts:
             - mountPath: /etc/rsyslog.d

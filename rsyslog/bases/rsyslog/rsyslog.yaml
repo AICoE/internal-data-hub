@@ -42,8 +42,6 @@ metadata:
     rsyslog-name: ingestor
   name: rsyslog-ingest
 spec:
-  updateStrategy:
-    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -69,7 +67,7 @@ spec:
             secretName: kafka-cert
         - name: rsyslog-d
           configMap:
-            default: 420
+            defaultMode: 420
             name: rsyslog-d-conf
   triggers:
     - type: ConfigChange
