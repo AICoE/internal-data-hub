@@ -18,6 +18,12 @@ Install [Kustomize](https://github.com/kubernetes-sigs/kustomize/blob/master/doc
 GO111MODULE=on go get sigs.k8s.io/kustomize/kustomize/v3@v3.5.4
 ```
 
+#### Deploy ArgoCD-Manager rolebinding
+
+Before using ArgoCD to manage the Rsyslog deployment in stage or
+production, you must manually apply the ArgoCD-Manager rolebinding
+contained in [bases/rsyslog/argocd-manager-rolebinding.yaml](bases/rsyslog/argocd-manager-rolebinding.yaml)
+
 See [Kustomize](https://github.com/kubernetes-sigs/kustomize/tree/master/docs)
 docs for more info.
 
