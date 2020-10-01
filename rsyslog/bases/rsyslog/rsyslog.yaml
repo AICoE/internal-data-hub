@@ -105,7 +105,27 @@ kind: Service
 metadata:
   labels:
     app: rsyslog
-  name: rsyslog-external
+  name: rsyslog-external-udp
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - name: udp
+      nodePort: 30514
+      port: 10514
+      protocol: UDP
+      targetPort: 10514
+  selector:
+    app: rsyslog
+    rsyslog-name: ingestor
+  sessionAffinity: None
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: rsyslog
+  name: rsyslog-external-tcp
 spec:
   externalTrafficPolicy: Cluster
   ports:
@@ -113,11 +133,6 @@ spec:
       nodePort: 30514
       port: 10514
       protocol: TCP
-      targetPort: 10514
-    - name: udp
-      nodePort: 30514
-      port: 10514
-      protocol: UDP
       targetPort: 10514
   selector:
     app: rsyslog
