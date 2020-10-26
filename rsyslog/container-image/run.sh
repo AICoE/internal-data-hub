@@ -12,4 +12,3 @@ else
 fi
 
 /usr/sbin/rsyslogd ${RSYSLOG_ARGS}
-
