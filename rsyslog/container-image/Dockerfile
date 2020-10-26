@@ -12,15 +12,15 @@ ADD rsyslog.repo /etc/yum.repos.d/
 RUN yum update -y && \
     yum install -y rsyslog \
     rsyslog-elasticsearch \
-#	rsyslog-imptcp \
-#	rsyslog-imrelp \
-	rsyslog-mmjsonparse \
-#	rsyslog-omrelp \
-#	rsyslog-omstdout \
+#    rsyslog-imptcp \
+#    rsyslog-imrelp \
+    rsyslog-mmjsonparse \
+#    rsyslog-omrelp \
+#    rsyslog-omstdout \
     rsyslog-mmsnmptrapd \
-	rsyslog-kafka && \
+    rsyslog-kafka && \
     yum clean all && \
-	rm /etc/rsyslog.d/listen.conf
+    rm /etc/rsyslog.d/listen.conf
 
 VOLUME /data
 
