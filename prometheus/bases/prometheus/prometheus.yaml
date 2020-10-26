@@ -1,0 +1,18 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    prometheus: data-hub
+  name: data-hub
+  namespace: dh-psi-monitoring
+spec:
+  alerting:
+    alertmanagers:
+      - name: data-hub
+        namespace: dh-psi-monitoring
+        port: web
+  replicas: 1
+  serviceMonitorSelector:
+    matchLabels:
+      prometheus: dh-prometheus

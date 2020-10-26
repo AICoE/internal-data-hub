@@ -1,0 +1,105 @@
+apiVersion: integreatly.org/v1alpha1
+kind: Grafana
+metadata:
+    name: grafana
+    namespace: dh-psi-monitoring
+spec:
+    client:
+        preferService: true
+    config:
+        auth:
+            disable_login_form: false
+            disable_signout_menu: true
+        auth.anonymous:
+            enabled: true
+        log:
+            level: warn
+            mode: console
+        security:
+            admin_user: admin
+            admin_password: ENC[AES256_GCM,data:iva7EMn2VSWo,iv:P1qbKqL6bBFuhySy/9N0sGew2j4vWugpwrgt/9A+GtM=,tag:+hH6Ww03WAX3+akkvepkiQ==,type:str]
+    dashboardLabelSelector:
+    -   matchExpressions:
+        -   key: app
+            operator: In
+            values:
+            - grafana
+    containers:
+    -   args:
+        - -provider=openshift
+        - -pass-basic-auth=false
+        - -https-address=:9091
+        - -http-address=
+        - -email-domain=*
+        - -upstream=http://localhost:3000
+        - '-openshift-sar={"resource": "namespaces", "verb": "get"}'
+        - -openshift-service-account=grafana-serviceaccount
+        - -openshift-ca=/etc/pki/tls/cert.pem
+        - -openshift-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        - -openshift-ca=/etc/pki/router-ca/ca-bundle.crt
+        - -tls-cert=/etc/tls/private/tls.crt
+        - -tls-key=/etc/tls/private/tls.key
+        - -cookie-secret-file=/etc/proxy/secrets/session_secret
+        - -skip-auth-regex=^/metrics,/api/datasources,/api/dashboards
+        - '-openshift-sar={"resource": "namespaces", "verb": "get", "resourceName":
+            "dh-psi-monitoring", "namespace": "dh-psi-monitoring"}'
+        image: registry.redhat.io/openshift4/ose-oauth-proxy:v4.4
+        name: oauth-proxy
+        ports:
+        -   containerPort: 9091
+            name: oauth-proxy
+        resources: {}
+        volumeMounts:
+        -   mountPath: /etc/tls/private
+            name: secret-grafana-tls
+            readOnly: false
+        -   mountPath: /etc/proxy/secrets
+            name: secret-grafana-proxy
+            readOnly: false
+        -   mountPath: /etc/pki/router-ca
+            name: secret-default-ingress-cert
+            readOnly: true
+    ingress:
+        enabled: true
+        targetPort: oauth-proxy
+        termination: reencrypt
+    secrets:
+    - grafana-tls
+    - grafana-proxy
+    - default-ingress-cert
+    service:
+        annotations:
+            service.alpha.openshift.io/serving-cert-secret-name: grafana-tls
+        ports:
+        -   name: oauth-proxy
+            port: 9091
+            protocol: TCP
+            targetPort: oauth-proxy
+    serviceAccount:
+        annotations:
+            serviceaccounts.openshift.io/oauth-redirectreference.primary: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"grafana-route"}}'
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    lastmodified: '2020-10-26T18:51:47Z'
+    mac: ENC[AES256_GCM,data:YCn4PbeWomqCJlmq0wnAoJAWrHq1w+sC92uzRkil98/GICBpoq0t7FiW4KGvFGM5WfFfD90Z8gqEyfQZhgNGpFDR8zlShKQyUxNBrg3engFmBQRUCpfboLfuZtJrVQjL9dkpU7TjcoE0NGw8JxcvCRwBEfabAV9x6Te+ljPpZXI=,iv:yZmG4KLZcaTlXQEFkcJ24LmGUp5SGCRCs12LOoEck1E=,tag:4dcuLlHF1y7kz5Zd+Y86lw==,type:str]
+    pgp:
+    -   created_at: '2020-10-26T18:51:47Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQEMA/irrHa183bxAQf/W1DWRQVYotJ2p8WPR4gag4D/V95vldMDZ75bysGvjDKy
+            luVn8AsFlUhKW/7LkjiWBkYduYTqQCzUwUhM0IwHr27dFhumOniRpnuQIvXk9mje
+            5FdBRH0ranvN+TCGtQi1yjnai2eHO3DJ+Q49nWOby7IfdO47OqPXHYuQlu5QPii0
+            IS3/LhYfgS8S9Yw54ClPuC6eKNxmcgKGDWmf1HKYkyVJPOMgJJ6DrxwARjZV+FPy
+            UjUvSqx9aEOoU7HOl6VDkoOMizQPLOYPz+ULU7cqwBHqbGe0RHYoUr1KvHcX8V46
+            7xOofza1hNcZWvVLXsY46nfI4pe3yaqYSJEP9gGrztJeAcLxLJRNUr51F9h6q05l
+            15qAmPk0RODOk4Roz4chgB9wkZ2I+sNlGOBc5iyFqsCkQYSY7SzxOi02X0s0aRvS
+            Ie7EtDJctdh+XGKHWP7sN06Df9lI5iIoZ+XkA4DsbA==
+            =BLtn
+            -----END PGP MESSAGE-----
+        fp: EFDB9AFBD18936D9AB6B2EECBD2C73FF891FBC7E
+    encrypted_regex: ^(data|stringData|basicAuthPassword|admin_password)$
+    version: 3.6.0
