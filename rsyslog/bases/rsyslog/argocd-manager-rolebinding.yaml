@@ -9,4 +9,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: argocd-manager
-    namespace: argocd-manager
+    namespace: aicoe-argocd
