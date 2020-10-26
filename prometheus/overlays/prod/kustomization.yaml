@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dh-psi-monitoring
+resources:
+  - ../../bases/prometheus
+  - ../../bases/alertmanager
+  - oauth_client.yaml
+generators:
+  - secret-generator.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+secretGenerator:
+  - files:
+      - prometheus/configs/additional-scrape-configs.yaml
+    name: additional-scrape-configs
+patchesStrategicMerge:
+  - prometheus/patches/prometheus.yaml
+  - prometheus/patches/route.yaml
+  - prometheus/patches/service.yaml
+  - alertmanager/patches/alertmanager.yaml
+  - alertmanager/patches/route.yaml
+  - alertmanager/patches/service.yaml

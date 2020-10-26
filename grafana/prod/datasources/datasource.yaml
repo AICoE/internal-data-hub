@@ -1,0 +1,45 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+    name: prometheus
+    namespace: dh-psi-monitoring
+spec:
+    datasources:
+    -   basicAuthUser: grafana
+        access: proxy
+        secureJsonData:
+            basicAuthPassword: ENC[AES256_GCM,data:ngHDXHoCB1Lc,iv:D6Ng+ns+bhclQWi1AK3SoERO4dLg7iSFMVeks13NhoE=,tag:JJkAv2ad1aErEG692DfFkA==,type:str]
+        name: prom-basic-auth
+        url: https://prometheus-dh-psi-monitoring.apps.ocp4.prod.psi.redhat.com
+        jsonData:
+            timeInterval: 5s
+            tlsSkipVerify: true
+        withCredentials: false
+        basicAuth: true
+        type: prometheus
+    name: prometheus-grafanadatasource.yaml
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    lastmodified: '2020-10-26T18:51:40Z'
+    mac: ENC[AES256_GCM,data:m5RKDY0oO3+A8Xu9QYlihXadXGD/vINUZwLHbvHwayqW0Ia0MNFLNTD8CwTiHXwW2Esv/BoQbpPSmIVS/eDKUE2XnxvZVy3P5bGbHJp3JEhbXauKwL3Fwfd9IQruFVxHLMku437AOTple48Ztu0Pw/EI/Z6QGLVyLwlq/ouZ5Mo=,iv:+ALPdRFri+q5lboAThlDmCBUxDATFQ7uoP+TBuix0is=,tag:vyLIYH/eWiBBV9hwrwBu8w==,type:str]
+    pgp:
+    -   created_at: '2020-10-26T18:51:40Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQEMA/irrHa183bxAQf8C5OrOjFqx+OereV9moIk4v3ZshMYvDkyKhkRgNyzUxN6
+            lBiT3rlkcdvkifLX5LsHDu04buuOiYKSyCvmdeEP3kHzJ3chEdOVrnmKXl3QLvN2
+            rAMyWND8dy7+R+ajwwwKByHSz5tgfqijQYKhaF/st3tJo7nMWR4KH7qGGKW6H8su
+            VmHhHcEAd7AAOoD5A8f6BAGycq5ImWIHBKT8bEEfQNqE8B6EtF7HYZneYYscyj6V
+            Ji4avJOLXEb2grHS9gjm0A3DY5KtIdMhj6PI/JZH2wUdGnnpNyRaAwcqcVVvJgtI
+            oiCqWXNs8Nv/ri728seHdqdvWwjuBtRftKwyZnEyQNJeAS1mfsC7vZM8mFhRYvNh
+            MwfnriskLuelkUIuqhuxoHcZUhxpyFaVRb4SzJ68tME6CvIo+chMm+Rq5cCJ+jjG
+            k9DRBITwO94b5Cp7kW3qnIdv6NM7l+J9HWuIv6VUZg==
+            =rtl4
+            -----END PGP MESSAGE-----
+        fp: EFDB9AFBD18936D9AB6B2EECBD2C73FF891FBC7E
+    encrypted_regex: ^(data|stringData|basicAuthPassword|admin_password)$
+    version: 3.6.0
