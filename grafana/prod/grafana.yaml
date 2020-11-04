@@ -19,7 +19,7 @@ spec:
         skipCreateAdminAccount: true
         envFrom:
         - secretRef:
-            name: admin-credentials
+              name: admin-credentials
     dashboardLabelSelector:
     -   matchExpressions:
         -   key: app
