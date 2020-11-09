@@ -4,4 +4,4 @@ resources:
 patchesStrategicMerge:
   - rsyslog.yaml
 generators:
-  - ./secret-generator.yaml
+  - ./secrets/secret-generator.yaml
