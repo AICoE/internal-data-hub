@@ -1,0 +1,5 @@
+namespace: dh-dev-ingest
+resources:
+  - ../../bases/logstash
+patchesStrategicMerge:
+  - logstash.yaml

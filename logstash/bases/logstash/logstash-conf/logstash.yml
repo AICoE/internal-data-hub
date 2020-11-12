@@ -1,0 +1,6 @@
+pipeline.batch.size: 500
+path.data: /opt/app-root
+pipeline.workers: 1
+path.config: /etc/logstash/conf.d
+path.queue: /opt/queue
+path.logs: /var/log/logstash

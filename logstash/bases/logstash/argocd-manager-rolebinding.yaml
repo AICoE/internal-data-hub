@@ -1,0 +1,12 @@
+apiVersion: authorization.openshift.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-manager-rolebinding
+roleRef:
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+subjects:
+  - kind: ServiceAccount
+    name: argocd-manager
+    namespace: aicoe-argocd
