@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: dh-psi-monitoring
 resources:
   - grafana.yaml
+  - dashboards
 generators:
   - secret-generator.yaml
