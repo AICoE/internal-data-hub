@@ -2,7 +2,6 @@ apiVersion: integreatly.org/v1alpha1
 kind: GrafanaDataSource
 metadata:
     name: prometheus
-    namespace: dh-psi-monitoring
 spec:
     datasources:
     -   basicAuthUser: grafana
@@ -22,9 +21,8 @@ sops:
     kms: []
     gcp_kms: []
     azure_kv: []
-    hc_vault: []
-    lastmodified: '2020-10-26T18:51:40Z'
-    mac: ENC[AES256_GCM,data:m5RKDY0oO3+A8Xu9QYlihXadXGD/vINUZwLHbvHwayqW0Ia0MNFLNTD8CwTiHXwW2Esv/BoQbpPSmIVS/eDKUE2XnxvZVy3P5bGbHJp3JEhbXauKwL3Fwfd9IQruFVxHLMku437AOTple48Ztu0Pw/EI/Z6QGLVyLwlq/ouZ5Mo=,iv:+ALPdRFri+q5lboAThlDmCBUxDATFQ7uoP+TBuix0is=,tag:vyLIYH/eWiBBV9hwrwBu8w==,type:str]
+    lastmodified: '2020-11-13T19:45:06Z'
+    mac: ENC[AES256_GCM,data:I4wuLaEH+fbdSZ1evtbbF9IlpkP6mZReE8yoB2oPWiJP2AFJwjPVzDHeMSeGh1Ldu1aejHc3vwrBd/tKJ2cfrA1EGYbWSe/eV7WohRt/eXpWECz9YZLd2SfLU48/UpxnF++SlnB+3nr2scwWHiaIq7ZgWrXYzfDaPzYLMY4BZ6Y=,iv:u0EVd8zr6bfdSkSTQS9Bv6QYHEOBtq7UQCafDxbHFGU=,tag:DLIvvPJ8gfaj6L57+8368g==,type:str]
     pgp:
     -   created_at: '2020-10-26T18:51:40Z'
         enc: |
