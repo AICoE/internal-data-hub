@@ -19,3 +19,9 @@ spec:
   serviceMonitorNamespaceSelector:
     matchLabels:
       team: data-hub
+  podMonitorSelector:
+    matchLabels:
+      prometheus: dh-prometheus
+  podMonitorNamespaceSelector:
+    matchLabels:
+      team: data-hub
