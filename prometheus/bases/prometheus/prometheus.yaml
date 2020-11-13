@@ -18,4 +18,4 @@ spec:
       prometheus: dh-prometheus
   serviceMonitorNamespaceSelector:
     matchLabels:
-      ticket: pnt0817437
+      team: data-hub
