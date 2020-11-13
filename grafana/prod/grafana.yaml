@@ -4,6 +4,7 @@ metadata:
     name: grafana
     namespace: dh-psi-monitoring
 spec:
+    baseImage: quay.io/app-sre/grafana:7.1.1
     client:
         preferService: true
     config:
