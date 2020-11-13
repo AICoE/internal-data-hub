@@ -45,21 +45,6 @@ kustomize build prometheus/overlays/prod/ | oc apply -n dh-psi-monitoring -f -
     oc policy add-role-to-user view system:serviceaccount:dh-psi-monitoring:monitoring-sa
     ```
 
-4. Make sure that the Prometheus CR has a label that matches a label for the target namespace:
-This namespace selector can be found [here](bases/prometheus/prometheus.yaml):.
-
-    ```yaml
-    serviceMonitorNamespaceSelector:
-      matchLabels:
-        <target_namespace_label_key>: <target_namespace_label_value>
-    ```
-
-    This label needs to be part of the namespace spec. You can find the namespace labels by running the following command
-
-    ```bash
-    oc get project <target_namespace> -o yaml
-    ```
-
 ## Alerting
 
 ### Alertmanager Config
