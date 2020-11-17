@@ -7,3 +7,9 @@ resources:
   - dashboards
 generators:
   - secret-generator.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+configMapGenerator:
+  - files:
+      - configs/ldap.toml
+    name: ldap-config
