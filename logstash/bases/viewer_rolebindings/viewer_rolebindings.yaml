@@ -1,0 +1,10 @@
+---
+apiVersion: authorization.openshift.io/v1
+kind: RoleBinding
+metadata:
+  name: "project-viewers"
+roleRef:
+  name: "view"
+subjects:
+  - kind: 'Group'
+    name: data-hub

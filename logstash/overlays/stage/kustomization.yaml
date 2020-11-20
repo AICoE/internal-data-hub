@@ -1,0 +1,6 @@
+namespace: dh-stage-ingest
+resources:
+  - ../../bases/logstash
+  - ../../bases/admin_rolebindings
+patchesStrategicMerge:
+  - logstash.yaml

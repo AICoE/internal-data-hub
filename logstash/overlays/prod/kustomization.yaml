@@ -1,0 +1,7 @@
+namespace: dh-prod-ingest
+resources:
+  - ../../bases/logstash
+  - ../../bases/viewer_rolebindings
+  - ../../bases/admin_rolebindings
+patchesStrategicMerge:
+  - logstash.yaml

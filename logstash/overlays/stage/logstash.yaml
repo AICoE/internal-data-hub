@@ -1,0 +1,75 @@
+---
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: logstash-ingest-logstash
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: logstash
+          resources:
+            limits:
+              cpu: 800m
+              memory: 2Gi
+            requests:
+              memory: 2Gi
+              cpu: 800m
+          env:
+            - name: "DEBUG_LOGSTASH"
+            - name: "INSTANCE_RAM"
+              value: "2Gi"
+            - name: "KAFKA_BROKER"
+              value: "stage-kafka-bootstrap.dh-stage-message-bus.svc.cluster.local:9092"
+            - name: "KAFKA_TOPIC"
+              value: "dynamic-logstash"
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 9600
+              scheme: HTTP
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 9600
+              scheme: HTTP
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          imagePullPolicy: Always
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - name: logstash-yml
+              mountPath: /etc/logstash/
+            - name: config
+              mountPath: /etc/logstash/conf.d
+              readOnly: true
+            - name: patterns
+              mountPath: /etc/logstash/patterns.d
+              readOnly: true
+            - name: queue
+              mountPath: /opt/queue
+            - name: logstash-certs
+              mountPath: /etc/pki/tls/certs/
+            - name: logstash-certs-keys
+              mountPath: /etc/pki/tls/private/
+        - name: logstash-monitor
+          imagePullPolicy: Always
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: LOGSTASH_ENDPOINT
+              value: http://localhost:9600
