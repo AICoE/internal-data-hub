@@ -1,6 +1,7 @@
 namespace: dh-prod-ingest
 resources:
   - ../../bases/rsyslog
+  - ./rsyslog-prometheus-rule.yaml
 patchesStrategicMerge:
   - rsyslog.yaml
 generators:
