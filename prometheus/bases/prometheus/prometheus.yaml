@@ -9,7 +9,7 @@ metadata:
 spec:
   alerting:
     alertmanagers:
-      - name: data-hub
+      - name: alert-manager
         namespace: dh-psi-monitoring
         port: web
   replicas: 1
