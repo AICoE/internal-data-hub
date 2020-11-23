@@ -23,3 +23,9 @@ spec:
       prometheus: dh-prometheus
   podMonitorNamespaceSelector:
     matchLabels: {}
+  ruleNamespaceSelector:
+    matchLabels: {}
+  ruleSelector:
+    matchLabels:
+      prometheus: data-hub
+      role: alert-rules
