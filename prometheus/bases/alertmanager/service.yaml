@@ -5,9 +5,9 @@ metadata:
   name: alert-manager
 spec:
   ports:
-    - name: web
+    - name: proxy
       port: 9095
       protocol: TCP
-      targetPort: web
+      targetPort: proxy
   selector:
     app: alertmanager

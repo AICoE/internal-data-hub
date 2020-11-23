@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: prometheus-rsyslog-rules
+  labels:
+    prometheus: data-hub
+    role: alert-rules
+  namespace: dh-prod-ingest
+spec:
+  groups:
+    - name: ./rsyslog.rules
+      rules:
+        - alert: Rsyslog is unavailable
+          expr: 'min{job="Rsyslog Availability"} == 0'
+          for: 5m
+          annotations:
+            summary: Rsyslog is unavailable
