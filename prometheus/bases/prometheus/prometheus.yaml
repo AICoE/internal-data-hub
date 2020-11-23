@@ -9,7 +9,7 @@ metadata:
 spec:
   alerting:
     alertmanagers:
-      - name: data-hub
+      - name: alert-manager
         namespace: dh-psi-monitoring
         port: web
   replicas: 1
@@ -19,7 +19,13 @@ spec:
   serviceMonitorNamespaceSelector:
     matchLabels: {}
   podMonitorSelector:
-    matchLabels: {}
-  podMonitorNamespaceSelector:
     matchLabels:
-      team: data-hub
+      prometheus: dh-prometheus
+  podMonitorNamespaceSelector:
+    matchLabels: {}
+  ruleNamespaceSelector:
+    matchLabels: {}
+  ruleSelector:
+    matchLabels:
+      prometheus: data-hub
+      role: alert-rules
