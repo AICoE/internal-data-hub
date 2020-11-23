@@ -8,14 +8,13 @@ spec:
   replicas: 1
   securityContext: {}
   serviceAccountName: monitoring-sa
-  listenLocal: true
   containers:
     - name: oauth-proxy
       image: registry.redhat.io/openshift4/ose-oauth-proxy:v4.4
       imagePullPolicy: Always
       ports:
         - containerPort: 9095
-          name: web
+          name: proxy
       args:
         - '-provider=openshift'
         - '-https-address=:9095'

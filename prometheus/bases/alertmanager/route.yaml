@@ -8,4 +8,4 @@ spec:
     kind: Service
     name: alert-manager
   port:
-    targetPort: web
+    targetPort: proxy
