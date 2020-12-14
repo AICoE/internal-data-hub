@@ -9,6 +9,9 @@ spec:
     - interval: 30s
       path: /metrics
       port: metrics
+  namespaceSelector:
+    matchNames:
+      - aicoe-argocd
   selector:
     matchLabels:
       app.kubernetes.io/purpose: argocd-metrics
