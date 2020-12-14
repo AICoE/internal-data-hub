@@ -5,7 +5,6 @@ metadata:
   labels:
     prometheus: data-hub
     role: alert-rules
-  namespace: dh-prod-ingest
 spec:
   groups:
     - name: ./rsyslog.rules
