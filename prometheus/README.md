@@ -2,7 +2,7 @@
 
 Kustomize deployment for the Data Hub's internal Prometheus and Grafana instance
 
-### Deploying to Production
+## Deploying to Production
 
 Run the following command from the root of the repository to deploy Prometheus and Alertmanager:
 
@@ -12,38 +12,12 @@ kustomize build prometheus/overlays/prod/ | oc apply -n dh-psi-monitoring -f -
 
 ## Adding New Namespaces for Prometheus to Monitor
 
-**NOTE:** Steps 1 and 2 require cluster admin permissions.
+Give the prometheus service account access to your namespace
 
-1. Make sure that MultiNamespace install is set to true
-
-    ```yaml
-    installModes:
-        - supported: true
-          type: OwnNamespace
-        - supported: true
-          type: SingleNamespace
-        - supported: false
-          type: MultiNamespace
-        - supported: false
-          type: AllNamespaces
-    ```
-
-2. Make sure that `targetNamespaces` in the Prometheus Operator Group has your namespace
-
-    ```yaml
-    spec:
-      targetNamespaces:
-        - dh-psi-monitoring
-        - aicoe-argocd
-        - <new_target_namespace>
-    ```
-
-3. Give the prometheus service account access to your namespace
-
-    ```bash
-    oc project <target_namespace>
-    oc policy add-role-to-user view system:serviceaccount:dh-psi-monitoring:monitoring-sa
-    ```
+```bash
+oc project <target_namespace>
+oc policy add-role-to-user view system:serviceaccount:dh-psi-monitoring:monitoring-sa
+```
 
 ## Alerting
 

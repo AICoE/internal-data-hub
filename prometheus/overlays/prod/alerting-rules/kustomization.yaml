@@ -1,0 +1,2 @@
+resources:
+  - ./rsyslog-prometheus-rule.yaml
