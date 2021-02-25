@@ -1,2 +1,3 @@
 resources:
-  - ./rsyslog-prometheus-rule.yaml
+  - ./rsyslog-prometheus-rules.yaml
+  - ./argocd-prometheus-rules.yaml

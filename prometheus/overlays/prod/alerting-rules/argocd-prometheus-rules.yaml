@@ -1,0 +1,43 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: prometheus-argocd-rules
+  labels:
+    prometheus: data-hub
+    role: alert-rules
+spec:
+  groups:
+    - name: ./argocd-health.rules
+      rules:
+        - alert: All ArgoCD Application Controllers are down
+          expr: 'max(up{job="argocd-metrics"}) == 0'
+          for: 5m
+          annotations:
+            summary: All ArgoCD Application Controllers are down
+            severity: "Critical"
+            documentation: "The production runbook for this service can be found at https://github.com/AICoE/aicoe-cd/blob/master/RUNBOOK.md"
+          labels:
+            service: "ArgoCD"
+            severity: "Critical"
+        - alert: All ArgoCD Servers are down
+          expr: 'max(up{job="argocd-server-metrics"}) == 0'
+          for: 5m
+          annotations:
+            summary: All ArgoCD Servers are down
+            severity: "Critical"
+            documentation: "The production runbook for this service can be found at https://github.com/AICoE/aicoe-cd/blob/master/RUNBOOK.md"
+          labels:
+            service: "ArgoCD"
+            severity: "Critical"
+    - name: ./argocd-sync.rules
+      rules:
+        - alert: A Prod application is out of sync
+          expr: 'count(argocd_app_info{project="data-hub", dest_namespace=~"dh-prod.*",sync_status!="Synced"}) > 0'
+          for: 10m
+          annotations:
+            summary: Check ArgoCD to determine what app is out of sync
+        - alert: Too many Stage applications are out of sync
+          expr: 'count(argocd_app_info{project="data-hub", dest_namespace=~"dh-stage.*",sync_status!="Synced"}) > 1'
+          for: 20m
+          annotations:
+            summary: Check ArgoCD to determine what apps are out of sync
