@@ -4,3 +4,5 @@ resources:
   - ../../bases/admin_rolebindings
 patchesStrategicMerge:
   - logstash.yaml
+generators:
+  - ./secrets/secret-generator.yaml
