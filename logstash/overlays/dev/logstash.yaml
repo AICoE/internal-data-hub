@@ -62,6 +62,8 @@ spec:
               mountPath: /etc/pki/tls/certs/
             - name: logstash-certs-keys
               mountPath: /etc/pki/tls/private/
+            - name: kafka-truststore
+              mountPath: /etc/logstash/conf.d/keystore/
         - name: logstash-monitor
           imagePullPolicy: Always
           resources: {}

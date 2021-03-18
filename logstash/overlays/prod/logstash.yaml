@@ -74,10 +74,3 @@ spec:
           env:
             - name: LOGSTASH_ENDPOINT
               value: http://localhost:9600
-    volumes:
-      - name: kafka-truststore
-        secret:
-          secretName: kafka-truststore
-          items:
-            - key: keystore.jks
-              path: keystore.jks
