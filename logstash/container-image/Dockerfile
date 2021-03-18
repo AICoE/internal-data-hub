@@ -1,4 +1,4 @@
-FROM quay.io/app-sre/centos:centos7
+FROM quay.io/centos/centos:centos7
 MAINTAINER The ViaQ Community <community@TBA>
 
 

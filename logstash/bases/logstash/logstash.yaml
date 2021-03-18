@@ -67,7 +67,7 @@ spec:
     type: Git
     contextDir: logstash/container-image
     git:
-      ref: master
+      ref: main
       uri: https://github.com/aicoe/internal-data-hub.git
   strategy:
     type: Docker
