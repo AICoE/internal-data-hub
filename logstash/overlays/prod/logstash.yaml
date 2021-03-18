@@ -20,7 +20,12 @@ spec:
             - name: "INSTANCE_RAM"
               value: "2Gi"
             - name: "KAFKA_BROKER"
-              value: "three-kafka-bootstrap.dh-prod-message-bus.svc.cluster.local:9092"
+              value: "kafka.datahub.redhat.com:443"
+            - name: "SSL_KEYSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: kafka-truststore
+                  key: SSL_KEYSTORE_PASSWORD
             - name: "KAFKA_TOPIC"
               value: "dynamic-logstash"
           readinessProbe:
