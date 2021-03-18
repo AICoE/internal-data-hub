@@ -6,3 +6,8 @@ patchesStrategicMerge:
   - logstash.yaml
 generators:
   - ./secrets/secret-generator.yaml
+configMapGenerator:
+  - name: logstash-ingest-logstash-config
+    behavior: merge
+    files:
+      - logstash-conf/99-output-kafka.conf
