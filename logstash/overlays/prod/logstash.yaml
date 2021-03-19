@@ -26,6 +26,11 @@ spec:
                 secretKeyRef:
                   name: kafka-truststore
                   key: SSL_KEYSTORE_PASSWORD
+            - name: "SSL_TRUSTSTORE_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: kafka-truststore
+                  key: SSL_TRUSTSTORE_PASSWORD
             - name: "KAFKA_TOPIC"
               value: "dynamic-logstash"
           readinessProbe:
