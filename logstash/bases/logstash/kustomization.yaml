@@ -13,6 +13,7 @@ configMapGenerator:
   - name: logstash-ingest-logstash-yml
     files:
       - logstash-conf/logstash.yml
+      - logstash-conf/log4j2.properties
   - name: logstash-ingest-logstash-patterns
     files:
       - logstash-conf/default
