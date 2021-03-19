@@ -169,6 +169,8 @@ spec:
             items:
               - key: keystore.jks
                 path: keystore.jks
+              - key: truststore.jks
+                path: truststore.jks
 
   triggers:
     - type: ConfigChange
