@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - alert-template.yaml
+  - trino-workflow-templates.yaml
+
+generators:
+- ./secret-generator.yaml

@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: alert-template
+  labels:
+    owner: dh-argo-workflows
+spec:
+  templates:
+    - name: notify-template
+      inputs:
+        parameters:
+        - name: argo-ui-host
+        - name: alert-email-smtp-server
+        - name: alert-from-email
+        - name: alert-to-email-list
+      container:
+        image: "tools:latest"
+        command: [python]
+        env:
+          - name: WORKFLOW_FAILURES
+            value: "{{workflow.failures}}"
+          - name: WORKFLOW_NAME
+            value: "{{workflow.name}}"
+          - name: WORKFLOW_NAMESPACE
+            value: "{{workflow.namespace}}"
+          - name: WORKFLOW_STATUS
+            value: "{{workflow.status}}"
+          - name: WORKFLOW_TIMESTAMP
+            value: "{{workflow.creationTimestamp}}"
+          - name: ARGO_UI_HOST
+            value: "{{inputs.parameters.argo-ui-host}}"
+          - name: ALERT_EMAIL_SMTP_SERVER
+            value: "{{inputs.parameters.alert-email-smtp-server}}"
+          - name: ALERT_FROM_EMAIL
+            value: "{{inputs.parameters.alert-from-email}}"
+          - name: ALERT_TO_EMAIL_LIST
+            value: "{{inputs.parameters.alert-to-email-list}}"
