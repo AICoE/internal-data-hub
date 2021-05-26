@@ -3,6 +3,11 @@ kind: Kustomization
 
 resources:
   - ../../base
-  - update-partition-metadata-workflow.yaml
+
+generators:
+  - ./secret-generator.yaml
+
+patchesStrategicMerge:
+  - update-partition-metadata-workflow_patch.yaml
 
 namespace: "dh-prod-argo"
