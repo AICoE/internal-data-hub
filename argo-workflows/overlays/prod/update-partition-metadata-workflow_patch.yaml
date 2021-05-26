@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: "trino-partition-metadata-update-cron-workflows"
+spec:
+  schedule: "15,45 * * * *"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: alerts_to
+          value: "data-hub-alerts@redhat.com"
+        - name: alerts_from
+          value: "dh-trino-alerts@redhat.com"
+        - name: alerts_smtp_server
+          value: "smtp.corp.redhat.com"
+        - name: argo_ui_host
+          value: "https://argocd-server-aicoe-argocd.apps.ocp4.prod.psi.redhat.com/"

@@ -4,6 +4,4 @@ kind: Kustomization
 resources:
   - alert-template.yaml
   - trino-workflow-templates.yaml
-
-generators:
-- ./secret-generator.yaml
+  - update-partition-metadata-workflow.yaml
