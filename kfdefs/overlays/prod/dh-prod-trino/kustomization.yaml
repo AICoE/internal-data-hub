@@ -1,0 +1,28 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dh-prod-trino
+
+resources:
+  - ../../../base/trino
+
+patchesJson6902:
+  - patch: |
+      - op: add
+        path: /spec/applications/-
+        value:
+          kustomizeConfig:
+            repoRef:
+              name: idh
+              path: odh-manifests/trino
+          name: trino
+      - op: add
+        path: /spec/repos/-
+        value:
+          name: idh
+          uri: https://github.com/rimolive/internal-data-hub/tarball/rmartine
+    target:
+      group: kfdef.apps.kubeflow.org
+      kind: KfDef
+      name: opendatahub
+      version: v1
