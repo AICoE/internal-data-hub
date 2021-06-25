@@ -1,0 +1,37 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dh-dev-trino
+
+resources:
+  - ../../../base/trino
+
+patchesJson6902:
+  - patch: |
+      - op: replace
+        path: /spec/applications/1/kustomizeConfig/parameters
+        value:
+            - name: s3_endpoint_url
+              value: s3.upshift.redhat.com
+            - name: s3_credentials_secret
+              value: prod-aws-secret
+            - name: trino_db_secret
+              value: prod-trino-db-secret
+      - op: add
+        path: /spec/applications/-
+        value:
+          kustomizeConfig:
+            repoRef:
+              name: idh
+              path: odh-manifests/trino
+          name: trino
+      - op: add
+        path: /spec/repos/-
+        value:
+          name: idh
+          uri: https://github.com/AICoE/internal-data-hub/tarball/main
+    target:
+      group: kfdef.apps.kubeflow.org
+      kind: KfDef
+      name: opendatahub
+      version: v1
