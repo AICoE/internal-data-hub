@@ -26,3 +26,27 @@ patchesJson6902:
       kind: KfDef
       name: opendatahub
       version: v1
+  - patch: |
+      - op: replace
+        path: /data/s3_credentials_secret
+        value: stage-aws-secret
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/s3_endpoint_url
+        value: s3.upshift.redhat.com
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/trino_environment
+        value: stage
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
