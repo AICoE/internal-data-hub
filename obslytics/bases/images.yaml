@@ -1,0 +1,85 @@
+---
+apiVersion: v1
+kind: ImageStream
+metadata:
+  name: obslytics-data-exporter
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+
+---
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: obslytics-data-exporter
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: obslytics-data-exporter:latest
+  resources:
+    limits:
+      memory: 4Gi
+  runPolicy: Serial
+  source:
+    git:
+      ref: main
+      uri: https://gitlab.cee.redhat.com/data-hub/obslytics-wrapper.git
+    type: Git
+  strategy:
+    type: "Docker"
+    dockerStrategy:
+      noCache: true
+      env:
+        - name: GIT_SSL_NO_VERIFY
+          value: 'true'
+  triggers:
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+
+---
+apiVersion: v1
+kind: ImageStream
+metadata:
+  name: obslytics-pyscripts
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+
+---
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: obslytics-pyscripts
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: obslytics-pyscripts:latest
+  resources:
+    limits:
+      memory: 4Gi
+  runPolicy: Serial
+  source:
+    git:
+      uri: https://gitlab.cee.redhat.com/data-hub/dh-workflow-obslytics.git
+    type: Git
+  strategy:
+    type: "Docker"
+    dockerStrategy:
+      dockerfilePath: pyscripts.Dockerfile
+      noCache: true
+      env:
+        - name: GIT_SSL_NO_VERIFY
+          value: 'true'
+  triggers:
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange

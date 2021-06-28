@@ -1,0 +1,301 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: obslytics-data-exporter-workflow-template
+  labels:
+    owner: obslytics-remote-reader
+    app: obslytics-data-exporter
+    pipeline: obslytics-data-exporter
+spec:
+  templates:
+    - name: init
+      parallelism: 2
+      inputs:
+        parameters:
+          - name: metrics_list
+          - name: start_timestamp
+          - name: step
+          - name: delay
+          - name: resolution
+      steps:
+        - - name: metric-split
+            template: metric-worker
+            arguments:
+              parameters:
+                - name: metric
+                  value: "{{item}}"
+                - name: start_timestamp
+                  value: "{{inputs.parameters.start_timestamp}}"
+                - name: step
+                  value: "{{inputs.parameters.step}}"
+                - name: delay
+                  value: "{{inputs.parameters.delay}}"
+                - name: resolution
+                  value: "{{inputs.parameters.resolution}}"
+            withParam: "{{inputs.parameters.metrics_list}}"
+    - name: metric-worker
+      parallelism: 1
+      inputs:
+        parameters:
+          - name: metric
+          - name: start_timestamp
+          - name: step
+          - name: delay
+          - name: resolution
+      dag:
+        tasks:
+          - name: process-metric
+            template: run-obslytics
+            arguments:
+              parameters:
+                - name: metric
+                  value: "{{inputs.parameters.metric}}"
+                - name: start_timestamp
+                  value: "{{inputs.parameters.start_timestamp}}"
+                - name: step
+                  value: "{{inputs.parameters.step}}"
+                - name: delay
+                  value: "{{inputs.parameters.delay}}"
+                - name: resolution
+                  value: "{{inputs.parameters.resolution}}"
+                - name: dryrun
+                  value: ""
+
+    - name: normalize-timestamps
+      activeDeadlineSeconds: 600
+      inputs:
+        parameters:
+          - name: backfill_from_timestamp
+          - name: backfill_min_ts
+      script:
+        image: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+        command: [/bin/bash, -e]
+        source: |
+          date --date="{{inputs.parameters.backfill_from_timestamp }}" +%FT%TZ -u > /mnt/out/backfill_from_timestamp
+          date --date="{{inputs.parameters.backfill_min_ts }}" +%FT%TZ -u > /mnt/out/backfill_min_ts
+
+        volumeMounts:
+          - name: out
+            mountPath: /mnt/out
+      volumes:
+        - name: out
+          emptyDir: {}
+      outputs:
+        parameters:
+          - name: backfill_from_timestamp
+            valueFrom:
+              path: /mnt/out/backfill_from_timestamp
+          - name: backfill_min_ts
+            valueFrom:
+              path: /mnt/out/backfill_min_ts
+      resources:
+        limits:
+          memory: 10Gi
+
+
+    - name: get-timestamp-list
+      activeDeadlineSeconds: 600
+      inputs:
+        parameters:
+          - name: step
+          - name: metric
+          - name: backfill_count
+          - name: backfill_from_timestamp
+          - name: min_ts
+          - name: delay
+      script:
+        image: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+        command: [/bin/bash, -e]
+        source: |
+          set -x
+          python py/gap_detector.py \
+              --storage_config /etc/obslytics-data-exporter/storage-config.yaml \
+              --prefix data/ \
+              --metric {{inputs.parameters.metric}} \
+              --step {{inputs.parameters.step}} \
+              --delay {{inputs.parameters.delay}} \
+              --from_timestamp {{inputs.parameters.backfill_from_timestamp}} \
+              --earliest_timestamp {{inputs.parameters.min_ts}} \
+              --max_timestamps {{inputs.parameters.backfill_count}} \
+              --output_file /mnt/out/tslist \
+              --verbose \
+              --backfill
+
+        volumeMounts:
+          - name: out
+            mountPath: /mnt/out
+          - name: obslytics-data-exporter-workflow-secrets
+            mountPath: /etc/obslytics-data-exporter
+      volumes:
+        - name: out
+          emptyDir: {}
+      outputs:
+        parameters:
+          - name: tslist
+            valueFrom:
+              path: /mnt/out/tslist
+      resources:
+        limits:
+          memory: 10Gi
+        requests:
+          memory: 10Gi
+
+    - name: get-labels
+      retryStrategy:
+        limit: 5
+      activeDeadlineSeconds: 600
+      script:
+        image: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+        command: [/bin/sh, -e]
+        source: |
+          curl --silent --insecure https://telemeter-lts.datahub.redhat.com/api/v1/label/__name__/values -H "Authorization: Bearer `cat /etc/obslytics-data-exporter/satoken.txt`" > /tmp/labels.json
+          yq r /tmp/labels.json data
+        resources:
+          limits:
+            memory: 10Gi
+        volumeMounts:
+          - name: obslytics-data-exporter-workflow-secrets
+            mountPath: /etc/obslytics-data-exporter
+
+    - name: run-obslytics
+      retryStrategy:
+        limit: 5
+      inputs:
+        parameters:
+          - name: metric
+          - name: start_timestamp
+          - name: step
+          - name: delay
+          - name: resolution
+          - name: dryrun
+      activeDeadlineSeconds: 600
+      script:
+        image: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+        command: [/bin/bash, -e]
+        source: |
+          set -x
+          export GOGC=30
+
+          echo "Calling Script with Params:"
+          epoch=`date --date="{{inputs.parameters.start_timestamp }}" +"%s"`
+          echo "START       : ${epoch} ({{inputs.parameters.start_timestamp}})"
+          echo "METRIC      : {{inputs.parameters.metric }}"
+          echo "STEP        : {{inputs.parameters.step }}"
+          echo "DELAY       : {{inputs.parameters.delay }}"
+          echo "RESOLUTION  : {{inputs.parameters.resolution }}"
+          echo "PREFIX      : data/"
+
+          # Config params
+          export INPUT_CONFIG_FILE="/etc/obslytics-data-exporter/input-config.yaml"
+          export STORAGE_CONFIG_FILE="/etc/obslytics-data-exporter/storage-config.yaml"
+
+          # Input Params
+          export METRIC_MAX_TIME="${epoch}"
+          export METRIC_STEP="{{inputs.parameters.step}}"
+          export METRIC_DELAY="{{inputs.parameters.delay}}"
+          export METRIC_MATCH="{{inputs.parameters.metric}}"
+
+          # Storage Params
+          export OUTPUT_FILE_TYPE="parquet"
+          export OUTPUT_METRIC_RESOLUTION="{{inputs.parameters.resolution }}"
+          export METRIC_STORAGE_PREFIX="data/"
+
+          # Mode Parameters
+          export VERIFY_DATA_STORED="false"
+          export DRYRUN="{{inputs.parameters.dryrun }}"
+
+          bash ./run.sh
+          echo "Export Complete."
+
+        resources:
+          request:
+            memory: 10Gi
+          limits:
+            memory: 10Gi
+        volumeMounts:
+          - name: obslytics-data-exporter-workflow-secrets
+            mountPath: /etc/obslytics-data-exporter
+
+
+    # This workflow template will backfill a single metric.
+    - name: backfill-metric
+      parallelism: 1
+      inputs:
+        parameters:
+          - name: backfill_count
+          - name: backfill_from_timestamp
+          - name: delay
+          - name: metric
+          - name: resolution
+          - name: step
+          - name: backfill_min_ts
+      steps:
+        - - name: get-timestamps
+            arguments:
+              parameters:
+                - name: backfill_count
+                  value: "{{inputs.parameters.backfill_count}}"
+                - name: backfill_from_timestamp
+                  value: "{{inputs.parameters.backfill_from_timestamp}}"
+                - name: metric
+                  value: "{{inputs.parameters.metric}}"
+                - name: step
+                  value: "{{inputs.parameters.step}}"
+                - name: min_ts
+                  value: "{{inputs.parameters.backfill_min_ts}}"
+                - name: delay
+                  value: "{{inputs.parameters.delay}}"
+            templateRef:
+              name: "obslytics-data-exporter-workflow-template"
+              template: get-timestamp-list
+
+        - - name: run
+            arguments:
+              parameters:
+                - name: delay
+                  value: "0"  # DO NOT change, this is a delay off of the already detected gaps, and should always be 0.
+                - name: metrics_list
+                  value: "[\"{{inputs.parameters.metric}}\"]"
+                - name: start_timestamp
+                  value: "{{item}}"
+                - name: step
+                  value: "{{inputs.parameters.step}}"
+                - name: resolution
+                  value: "5m"
+            templateRef:
+              name: "obslytics-data-exporter-workflow-template"
+              template: init
+            withParam: "{{steps.get-timestamps.outputs.parameters.tslist}}"
+
+    # This workflow template will verify a single metric.
+    - name: verify
+      activeDeadlineSeconds: 600
+      inputs:
+        parameters:
+          - name: step
+          - name: verify_count
+          - name: verification_from_timestamp
+          - name: delay
+          - name: metric
+      script:
+        image: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+        command: [/bin/bash, -e]
+        source: |
+          set -x
+          python py/verify.py \
+              --config_file /etc/obslytics-data-exporter/storage-config.yaml \
+              --prefix data/ \
+              --metric {{inputs.parameters.metric}} \
+              --step {{inputs.parameters.step}} \
+              --from_timestamp {{inputs.parameters.verification_from_timestamp}} \
+              --max_timestamps {{inputs.parameters.verify_count}} \
+              --delay {{inputs.parameters.delay}} \
+
+        volumeMounts:
+          - name: obslytics-data-exporter-workflow-secrets
+            mountPath: /etc/obslytics-data-exporter
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          memory: 2Gi

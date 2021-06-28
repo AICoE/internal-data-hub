@@ -1,0 +1,12 @@
+---
+- op: replace
+  path: /spec/workflowSpec/ttlSecondsAfterFinished
+  value: 3600
+
+- op: replace
+  path: /spec/workflowSpec/templates/1/steps/0/0/arguments/parameters/0/value
+  value: http://argo-ui-route-dh-dev-argo.apps.your-dev-cluster-ip.nip.io/
+
+- op: replace
+  path: /spec/workflowSpec/templates/1/steps/0/0/arguments/parameters/3/value
+  value: lferrnan@redhat.com
