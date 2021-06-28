@@ -3,8 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: idh-trino
 
-resources:
-  - kfdef.yaml
+bases:
+  - github.com/opendatahub-io/odh-manifests/trino/base?ref=f86122eeb0d9e89991cfd1b7ff9619c5e8d26436
 
 generators:
 - ./secret-generator.yaml
