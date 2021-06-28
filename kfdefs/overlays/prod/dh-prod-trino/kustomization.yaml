@@ -20,9 +20,57 @@ patchesJson6902:
         path: /spec/repos/-
         value:
           name: idh
-          uri: https://github.com/rimolive/internal-data-hub/tarball/rmartine
+          uri: https://github.com/AICoE/internal-data-hub/tarball/main
     target:
       group: kfdef.apps.kubeflow.org
       kind: KfDef
       name: opendatahub
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/s3_credentials_secret
+        value: prod-aws-secret
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/trino_db_secret
+        value: prod-trino-db-secret
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/s3_endpoint_url
+        value: s3.upshift.redhat.com
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/trino_environment
+        value: production
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/trino_cpu_limit
+        value: '16'
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/trino_memory_limit
+        value: '16Gi'
+    target:
+      kind: ConfigMap
+      name: trino-config
       version: v1
