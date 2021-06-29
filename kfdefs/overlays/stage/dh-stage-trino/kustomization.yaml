@@ -6,6 +6,9 @@ namespace: dh-stage-trino
 resources:
   - ../../../base/trino
 
+generators:
+  - secret-generator.yaml
+
 patchesJson6902:
   - patch: |
       - op: add
