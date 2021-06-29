@@ -60,7 +60,7 @@ spec:
           cur = conn.cursor()
           cur.execute(SHOW_CREATE_TABLES)
           rows = cur.fetchall()
-          
+
           schemas = []
 
           for row in rows:
@@ -95,7 +95,7 @@ spec:
           - name: tables_list
             valueFrom:
               path: /mnt/out/tbl_list
-       
+
     - name: update-partition-metadata
       inputs:
         parameters:
