@@ -9,6 +9,9 @@ resources:
 generators:
   - secret-generator.yaml
 
+patchesStrategicMerge:
+  - trino-db-pvc.yaml
+
 patchesJson6902:
   - patch: |
       - op: add
