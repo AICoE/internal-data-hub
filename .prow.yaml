@@ -12,7 +12,11 @@ presubmits:
             - "test-kustomize-build"
           resources:
             requests:
+              cpu: "300m"
               memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
   - name: pre-commit
     decorate: true
     skip_report: false
@@ -27,5 +31,8 @@ presubmits:
             - "--all-files"
           resources:
             requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "1"
               memory: "2Gi"
-              cpu: "2"
