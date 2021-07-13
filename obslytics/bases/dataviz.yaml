@@ -18,7 +18,6 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: obslytics-data-exporter
-          image: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
           imagePullPolicy: Always
           resources:
             limits:
