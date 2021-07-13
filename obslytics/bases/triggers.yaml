@@ -1,0 +1,154 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: obslytics-data-exporter-workflow-triggers
+  labels:
+    owner: obslytics-remote-reader
+    app: obslytics-data-exporter
+    pipeline: obslytics-data-exporter
+spec:
+  podGC:
+    strategy: OnWorkflowSuccess
+  templates:
+    - name: trigger-workflow
+      steps:
+        - - name: run
+            arguments:
+              parameters:
+                - name: metrics_list
+                  value:
+                    - ceph_cluster_total_bytes
+                    - ceph_cluster_total_used_raw_bytes
+                    - cluster_infrastructure_provider
+                    - cluster_installer
+                    - cluster_version
+                    - cluster:capacity_cpu_cores:sum
+                    - cluster:capacity_memory_bytes:sum
+                    - cluster:node_instance_type_count:sum
+                    - id_version_ebs_account_internal:cluster_subscribed
+                    - instance:etcd_object_counts:sum
+                    - node_role_os_version_machine:cpu_capacity_cores:sum
+                    - subscription_sync_total
+                    - workload:cpu_usage_cores:sum
+                    - workload:memory_usage_bytes:sum
+                    - subscription_labels
+                    - ebs_account_account_type_email_domain_internal
+                    - visual_web_terminal_sessions_total
+                    - acm_managed_cluster_info
+                    - cluster:usage:consumption:rhods:cpu:seconds:rate5m
+                    # - cluster_operator_conditions  # TODO: times out, uncomment once grpc proxy allows this and add it to overlays
+                    # - rhods_total_users  # TODO: uncomment once available and add it to overlays
+                    # - rhods_aggregate_availability  # TODO: uncomment once available and add it to overlays
+                - name: start_timestamp
+                  value: "{{workflow.parameters.start_timestamp}}"
+                - name: step
+                  value: 1800
+                - name: delay
+                  value: 36000
+                - name: resolution
+                  value: 5m
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: init
+
+
+    - name: trigger-backfill-workflow
+      parallelism: 3
+      steps:
+        - - name: normalize-timestamps
+            arguments:
+              parameters:
+                - name: backfill_from_timestamp
+                  value: "{{workflow.parameters.start_timestamp}}"
+                - name: backfill_min_ts
+                  value: 2019-05-30T00:00:00Z
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: normalize-timestamps
+        - - name: run-backfill-workflow
+            arguments:
+              parameters:
+                - name: backfill_count
+                  value: 2
+                - name: backfill_from_timestamp
+                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
+                - name: step
+                  value: 1800
+                - name: metric
+                  value: "{{item}}"
+                - name: delay
+                  value: 43200
+                - name: resolution
+                  value: 5m
+                - name: backfill_min_ts
+                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_min_ts}}"
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: backfill-metric
+            withParam:
+              - ceph_cluster_total_bytes
+              - ceph_cluster_total_used_raw_bytes
+              - cluster_infrastructure_provider
+              - cluster_installer
+              - cluster_version
+              - cluster:capacity_cpu_cores:sum
+              - cluster:capacity_memory_bytes:sum
+              - cluster:node_instance_type_count:sum
+              - id_version_ebs_account_internal:cluster_subscribed
+              - instance:etcd_object_counts:sum
+              - node_role_os_version_machine:cpu_capacity_cores:sum
+              - subscription_sync_total
+              - workload:cpu_usage_cores:sum
+              - workload:memory_usage_bytes:sum
+              - subscription_labels
+              - ebs_account_account_type_email_domain_internal
+              - visual_web_terminal_sessions_total
+              - acm_managed_cluster_info
+              - cluster:usage:consumption:rhods:cpu:seconds:rate5m
+              # - cluster_operator_conditions  # TODO: times out, uncomment once grpc proxy allows this and add it to overlays
+              # - rhods_total_users  # TODO: uncomment once available and add it to overlays
+              # - rhods_aggregate_availability  # TODO: uncomment once available and add it to overlays
+
+
+    - name: trigger-verification-workflow
+      parallelism: 3
+      steps:
+        - - name: run-verification-workflow
+            arguments:
+              parameters:
+                - name: verify_count
+                  value: 12
+                - name: verification_from_timestamp
+                  value: "{{workflow.parameters.start_timestamp}}"
+                - name: step
+                  value: 1800
+                - name: metric
+                  value: "{{item}}"
+                - name: delay
+                  value: 45000
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: verify
+            withParam:
+              - ceph_cluster_total_bytes
+              - ceph_cluster_total_used_raw_bytes
+              - cluster_infrastructure_provider
+              - cluster_installer
+              - cluster_version
+              - cluster:capacity_cpu_cores:sum
+              - cluster:capacity_memory_bytes:sum
+              - cluster:node_instance_type_count:sum
+              - id_version_ebs_account_internal:cluster_subscribed
+              - instance:etcd_object_counts:sum
+              - node_role_os_version_machine:cpu_capacity_cores:sum
+              - subscription_sync_total
+              - workload:cpu_usage_cores:sum
+              - workload:memory_usage_bytes:sum
+              - subscription_labels
+              - ebs_account_account_type_email_domain_internal
+              - visual_web_terminal_sessions_total
+              - acm_managed_cluster_info
+              - cluster:usage:consumption:rhods:cpu:seconds:rate5m
+              # - cluster_operator_conditions  # TODO: times out, uncomment once grpc proxy allows this and add it to overlays
+              # - rhods_total_users  # TODO: uncomment once available and add it to overlays
+              # - rhods_aggregate_availability  # TODO: uncomment once available and add it to overlays

@@ -1,0 +1,39 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: dh-prod-argo
+
+resources:
+  - ../../bases/
+
+patchesJson6902:
+  - path: obslytics-cron-workflow.yaml
+    target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: CronWorkflow
+      name: obslytics-data-exporter-cron-workflow
+  - path: backfill-cron-workflow.yaml
+    target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: CronWorkflow
+      name: obslytics-data-exporter-backfill-cron-workflows
+  - path: verification-cron-workflow.yaml
+    target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: CronWorkflow
+      name: obslytics-data-exporter-verification-cron-workflows
+  - path: workflow-templates.yaml
+    target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: WorkflowTemplate
+      name: obslytics-data-exporter-workflow-template
+  - path: dataviz.yaml
+    target:
+      group: apps.openshift.io
+      version: v1
+      kind: DeploymentConfig
+      name: obslytics-data-exporter-dataviz

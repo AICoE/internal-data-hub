@@ -1,0 +1,8 @@
+---
+- op: replace
+  path: /spec/schedule
+  value: 15,45 * * * *
+
+- op: replace
+  path: /spec/workflowSpec/ttlSecondsAfterFinished
+  value: 86400

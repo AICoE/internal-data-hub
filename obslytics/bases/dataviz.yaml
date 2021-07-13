@@ -1,0 +1,95 @@
+---
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: obslytics-data-exporter-dataviz
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+spec:
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      minReadySeconds: 600
+  template:
+    metadata:
+      name: obslytics-data-exporter
+      labels:
+        app: obslytics-data-exporter
+        component: obslytics-data-exporter
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: obslytics-data-exporter
+          image: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 500m
+              memory: 2Gi
+            requests:
+              cpu: 500m
+              memory: 2Gi
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          env:
+            - name: APP_SCRIPT
+              value: /opt/app-root/src/sh/dataviz.sh
+            - name: CONFIG_FILE
+              value: /etc/obslytics-data-exporter/storage-config.yaml
+            - name: PREFIX
+              value: data/
+            - name: FLASK_HOST
+              value: 0.0.0.0
+            - name: FLASK_PORT
+              value: "5000"
+          volumeMounts:
+            - name: "obslytics-data-exporter-config"
+              mountPath: /etc/obslytics-data-exporter
+      volumes:
+        - name: "obslytics-data-exporter-config"
+          secret:
+            secretName: "obslytics-data-exporter-dataviz-secrets"
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        from:
+          kind: ImageStreamTag
+          name: obslytics-pyscripts:latest
+        containerNames:
+          - obslytics-data-exporter
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: obslytics-data-exporter-dataviz
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+spec:
+  selector:
+    component: obslytics-data-exporter
+  ports:
+    - protocol: TCP
+      targetPort: 5000
+      port: 5000
+
+---
+apiVersion: v1
+kind: Route
+metadata:
+  annotations:
+    haproxy.router.openshift.io/timeout: 10m
+  name: dataviz
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+spec:
+  to:
+    kind: Service
+    name: obslytics-data-exporter-dataviz

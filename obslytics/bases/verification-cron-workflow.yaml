@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: obslytics-data-exporter-verification-workflow-
+  labels:
+    owner: obslytics-remote-reader
+    app: obslytics-data-exporter
+    pipeline: obslytics-data-exporter-verification
+  name: obslytics-data-exporter-verification-cron-workflows
+spec:
+  schedule: 0 */4 * * *
+  concurrencyPolicy: Allow
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: start_timestamp
+          value: "{{workflow.creationTimestamp}}"
+    ttlSecondsAfterFinished: 86400
+    entrypoint: cron-trigger
+    onExit: exit-handler
+    templates:
+    - name: cron-trigger
+      steps:
+        - - name: trigger
+            templateRef:
+              name: obslytics-data-exporter-workflow-triggers
+              template: trigger-verification-workflow
+    - name: exit-handler
+      steps:
+        - - name: notify
+            templateRef:
+              name: alert-template
+              template: notify-template
+            when: "{{workflow.status}} != Succeeded"
+            arguments:
+              parameters:
+              - name: argo-ui-host
+                value: http://argo-server-dh-prod-argo.cloud.datahub.psi.redhat.com
+              - name: alert-email-smtp-server
+                value: smtp.corp.redhat.com
+              - name: alert-from-email
+                value: dh-obslytics-alerts@redhat.com
+              - name: alert-to-email-list
+                value: data-hub-alerts@redhat.com
+    volumes:
+    - name: obslytics-data-exporter-workflow-secrets
+      secret:
+        secretName: obslytics-data-exporter-workflow-secrets

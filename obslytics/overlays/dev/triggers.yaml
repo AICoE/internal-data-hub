@@ -1,0 +1,17 @@
+---
+- op: replace
+  path: /spec/templates/0/steps/0/0/arguments/parameters/0/value
+  value:
+    - cluster_versions
+- op: replace
+  path: /spec/templates/1/steps/1/0/withParam
+  value:
+    - cluster_version
+- op: replace
+  path: /spec/templates/2/steps/0/0/withParam
+  value:
+    - cluster_version
+- op: replace
+  path: /spec/templates/1/steps/1/0/arguments/parameters/0/value
+  value:
+    - 4
