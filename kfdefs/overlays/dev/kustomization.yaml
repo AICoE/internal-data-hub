@@ -4,3 +4,4 @@ kind: Kustomization
 
 resources:
   - dh-dev-trino
+  - dh-dev-superset

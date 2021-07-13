@@ -1,0 +1,101 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dh-prod-superset
+
+resources:
+  - ../../../base/superset
+
+generators:
+  - secret-generator.yaml
+
+patchesJson6902:
+  - patch: |
+      - op: replace
+        path: /data/superset_secret
+        value: prod-superset
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_db_secret
+        value: prod-supersetdb-secret
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_cpu_requests
+        value: 1000m
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_memory_requests
+        value: 1Gi
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_cpu_limits
+        value: 2000m
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_memory_limits
+        value: 2Gi
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_db_cpu_requests
+        value: 1000m
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_db_memory_requests
+        value: 1Gi
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_db_cpu_limits
+        value: 2000m
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_db_memory_limits
+        value: 2Gi
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: add
+        path: "/metadata/annotations"
+        value:
+          haproxy.router.openshift.io/timeout: 200s
+    target:
+      kind: Route
+      name: superset
+      version: v1
