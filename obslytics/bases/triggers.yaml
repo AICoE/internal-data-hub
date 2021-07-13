@@ -42,9 +42,9 @@ spec:
                 - name: start_timestamp
                   value: "{{workflow.parameters.start_timestamp}}"
                 - name: step
-                  value: 1800
+                  value: '1800'
                 - name: delay
-                  value: 36000
+                  value: '36000'
                 - name: resolution
                   value: 5m
             templateRef:
@@ -69,15 +69,15 @@ spec:
             arguments:
               parameters:
                 - name: backfill_count
-                  value: 2
+                  value: '2'
                 - name: backfill_from_timestamp
                   value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
                 - name: step
-                  value: 1800
+                  value: '1800'
                 - name: metric
                   value: "{{item}}"
                 - name: delay
-                  value: 43200
+                  value: '43200'
                 - name: resolution
                   value: 5m
                 - name: backfill_min_ts
@@ -117,15 +117,15 @@ spec:
             arguments:
               parameters:
                 - name: verify_count
-                  value: 12
+                  value: '12'
                 - name: verification_from_timestamp
                   value: "{{workflow.parameters.start_timestamp}}"
                 - name: step
-                  value: 1800
+                  value: '1800'
                 - name: metric
                   value: "{{item}}"
                 - name: delay
-                  value: 45000
+                  value: '45000'
             templateRef:
               name: obslytics-data-exporter-workflow-template
               template: verify

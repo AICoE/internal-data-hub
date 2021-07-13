@@ -14,11 +14,11 @@ spec:
         - name: alert-from-email
         - name: alert-to-email-list
       container:
+        args:
+          - notify.py
         image: "tools:latest"
         command: [python]
         env:
-          - name: WORKFLOW_FAILURES
-            value: "{{workflow.failures}}"
           - name: WORKFLOW_NAME
             value: "{{workflow.name}}"
           - name: WORKFLOW_NAMESPACE
