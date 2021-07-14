@@ -58,7 +58,7 @@
 
 - op: replace
   path: /spec/templates/5/retryStrategy/limit
-  value: 5
+  value: 1
 
 - op: replace
   path: /spec/templates/5/script/image
