@@ -91,6 +91,23 @@ patchesJson6902:
       name: superset-config
       version: v1
   - patch: |
+      - op: replace
+        path: /metadata/name
+        value: postgresql
+    target:
+      kind: PersistentVolumeClaim
+      name: supersetdb-data
+      version: v1
+  - patch: |
+      - op: add
+        path: "/metadata/annotations"
+        value:
+          volume.beta.kubernetes.io/storage-class: ceph-dyn-datahub-prod-psi
+    target:
+      kind: PersistentVolumeClaim
+      name: postgresql
+      version: v1
+  - patch: |
       - op: add
         path: "/metadata/annotations"
         value:
