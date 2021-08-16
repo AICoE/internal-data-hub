@@ -100,9 +100,8 @@ patchesJson6902:
       version: v1
   - patch: |
       - op: add
-        path: "/metadata/annotations"
-        value:
-          volume.beta.kubernetes.io/storage-class: ceph-dyn-datahub-prod-psi
+        path: "/spec/storageClassName"
+        value: ceph-dyn-datahub-prod-psi
     target:
       kind: PersistentVolumeClaim
       name: postgresql
