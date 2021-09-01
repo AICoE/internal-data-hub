@@ -115,3 +115,6 @@ patchesJson6902:
       kind: Route
       name: superset
       version: v1
+
+patchesStrategicMerge:
+  - ./supersetdb-deployment-pvc-backup.yaml

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: supersetdb
+  name: supersetdb
+spec:
+  template:
+    spec:
+      containers:
+      - name: postgresql
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - /bin/sh
+                - '-c'
+                - >
+                  sleep 5;
+                  psql '-c' "CREATE USER bareos WITH PASSWORD '$BACKUPS_PASSWORD';";
+                  psql '-c' "GRANT SELECT ON ALL TABLES IN SCHEMA public TO bareos;";
+                  psql --dbname=superset -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO bareos;";
+                  psql '-c' "GRANT USAGE ON SCHEMA public TO bareos;";
+                  psql '-c' "GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO bareos;";
+        env:
+        - name: BACKUPS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: backups-password
+              name: prod-supersetdb-secret
