@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: idh-trino
 
 bases:
-  - github.com/opendatahub-io/odh-manifests/trino/base?ref=fa39cec574c523ae37b67f8a67b0e8bc476ce2a8
+  - github.com/opendatahub-io/odh-manifests/trino/base?ref=9f38fb665102a9a6c2b6bf6b5c0a94b44d1ce234
 
 patchesStrategicMerge:
   - hive-config.yaml
