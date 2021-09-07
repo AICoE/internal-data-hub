@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    prometheus: dh-prometheus
+  name: trino-service-monitor
+spec:
+  endpoints:
+    - interval: 30s
+      path: /metrics
+      port: metrics
+  namespaceSelector:
+    matchNames:
+      - dh-prod-trino
+  selector:
+    matchLabels:
+      component.opendatahub.io/name: trino
