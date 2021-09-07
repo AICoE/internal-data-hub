@@ -31,8 +31,8 @@ spec:
             items:
               - key: config-coordinator.properties
                 path: config-coordinator.properties
-              - key: jvm.config
-                path: jvm.config
+              - key: jvm-coordinator.config
+                path: jvm-coordinator.config
               - key: log.properties
                 path: log.properties
               - key: node.properties
@@ -97,6 +97,6 @@ spec:
               mountPath: /etc/trino/catalog
             - name: root-ca
               mountPath: /etc/trino/certs
-          image: $(trino_image)
           args:
             - --config=/etc/trino/config-coordinator.properties
+            - --jvm-config=/etc/trino/jvm-coordinator.config
