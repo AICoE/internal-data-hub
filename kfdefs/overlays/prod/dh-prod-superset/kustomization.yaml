@@ -5,6 +5,7 @@ namespace: dh-prod-superset
 
 resources:
   - ../../../base/superset
+  - supersetdb-route.yaml
 
 generators:
   - secret-generator.yaml
@@ -118,3 +119,4 @@ patchesJson6902:
 
 patchesStrategicMerge:
   - ./supersetdb-deployment-pvc-backup.yaml
+  - ./supersetdb-service-nodePort.yaml
