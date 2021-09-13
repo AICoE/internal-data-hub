@@ -2,7 +2,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
     annotations:
-        haproxy.router.openshift.io/timeout: 200s
+        haproxy.router.openshift.io/timeout: 1800s
     labels:
         app: superset
     name: superset-datahub
@@ -24,8 +24,8 @@ sops:
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2021-09-08T20:35:38Z'
-    mac: ENC[AES256_GCM,data:RuYLrAlMTOg4t2ZTIZ94Bhaih3er2/pCQp3r2jseuNJsAVdrUC5AApptoGSdLbTeGrdwI5/sh6W3+eGQ9rMqSxYdvDw5oYFRO9yKGzZhFIW9wxnoFpv85BEZbCDdAcH81/RV182Wo5aD8KimgLqfuNZ5MA/+ZBjSlQ4QpAMJ5Ds=,iv:AgZr+baJRaG1zVLbRlT341vjo9DT5fb+mw6USS3FOfQ=,tag:7ZNUPtn0OIudP2pBJah0mQ==,type:str]
+    lastmodified: '2021-09-13T14:51:40Z'
+    mac: ENC[AES256_GCM,data:zndgFGgKTOWOyT/eFzIm8afeeaxeXWkYK5YgYAnQy1uhDjJBq7hRWln0eR0MzVZhWI4Zyo0QaWibujWw+zM6I1lURiMM9FUK8yvE48NLLamTvGozVabHogXISmEmqop/20u6bp0dzy6x0tyR5+j9vFOJuxBi0JG3qwqmX7telbo=,iv:0KjG3Bf1F3opFC3hDdnLDHjC54aZFYZiwoqpi9e/qRU=,tag:q0eVu3ifP/upvGpXzywBxg==,type:str]
     pgp:
     -   created_at: '2021-09-08T20:35:36Z'
         enc: |
