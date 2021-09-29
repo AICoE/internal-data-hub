@@ -1,0 +1,9 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: addon-managed-odh-catalog
+spec:
+  displayName: Managed Open Data Hub Operator
+  image: dummy
+  publisher: Internal Data Hub
+  sourceType: grpc
