@@ -1,0 +1,6 @@
+namespace: openshift-marketplace
+resources:
+  - ../../base
+
+patchesStrategicMerge:
+  - catalog-source.yaml

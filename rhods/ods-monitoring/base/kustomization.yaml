@@ -1,0 +1,5 @@
+namespace: redhat-ods-monitoring
+resources:
+  - namespace.yaml
+generators:
+  - ./secrets/secret-generator.yaml
