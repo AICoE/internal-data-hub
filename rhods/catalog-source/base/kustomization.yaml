@@ -1,6 +1,5 @@
 namespace: openshift-marketplace
 resources:
   - catalog-source.yaml
-  - service-account.yaml
 generators:
   - ./secrets/secret-generator.yaml
