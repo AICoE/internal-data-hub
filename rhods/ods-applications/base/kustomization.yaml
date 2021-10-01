@@ -1,3 +1,3 @@
 namespace: redhat-ods-applications
-generators:
-  - ./secrets/secret-generator.yaml
+resources:
+  - ../../common

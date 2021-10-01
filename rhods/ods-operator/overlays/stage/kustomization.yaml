@@ -1,0 +1,4 @@
+namespace: redhat-ods-operator
+resources:
+  - namespace.yaml
+  - ../../base
