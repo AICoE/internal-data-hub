@@ -1,3 +1,4 @@
 namespace: redhat-ods-monitoring
 resources:
   - ../../base
+  - namespace.yaml
