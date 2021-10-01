@@ -1,4 +1,8 @@
 namespace: redhat-ods-operator
 resources:
+  - addon-managed-odh.yaml
+  - redhat-layer-product-og.yaml
   - namespace.yaml
   - ../../base
+generators:
+  - ./secrets/secret-generator.yaml
