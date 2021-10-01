@@ -4,5 +4,3 @@ resources:
   - redhat-layer-product-og.yaml
   - namespace.yaml
   - ../../base
-generators:
-  - ./secrets/secret-generator.yaml
