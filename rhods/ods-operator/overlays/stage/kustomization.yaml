@@ -1,4 +1,4 @@
-namespace: redhat-ods-applications
+namespace: redhat-ods-operator
 resources:
   - ../../base
   - ../../privileged

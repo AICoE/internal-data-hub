@@ -1,5 +1,6 @@
 namespace: openshift-marketplace
 resources:
+  - ../../base
+
+patchesStrategicMerge:
   - catalog-source.yaml
-generators:
-  - ./secrets/secret-generator.yaml

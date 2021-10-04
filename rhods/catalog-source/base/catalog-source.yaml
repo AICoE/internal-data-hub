@@ -4,6 +4,8 @@ metadata:
   name: addon-managed-odh-catalog
 spec:
   displayName: Managed Open Data Hub Operator
-  image: dummy
-  publisher: Internal Data Hub
+  image: quay.io/modh/modh:v111-41
+  publisher: OSD Red Hat Addons
   sourceType: grpc
+  secrets:
+    - modh-idh-cluster-image-puller-pull-secret
