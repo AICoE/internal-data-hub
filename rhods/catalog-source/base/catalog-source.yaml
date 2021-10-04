@@ -2,7 +2,6 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
   name: addon-managed-odh-catalog
-  namespace: openshift-marketplace
 spec:
   displayName: Managed Open Data Hub Operator
   image: quay.io/modh/modh:v111-41
