@@ -5,8 +5,8 @@
 There are certain components in the RHODS installation that the Data Hub team does not have permissions to deploy in production
 These portions can be found in the following locations:
 
-1) Stage overlays for any of the ods-* directories
-2) (As of 10/01/21) We currently can not update catalogsources in prod. We have a ticket open with PSI to grant us permissions to do so.
+1) The `privileged` directory within any of the ods-* directories
+2) (As of 10/04/21) We currently can not update catalogsources in prod. We have a ticket open with PSI to grant us permissions to do so.
 
 ## Deployment
 
