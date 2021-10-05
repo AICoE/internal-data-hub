@@ -6,4 +6,4 @@ spec:
   channel: beta
   name: managed-odh
   source: addon-managed-odh-catalog
-  sourceNamespace: openshift-marketplace
+  sourceNamespace: redhat-ods-operator
