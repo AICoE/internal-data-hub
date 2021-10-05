@@ -1,4 +1,4 @@
-namespace: openshift-marketplace
+namespace: redhat-ods-operator
 resources:
   - catalog-source.yaml
 generators:
