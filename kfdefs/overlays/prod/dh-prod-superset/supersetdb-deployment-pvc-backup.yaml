@@ -17,11 +17,10 @@ spec:
                 - '-c'
                 - >
                   sleep 5;
-                  psql '-c' "CREATE USER bareos WITH PASSWORD '$BACKUPS_PASSWORD';";
-                  psql '-c' "GRANT SELECT ON ALL TABLES IN SCHEMA public TO bareos;";
-                  psql --dbname=superset -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO bareos;";
-                  psql '-c' "GRANT USAGE ON SCHEMA public TO bareos;";
-                  psql '-c' "GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO bareos;";
+                  psql -c "CREATE USER bareos WITH PASSWORD '$BACKUPS_PASSWORD';";
+                  psql --dbname=$POSTGRESQL_DATABASE -c "GRANT USAGE ON SCHEMA public TO bareos;";
+                  psql --dbname=$POSTGRESQL_DATABASE -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO bareos;";
+                  psql --dbname=$POSTGRESQL_DATABASE -c "GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO bareos;";
         env:
         - name: BACKUPS_PASSWORD
           valueFrom:
