@@ -47,6 +47,8 @@ spec:
           env:
             - name: GF_INSTALL_PLUGINS
               value: "grafana-piechart-panel"
+            - name: GRAFANA_USERS_ROLE
+              value: Viewer
           livenessProbe:
             httpGet:
               path: /api/health

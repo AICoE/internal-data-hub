@@ -23,7 +23,7 @@ data:
     http_port = 3001
     [users]
     viewers_can_edit = true
-    auto_assign_org_role = Viewer
+    auto_assign_org_role = $__env{GRAFANA_USERS_ROLE}
     [metrics]
     enabled = true
     [alerting]
