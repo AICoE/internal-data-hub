@@ -5,7 +5,7 @@ metadata:
     app: grafana
   name: grafana
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     app: grafana
     deploymentconfig: grafana
@@ -47,6 +47,8 @@ spec:
           env:
             - name: GF_INSTALL_PLUGINS
               value: "grafana-piechart-panel"
+            - name: GRAFANA_USERS_ROLE
+              value: Viewer
           livenessProbe:
             httpGet:
               path: /api/health
@@ -142,9 +144,9 @@ spec:
             name: grafana-dashboards
           name: grafana-dashboards
         - name: grafana-config
-          secret:
+          configMap:
             defaultMode: 420
-            secretName: grafana-config
+            name: grafana-config
         - name: grafana-tls-secret
           secret:
             defaultMode: 420

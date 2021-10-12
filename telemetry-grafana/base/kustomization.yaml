@@ -9,6 +9,7 @@ resources:
   - grafana-route.yaml
   - grafana-service.yaml
   - grafana-dashboards-configmap.yaml
+  - grafana-config-configmap.yaml
   - grafana-deploymentconfig.yaml
 
 generators:
