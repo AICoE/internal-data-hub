@@ -142,9 +142,9 @@ spec:
             name: grafana-dashboards
           name: grafana-dashboards
         - name: grafana-config
-          secret:
+          configMap:
             defaultMode: 420
-            secretName: grafana-config
+            name: grafana-config
         - name: grafana-tls-secret
           secret:
             defaultMode: 420

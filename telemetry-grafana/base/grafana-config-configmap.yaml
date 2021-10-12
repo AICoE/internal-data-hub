@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+data:
+  grafana.ini: |-
+    [auth]
+    disable_login_form = true
+    disable_signout_menu = true
+    [auth.basic]
+    enabled = false
+    [auth.proxy]
+    auto_sign_up = true
+    enabled = true
+    header_name = X-Forwarded-User
+    [paths]
+    data = /var/lib/grafana
+    logs = /var/lib/grafana/logs
+    plugins = /var/lib/grafana/plugins
+    provisioning = /etc/grafana/provisioning
+    [server]
+    http_addr = 0.0.0.0
+    http_port = 3001
+    [users]
+    viewers_can_edit = true
+    auto_assign_org_role = Viewer
+    [metrics]
+    enabled = true
+    [alerting]
+    enabled = false
+    [dataproxy]
+    timeout = 900
