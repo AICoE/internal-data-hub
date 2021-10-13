@@ -115,3 +115,8 @@ patchesJson6902:
       kind: Route
       name: superset
       version: v1
+
+images:
+  - name: quay.io/opendatahub/superset:1.1.0
+    newName: quay.io/internaldatahub/superset
+    newTag: "1.3.0"
