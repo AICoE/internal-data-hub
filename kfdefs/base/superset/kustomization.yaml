@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: idh-superset
 
 bases:
-  - github.com/opendatahub-io/odh-manifests/superset/base?ref=547d1a4ebfbcbae7e1fe005c5531be5cfe51dba7
+  - github.com/opendatahub-io/odh-manifests/superset/base?ref=7ccd139de25ac9499307ab2534778107865c374c
 
 patchesStrategicMerge:
   - superset-config-secret.yaml

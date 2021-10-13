@@ -1,0 +1,425 @@
+apiVersion: v1
+data:
+  storage_class: default
+  superset_cpu_limits: 1000m
+  superset_cpu_requests: 500m
+  superset_db_cpu_limits: 1000m
+  superset_db_cpu_requests: 500m
+  superset_db_memory_limits: 512Mi
+  superset_db_memory_requests: 512Mi
+  superset_db_secret: stage-supersetdb-secret
+  superset_memory_limits: 1Gi
+  superset_memory_requests: 512Mi
+  superset_secret: stage-superset
+kind: ConfigMap
+metadata:
+  labels:
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: superset-config
+  namespace: dh-stage-superset
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: superset
+  name: stage-superset
+  namespace: dh-stage-superset
+stringData:
+  SUPERSET_ADMIN_EMAIL: data-hub@redhat.com
+  SUPERSET_ADMIN_FNAME: data
+  SUPERSET_ADMIN_LNAME: hub
+  SUPERSET_ADMIN_PASSWORD: 2019-stage-superset-data-hub
+  SUPERSET_ADMIN_USER: admin
+  SUPERSET_SECRET_KEY: LAoQ4Mw%EwkD&2Um5m3Qywq@XvL^NmxNtxGoE5qzm3Zb&g5*P#
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    template.openshift.io/expose-database_name: '{.data[''database-name'']}'
+    template.openshift.io/expose-password: '{.data[''database-password'']}'
+    template.openshift.io/expose-username: '{.data[''database-user'']}'
+  labels:
+    app: supersetdb
+  name: stage-supersetdb-secret
+  namespace: dh-stage-superset
+stringData:
+  database-name: superset
+  database-password: superset
+  database-user: superset
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: superset
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: superset
+  namespace: dh-stage-superset
+stringData:
+  SUPERSET_ADMIN_EMAIL: admin@fab.org
+  SUPERSET_ADMIN_FNAME: admin
+  SUPERSET_ADMIN_LNAME: admin
+  SUPERSET_ADMIN_PASSWORD: admin
+  SUPERSET_ADMIN_USER: admin
+  SUPERSET_SECRET_KEY: thisISaSECRET_1234
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: superset
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: superset-config
+  namespace: dh-stage-superset
+stringData:
+  superset_config.py: |
+    import os
+    from flask_appbuilder.security.manager import AUTH_DB, AUTH_LDAP
+
+    MAPBOX_API_KEY = os.getenv('MAPBOX_API_KEY', '')
+    SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@supersetdb:5432/{}".format(os.environ['POSTGRESQL_USERNAME'], os.environ['POSTGRESQL_PASSWORD'], os.environ['POSTGRESQL_DATABASE'])
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    SECRET_KEY = os.getenv('SUPERSET_SECRET_KEY','')
+    DATA_DIR = '/var/lib/superset'
+    LOG_LEVEL = 'INFO'
+    FEATURE_FLAGS = {
+      'ENABLE_TEMPLATE_PROCESSING': True,
+      # Uncomment this when Superset 1.3.0 upgrade is done
+      # 'DASHBOARD_RBAC': True
+    }
+
+    AUTH_TYPE = AUTH_LDAP
+    AUTH_LDAP_SERVER = 'ldaps://ldap.corp.redhat.com'
+    AUTH_LDAP_USERNAME_FORMAT = 'uid=%s,ou=Users,dc=redhat,dc=com'
+    AUTH_LDAP_SEARCH = 'dc=redhat,dc=com'
+    AUTH_LDAP_ALLOW_SELF_SIGNED = True
+    AUTH_USER_REGISTRATION_ROLE = 'Datahub'
+    AUTH_USER_REGISTRATION = True
+    AUTH_LDAP_USE_TLS = False
+    AUTH_ROLE_ADMIN = 'Admin'
+    PUBLIC_ROLE_LIKE = 'Gamma'
+    AUTH_ROLES_MAPPING = {
+      'cn=data-hub-openshift-admins,ou=adhoc,ou=managedGroups,dc=redhat,dc=com': ['Admin'],
+      'cn=mhicks-all,ou=adhoc,ou=managedGroups,dc=redhat,dc=com': ['CCX'],
+      'cn=ccx-dev,ou=adhoc,ou=managedGroups,dc=redhat,dc=com': ['CCX Sensitive'],
+      'cn=candlepin-posix,ou=Groups,dc=redhat,dc=com': ['Subscriptions'],
+      'cn=ceeandpe,ou=Groups,dc=redhat,dc=com': ['Subscriptions', 'CCX Sensitive'],
+      'cn=telemeter-auth,ou=adhoc,ou=managedGroups,dc=redhat,dc=com': ['Telemetry'],
+    }
+
+    # the LDAP user attribute which has their role DNs
+    AUTH_LDAP_GROUP_FIELD= 'memberOf'
+
+    # if we should replace ALL the user's roles each login
+    AUTH_ROLES_SYNC_AT_LOGIN = True
+
+    # force users to re-auth after 6 hours of inactivity (to keep roles in sync)
+    PERMANENT_SESSION_LIFETIME = 21600
+
+    SQLALCHEMY_ENGINE_OPTIONS = {
+      'pool_size': 15,
+      'pool_timeout': 60,
+      'pool_recycle': 3600
+    }
+
+    # Set Webserver timeout to 30 minutes to wait for the queries to be executed
+    SUPERSET_WEBSERVER_TIMEOUT=1800
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    template.openshift.io/expose-database_name: '{.data[''database-name'']}'
+    template.openshift.io/expose-password: '{.data[''database-password'']}'
+    template.openshift.io/expose-username: '{.data[''database-user'']}'
+  labels:
+    app: supersetdb
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: supersetdb
+  namespace: dh-stage-superset
+stringData:
+  database-name: superset
+  database-password: changeme
+  database-user: changeme
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: superset
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: superset
+  namespace: dh-stage-superset
+spec:
+  ports:
+  - name: 8088-tcp
+    port: 8088
+    protocol: TCP
+    targetPort: 8088
+  selector:
+    component.opendatahub.io/name: superset
+    deployment: superset
+    opendatahub.io/component: "true"
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: supersetdb
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: supersetdb
+  namespace: dh-stage-superset
+spec:
+  ports:
+  - name: postgresql
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    component.opendatahub.io/name: superset
+    name: supersetdb
+    opendatahub.io/component: "true"
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: superset
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: superset-data
+  namespace: dh-stage-superset
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 512Mi
+  storageClassName: ceph-dyn-data-hub-stage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: supersetdb
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: supersetdb-data
+  namespace: dh-stage-superset
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    limits:
+      storage: 1Gi
+    requests:
+      storage: 1Gi
+  storageClassName: ceph-dyn-data-hub-stage
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: superset
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: superset
+  namespace: dh-stage-superset
+spec:
+  replicas: 1
+  selector:
+    deployment: superset
+    matchLabels:
+      component.opendatahub.io/name: superset
+      opendatahub.io/component: "true"
+  template:
+    metadata:
+      labels:
+        app: superset
+        component.opendatahub.io/name: superset
+        deployment: superset
+        opendatahub.io/component: "true"
+    spec:
+      containers:
+      - env:
+        - name: SUPERSET_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: SUPERSET_SECRET_KEY
+              name: stage-superset
+        - name: POSTGRESQL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: database-user
+              name: stage-supersetdb-secret
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: database-password
+              name: stage-supersetdb-secret
+        - name: POSTGRESQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: database-name
+              name: stage-supersetdb-secret
+        - name: SUPERSET_CONFIG_PATH
+          value: /etc/superset/superset_config.py
+        image: quay.io/opendatahub/superset:1.3.0
+        name: superset
+        ports:
+        - containerPort: 8088
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            memory: 512Mi
+        volumeMounts:
+        - mountPath: /etc/superset
+          name: superset-config
+      initContainers:
+      - command:
+        - sh
+        - -c
+        - sleep 30; superset-init --username $SUPERSET_ADMIN_USER --firstname $SUPERSET_ADMIN_FNAME --lastname $SUPERSET_ADMIN_LNAME --email $SUPERSET_ADMIN_EMAIL --password $SUPERSET_ADMIN_PASSWORD
+        env:
+        - name: SUPERSET_CONFIG_PATH
+          value: /etc/superset/superset_config.py
+        - name: POSTGRESQL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: database-user
+              name: stage-supersetdb-secret
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: database-password
+              name: stage-supersetdb-secret
+        - name: POSTGRESQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: database-name
+              name: stage-supersetdb-secret
+        envFrom:
+        - secretRef:
+            name: stage-superset
+        image: quay.io/opendatahub/superset:1.3.0
+        name: superset-init
+        volumeMounts:
+        - mountPath: /etc/superset
+          name: superset-config
+      volumes:
+      - name: superset-config
+        secret:
+          defaultMode: 420
+          items:
+          - key: superset_config.py
+            path: superset_config.py
+          secretName: superset-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    template.alpha.openshift.io/wait-for-ready: "true"
+  labels:
+    app: supersetdb
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: supersetdb
+  namespace: dh-stage-superset
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component.opendatahub.io/name: superset
+      name: supersetdb
+      opendatahub.io/component: "true"
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        component.opendatahub.io/name: superset
+        name: supersetdb
+        opendatahub.io/component: "true"
+    spec:
+      containers:
+      - env:
+        - name: POSTGRESQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: database-user
+              name: stage-supersetdb-secret
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: database-password
+              name: stage-supersetdb-secret
+        - name: POSTGRESQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: database-name
+              name: stage-supersetdb-secret
+        image: quay.io/internaldatahub/postgresql-96-centos7:9.6
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+            - /usr/libexec/check-container
+            - --live
+          initialDelaySeconds: 120
+          timeoutSeconds: 10
+        name: postgresql
+        ports:
+        - containerPort: 5432
+        readinessProbe:
+          exec:
+            command:
+            - /usr/libexec/check-container
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+          requests:
+            cpu: 500m
+            memory: 512Mi
+        volumeMounts:
+        - mountPath: /var/lib/pgsql/data
+          name: supersetdb-data
+      volumes:
+      - name: supersetdb-data
+        persistentVolumeClaim:
+          claimName: supersetdb-data
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    haproxy.router.openshift.io/timeout: 200s
+  labels:
+    app: superset
+    component.opendatahub.io/name: superset
+    opendatahub.io/component: "true"
+  name: superset
+  namespace: dh-stage-superset
+spec:
+  port:
+    targetPort: 8088-tcp
+  to:
+    kind: Service
+    name: superset
