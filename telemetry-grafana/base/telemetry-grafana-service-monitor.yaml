@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: telemetry-grafana-service-monitor
+spec:
+  jobLabel: prometheus.io/joblabel
+  endpoints:
+    - interval: 30s
+      port: metrics
+  namespaceSelector:
+    matchNames: []
+  selector:
+    matchLabels:
+      prometheus.io/scrape: "true"
