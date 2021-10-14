@@ -11,6 +11,7 @@ resources:
   - grafana-dashboards-configmap.yaml
   - grafana-config-configmap.yaml
   - grafana-deploymentconfig.yaml
+  - telemeter-groups-rolebinding.yaml
 
 generators:
   - ./secret-generator.yaml

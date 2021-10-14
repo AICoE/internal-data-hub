@@ -1,0 +1,13 @@
+apiVersion: authorization.openshift.io/v1
+kind: RoleBinding
+metadata:
+  name: telemeter-groups
+roleRef:
+  name: view
+subjects:
+  - kind: Group
+    name: telemeter-auth
+  - kind: Group
+    name: telemeter-auto-approval
+  - kind: Group
+    name: telemeter-manual-approval
