@@ -20,3 +20,12 @@ patchesJson6902:
       - op: replace
         path: /spec/replicas
         value: 3
+  - target:
+      kind: ServiceMonitor
+      name: telemetry-grafana-service-monitor
+      group: monitoring.coreos.com
+      version: v1
+    patch: |
+      - op: add
+        path: /spec/namespaceSelector/matchNames/0
+        value: dh-prod-telemetry-grafana
