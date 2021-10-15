@@ -1,0 +1,127 @@
+---
+- op: replace
+  path: /spec/templates/0/parallelism
+  value: 2
+
+- op: replace
+  path: /spec/templates/1/dag/tasks/0/arguments/parameters/5/value
+  value: ""
+
+- op: replace
+  path: /spec/templates/2/script/image
+  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+
+- op: replace
+  path: /spec/templates/2/resources/limits/memory
+  value: 12Gi
+
+- op: replace
+  path: /spec/templates/3/script/image
+  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+
+- op: replace
+  path: /spec/templates/3/script/source
+  value: |
+    set -x
+    python py/gap_detector.py \
+        --storage_config /etc/obslytics-data-exporter/storage-config.yaml \
+        --prefix data/ \
+        --metric {{inputs.parameters.metric}} \
+        --step {{inputs.parameters.step}} \
+        --delay {{inputs.parameters.delay}} \
+        --from_timestamp {{inputs.parameters.backfill_from_timestamp}} \
+        --earliest_timestamp {{inputs.parameters.min_ts}} \
+        --max_timestamps {{inputs.parameters.backfill_count}} \
+        --output_file /mnt/out/tslist \
+        --verbose \
+        --backfill
+
+- op: replace
+  path: /spec/templates/3/resources/limits/memory
+  value: 12Gi
+
+- op: replace
+  path: /spec/templates/3/resources/requests/memory
+  value: 12Gi
+
+- op: replace
+  path: /spec/templates/4/retryStrategy/limit
+  value: 5
+
+- op: replace
+  path: /spec/templates/4/script/image
+  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+
+- op: replace
+  path: /spec/templates/4/script/resources/limits/memory
+  value: 12Gi
+
+- op: replace
+  path: /spec/templates/5/retryStrategy/limit
+  value: 1
+
+- op: replace
+  path: /spec/templates/5/script/image
+  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+
+- op: replace
+  path: /spec/templates/5/script/source
+  value: |
+    set -x
+    export GOGC=30
+
+    echo "Calling Script with Params:"
+    epoch=`date --date="{{inputs.parameters.start_timestamp}}" +"%s"`
+    echo "START       : ${epoch} ({{inputs.parameters.start_timestamp}})"
+    echo "METRIC      : {{inputs.parameters.metric}}"
+    echo "STEP        : {{inputs.parameters.step}}"
+    echo "DELAY       : {{inputs.parameters.delay}}"
+    echo "RESOLUTION  : {{inputs.parameters.resolution}}"
+    echo "PREFIX      : data/"
+
+    # Config params
+    export INPUT_CONFIG_FILE="/etc/obslytics-data-exporter/input-config.yaml"
+    export STORAGE_CONFIG_FILE="/etc/obslytics-data-exporter/storage-config.yaml"
+
+    # Input Params
+    export METRIC_MAX_TIME="${epoch}"
+    export METRIC_STEP="{{inputs.parameters.step}}"
+    export METRIC_DELAY="{{inputs.parameters.delay}}"
+    export METRIC_MATCH="{{inputs.parameters.metric}}"
+
+    # Storage Params
+    export OUTPUT_FILE_TYPE="parquet"
+    export OUTPUT_METRIC_RESOLUTION="{{inputs.parameters.resolution}}"
+    export METRIC_STORAGE_PREFIX="data/"
+
+    # Mode Parameters
+    export VERIFY_DATA_STORED="false"
+    export DRYRUN="{{inputs.parameters.dryrun}}"
+
+    bash ./run.sh
+    echo "Export Complete."
+
+- op: replace
+  path: /spec/templates/5/script/resources/request/memory
+  value: 12Gi
+
+- op: replace
+  path: /spec/templates/5/script/resources/limits/memory
+  value: 12Gi
+
+- op: replace
+  path: /spec/templates/7/script/image
+  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+
+- op: replace
+  path: /spec/templates/7/script/source
+  value: |
+    set -x
+    python py/verify.py \
+        --config_file /etc/obslytics-data-exporter/storage-config.yaml \
+        --prefix data/ \
+        --metric {{inputs.parameters.metric}} \
+        --step {{inputs.parameters.step}} \
+        --from_timestamp {{inputs.parameters.verification_from_timestamp}} \
+        --max_timestamps {{inputs.parameters.verify_count}} \
+        --delay {{inputs.parameters.delay}} \
