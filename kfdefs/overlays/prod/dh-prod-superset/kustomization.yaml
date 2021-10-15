@@ -30,7 +30,7 @@ patchesJson6902:
   - patch: |
       - op: replace
         path: /data/superset_cpu_requests
-        value: 1
+        value: "1"
     target:
       kind: ConfigMap
       name: superset-config
@@ -46,7 +46,7 @@ patchesJson6902:
   - patch: |
       - op: replace
         path: /data/superset_cpu_limits
-        value: 2
+        value: "2"
     target:
       kind: ConfigMap
       name: superset-config
