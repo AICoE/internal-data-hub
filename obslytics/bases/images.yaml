@@ -38,8 +38,6 @@ spec:
           value: 'true'
   triggers:
     - type: ConfigChange
-    - imageChange: {}
-      type: ImageChange
 
 ---
 apiVersion: image.openshift.io/v1
@@ -81,5 +79,3 @@ spec:
           value: 'true'
   triggers:
     - type: ConfigChange
-    - imageChange: {}
-      type: ImageChange
