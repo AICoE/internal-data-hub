@@ -1,5 +1,5 @@
 ---
-apiVersion: v1
+apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: obslytics-data-exporter
@@ -8,7 +8,7 @@ metadata:
     template: obslytics-data-exporter
 
 ---
-apiVersion: v1
+apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   name: obslytics-data-exporter
@@ -42,7 +42,7 @@ spec:
       type: ImageChange
 
 ---
-apiVersion: v1
+apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   name: obslytics-pyscripts
@@ -51,7 +51,7 @@ metadata:
     template: obslytics-data-exporter
 
 ---
-apiVersion: v1
+apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   name: obslytics-pyscripts
