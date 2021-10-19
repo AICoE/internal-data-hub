@@ -10,3 +10,7 @@
 - op: replace
   path: /spec/workflowSpec/templates/1/steps/0/0/arguments/parameters/3/value
   value: data-hub-alerts@redhat.com
+
+- op: add
+  path: /spec/suspend
+  value: true
