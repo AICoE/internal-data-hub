@@ -46,3 +46,9 @@ patchesJson6902:
       version: v1
       kind: DeploymentConfig
       name: obslytics-data-exporter-dataviz
+  - path: alert-template.yaml
+    target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: WorkflowTemplate
+      name: alert-template
