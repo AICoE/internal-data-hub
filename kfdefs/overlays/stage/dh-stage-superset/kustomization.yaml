@@ -92,14 +92,6 @@ patchesJson6902:
       version: v1
   - patch: |
       - op: add
-        path: "/spec/storageClassName"
-        value: ceph-dyn-data-hub-stage
-    target:
-      kind: PersistentVolumeClaim
-      name: supersetdb-data
-      version: v1
-  - patch: |
-      - op: add
         path: "/metadata/annotations"
         value:
           haproxy.router.openshift.io/timeout: 200s
