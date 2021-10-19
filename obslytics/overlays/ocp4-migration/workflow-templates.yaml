@@ -9,7 +9,7 @@
 
 - op: replace
   path: /spec/templates/2/script/image
-  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
 
 - op: replace
   path: /spec/templates/2/resources/limits/memory
@@ -17,7 +17,7 @@
 
 - op: replace
   path: /spec/templates/3/script/image
-  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
 
 - op: replace
   path: /spec/templates/3/script/source
@@ -50,7 +50,7 @@
 
 - op: replace
   path: /spec/templates/4/script/image
-  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
 
 - op: replace
   path: /spec/templates/4/script/resources/limits/memory
@@ -62,7 +62,7 @@
 
 - op: replace
   path: /spec/templates/5/script/image
-  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
 
 - op: replace
   path: /spec/templates/5/script/source
@@ -111,7 +111,7 @@
 
 - op: replace
   path: /spec/templates/7/script/image
-  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
 
 - op: replace
   path: /spec/templates/7/script/source
