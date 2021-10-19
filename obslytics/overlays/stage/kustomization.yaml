@@ -6,6 +6,9 @@ namespace: dh-prod-argo
 resources:
   - ../../bases/
 
+generators:
+  - secrets/secret-generator.yaml
+
 patchesJson6902:
   - path: obslytics-cron-workflow.yaml
     target:
