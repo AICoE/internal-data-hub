@@ -79,3 +79,72 @@ spec:
           value: 'true'
   triggers:
     - type: ConfigChange
+
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: tools
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+spec:
+  lookupPolicy:
+    local: true
+
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: python-36-rhel7
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+spec:
+  tags:
+    - name: latest
+      from:
+        kind: DockerImage
+        name: registry.access.redhat.com/rhscl/python-36-rhel7:latest
+
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: tools
+  labels:
+    app: obslytics-data-exporter
+    template: obslytics-data-exporter
+spec:
+  source:
+    git:
+      uri: "https://gitlab.cee.redhat.com/data-hub/dh-argo-workflows.git"
+      ref: "master"
+    contextDir: "roles/tools/src"
+    type: Git
+  strategy:
+    sourceStrategy:
+      env:
+        - name: ENABLE_PIPENV
+          value: "true"
+        - name: GIT_SSL_NO_VERIFY
+          value: "true"
+      from:
+        kind: ImageStreamTag
+        name: "python-36-rhel7:latest"
+    type: Source
+  resources:
+    limits:
+      cpu: 500m
+      memory: 2Gi
+  output:
+    to:
+      kind: ImageStreamTag
+      name: "tools:latest"
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChange:
+        from:
+          kind: ImageStreamTag
+          name: python-37-rhel7:latest
