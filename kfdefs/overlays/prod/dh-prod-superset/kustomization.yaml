@@ -120,3 +120,8 @@ patchesJson6902:
 patchesStrategicMerge:
   - ./supersetdb-deployment-pvc-backup.yaml
   - ./supersetdb-service-nodePort.yaml
+
+images:
+  - name: quay.io/opendatahub/superset:1.3.0
+    newName: quay.io/opendatahub/superset
+    newTag: "1.1.0"
