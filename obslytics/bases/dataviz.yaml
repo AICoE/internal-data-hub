@@ -75,7 +75,7 @@ spec:
       port: 5000
 
 ---
-apiVersion: v1
+apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   annotations:
