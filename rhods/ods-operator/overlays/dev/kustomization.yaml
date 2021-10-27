@@ -1,0 +1,4 @@
+namespace: redhat-ods-operator
+resources:
+  - ../../base
+  - ../../privileged

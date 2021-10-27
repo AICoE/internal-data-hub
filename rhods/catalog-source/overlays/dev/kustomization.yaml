@@ -1,0 +1,6 @@
+namespace: redhat-ods-operator
+resources:
+  - ../../base
+
+patchesStrategicMerge:
+  - catalog-source.yaml
