@@ -90,7 +90,7 @@ spec:
             - mountPath: /grafana-dashboard-definitions
               name: grafana-dashboard-definitions
         - name: auth-proxy
-          image: registry.redhat.io/openshift4/ose-oauth-proxy
+          image: quay.io/openshift/origin-oauth-proxy:4.8.0
           imagePullPolicy: Always
           resources:
             limits:
