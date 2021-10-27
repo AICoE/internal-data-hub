@@ -4,6 +4,6 @@ metadata:
   name: addon-managed-odh
 spec:
   channel: beta
-  name: managed-odh
+  name: rhods-operator
   source: addon-managed-odh-catalog
   sourceNamespace: redhat-ods-operator
