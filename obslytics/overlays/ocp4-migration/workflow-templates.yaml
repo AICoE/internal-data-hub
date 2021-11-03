@@ -9,7 +9,7 @@
 
 - op: replace
   path: /spec/templates/2/script/image
-  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+  value: quay.io/internaldatahub/obslytics-data-exporter:stable
 
 - op: replace
   path: /spec/templates/2/resources/limits/memory
@@ -50,7 +50,7 @@
 
 - op: replace
   path: /spec/templates/4/script/image
-  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+  value: quay.io/internaldatahub/obslytics-data-exporter:stable
 
 - op: replace
   path: /spec/templates/4/script/resources/limits/memory
@@ -62,7 +62,7 @@
 
 - op: replace
   path: /spec/templates/5/script/image
-  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+  value: quay.io/internaldatahub/obslytics-data-exporter:stable
 
 - op: replace
   path: /spec/templates/5/script/source
