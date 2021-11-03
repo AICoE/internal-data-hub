@@ -6,3 +6,7 @@
 - op: replace
   path: /spec/workflowSpec/ttlSecondsAfterFinished
   value: 86400
+
+- op: add
+  path: /spec/suspend
+  value: true
