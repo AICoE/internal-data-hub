@@ -4,8 +4,6 @@ metadata:
   name: trino-db-volume
   labels:
     app: trino
-  annotations:
-    volume.beta.kubernetes.io/storage-class: "standard"
 spec:
   accessModes:
     - ReadWriteOnce
