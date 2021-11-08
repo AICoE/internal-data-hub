@@ -3,5 +3,3 @@ kind: Kustomization
 
 resources:
   - alert-template.yaml
-  - trino-workflow-templates.yaml
-  - update-partition-metadata-workflow.yaml
