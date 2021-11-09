@@ -1,0 +1,62 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+    labels:
+        app: dh-docs-server
+    name: stasis-reactor
+spec:
+    output:
+        to:
+            kind: ImageStreamTag
+            name: stasis-reactor:latest
+    source:
+        type: Git
+        git:
+            ref: 0.2.5
+            uri: https://gitlab.com/elmiko/stasis-reactor.git
+    strategy:
+        type: Source
+        sourceStrategy:
+            env:
+            -   name: GIT_SSL_NO_VERIFY
+                value: "true"
+            -   name: CONTENT_URLS
+                value: https://gitlab.cee.redhat.com/data-hub/dh-docs.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/cja-topic-modeling.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/openshift-sme-mailing-list-analysis.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/insights-drift-analysis-baselines.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/data-science-workflows.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/ocp4-anomaly-detection.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/sentiment-analysis-demo.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/insights-configuration-files-analysis.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/categorical-encoding-internal.git#master
+            from:
+                kind: ImageStreamTag
+                name: nodejs-10-centos7:latest
+    triggers:
+    -   type: GitHub
+        github:
+            secret: ENC[AES256_GCM,data:8EwD9igYlwOM1BBgA1Z3ORFhGvU=,iv:2LQ60S4QVbfe9QX9ked5gJ17QjkmQK8lfy+JEgDKXx4=,tag:7evFP1CyyDj6j4DrA9zC0A==,type:str]
+    -   type: Generic
+        generic:
+            secret: ENC[AES256_GCM,data:W+LzEC4NUQyLtH4k1Nz+hIvwQwQ=,iv:HXKyH1XFJwdaTL3yQsjEONtMlTLEeAdqEkdfmc9rkQY=,tag:ndULPpybQK9QzTU/KYHJ4Q==,type:str]
+    -   type: ConfigChange
+    -   type: ImageChagne
+        imageChange: {}
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    lastmodified: '2021-11-09T21:08:27Z'
+    mac: ENC[AES256_GCM,data:ORSn6nf5G8LjyZ0Khgz3yTjQ5QYvR/ji4qSv83shOdrBc3Za4Uhjlk6wU7Km2K803XXa35tQLy+4fufzwjjbrfS8yQKfhhtCyHyurelImS2YJxZDSh1KKqFQoSd0O03Ixh8SlLZrBWi8wcahEtWoF7CNzmJ6sUmu39h1g80ZGu4=,iv:W3H2rN+ZyrD2yFdL0gz6BK7FMPhF0DvUKGGe7440NS4=,tag:WOr7UvUaWlOegRy/M+FeKw==,type:str]
+    pgp:
+    -   created_at: '2021-11-09T21:08:26Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQEMA/irrHa183bxAQgApqZVywW9UJYoo/y7Zb9QP4DChxW49O/LiRVeYiEd6ML/
+            B1airJmxOqvZNGrU74QLO9uCZq0nUM1EjyOLC+HMyhvVM9xDVAsAferWd7h9Xt6M
+            tHdmBhWroSzQJyOdcve7iYjQqYo7dILQAUHTfnO9Hcq24YYrDi7naETf9sW+lH0X
+            Tw3OCuBgipIJ8EdxKMaudKbI68eEeybnS+7BOv2kNolWCepDCBdfjB2iZWktfeKJ
+            Bt3s119d4l8153jjpz9ptxyD2rw5lUmUKSiFJNKMs4nGh/mguM9X0cyQ2nOylMYD
+            4yWmbifjIgkWyYTntirfXEBxMjakrtOXC0XP3ejs5tJeAXinOp3ihJm5koI6POez
+            wC+1bCxLeU9y476LjzErRlXCPdqkP8iHwIXileZHr5Uiz4ZgKrviSXu0em/XITsk
+            LLYmWAMRweJ0JMOiQ42b3ZwpeXnJS66TtHQo0j1qog==
+            =8I7J
+            -----END PGP MESSAGE-----
+        fp: EFDB9AFBD18936D9AB6B2EECBD2C73FF891FBC7E
+    encrypted_regex: ^(data|stringData|tls|secret)$
+    version: 3.6.1

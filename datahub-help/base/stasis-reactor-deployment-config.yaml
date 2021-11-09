@@ -1,0 +1,33 @@
+---
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: dh-docs-server
+  name: stasis-reactor
+spec:
+  replicas: 1
+  selector:
+    app: dh-docs-server
+    deploymentconfig: stasis-reactor
+  template:
+    metadata:
+      labels:
+        deploymentconfig: stasis-reactor
+        app: dh-docs-server
+    spec:
+      containers:
+        - name: stasis-reactor
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - stasis-reactor
+        from:
+          kind: ImageStreamTag
+          name: stasis-reactor:latest
