@@ -1,7 +1,7 @@
 ---
 - op: replace
   path: /spec/templates/0/parallelism
-  value: 2
+  value: 10
 
 - op: replace
   path: /spec/templates/1/dag/tasks/0/arguments/parameters/5/value

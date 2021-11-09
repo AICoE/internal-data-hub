@@ -81,3 +81,7 @@
     - rhods_aggregate_availability
     # TODO: add the following metrics to this list
     # - cluster_operator_conditions  # TODO: times out
+
+- op: replace
+  path: /spec/templates/1/parallelism
+  value: 10
