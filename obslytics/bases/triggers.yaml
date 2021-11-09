@@ -52,7 +52,7 @@ spec:
                 - name: backfill_from_timestamp
                   value: "{{workflow.parameters.start_timestamp}}"
                 - name: backfill_min_ts
-                  value: 2019-05-30T00:00:00Z
+                  value: 2019-05-30T23:59:59Z  # TODO: figure out a way to determine this dynamically
             templateRef:
               name: obslytics-data-exporter-workflow-template
               template: normalize-timestamps
