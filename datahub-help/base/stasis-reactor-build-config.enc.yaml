@@ -33,7 +33,7 @@ spec:
         generic:
             secret: ENC[AES256_GCM,data:W+LzEC4NUQyLtH4k1Nz+hIvwQwQ=,iv:HXKyH1XFJwdaTL3yQsjEONtMlTLEeAdqEkdfmc9rkQY=,tag:ndULPpybQK9QzTU/KYHJ4Q==,type:str]
     -   type: ConfigChange
-    -   type: imageChange
+    -   type: ImageChange
         imageChange: {}
     -   type: GitLab
         gitlab:
@@ -44,8 +44,8 @@ sops:
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2021-11-10T15:22:24Z'
-    mac: ENC[AES256_GCM,data:7RDfoQXwpJpVVmcbaMPtXGrhiobq5Ole2reuobJAAP15xNT2iv0TEwWpWmwpbH9OLyec1oEsdulZ8M93vIp4cE/gZRBbamq73AzaKZ13vgGBgqF5OW6byhFdApSiKhCtFB1c/6XR/+OPBn3Y+gQcsN7jyyLswWNSsaLHCig3ur8=,iv:gIpi9cbTIsAwfPVi0QkeD7rIqpMZ2DzqZDoEowUKxsE=,tag:KeQWjlj0MF/zX3MlFCNi1A==,type:str]
+    lastmodified: '2021-11-10T16:35:00Z'
+    mac: ENC[AES256_GCM,data:ZnlD8fTWZYVyLKYecMLzsiY+pPu9umFM7OT4fwZH1SzrkYxNFQB7fn/naSh9sWCHGQEwiCU2SeUeQRXvDhjybPpS6gYxB8SjapQ9aTGq19X4g0O8F+CYZ1ZA+a9fg0WDLLyMH8Glavq5d8RVaMqHigZBhwF5USjiM4hcYyhE9t0=,iv:3KGkiPEPgt3x+JDoO1eyV3xzuXCzzNyfrQy/bQsmOwY=,tag:30LiVS2zQe26qm1zkxf9uA==,type:str]
     pgp:
     -   created_at: '2021-11-09T21:08:26Z'
         enc: |
