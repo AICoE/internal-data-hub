@@ -33,15 +33,19 @@ spec:
         generic:
             secret: ENC[AES256_GCM,data:W+LzEC4NUQyLtH4k1Nz+hIvwQwQ=,iv:HXKyH1XFJwdaTL3yQsjEONtMlTLEeAdqEkdfmc9rkQY=,tag:ndULPpybQK9QzTU/KYHJ4Q==,type:str]
     -   type: ConfigChange
-    -   type: ImageChagne
+    -   type: imageChange
         imageChange: {}
+    -   type: GitLab
+        gitlab:
+            secretReference:
+                name: dh-docs-trigger-secret
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2021-11-09T21:08:27Z'
-    mac: ENC[AES256_GCM,data:ORSn6nf5G8LjyZ0Khgz3yTjQ5QYvR/ji4qSv83shOdrBc3Za4Uhjlk6wU7Km2K803XXa35tQLy+4fufzwjjbrfS8yQKfhhtCyHyurelImS2YJxZDSh1KKqFQoSd0O03Ixh8SlLZrBWi8wcahEtWoF7CNzmJ6sUmu39h1g80ZGu4=,iv:W3H2rN+ZyrD2yFdL0gz6BK7FMPhF0DvUKGGe7440NS4=,tag:WOr7UvUaWlOegRy/M+FeKw==,type:str]
+    lastmodified: '2021-11-10T15:22:24Z'
+    mac: ENC[AES256_GCM,data:7RDfoQXwpJpVVmcbaMPtXGrhiobq5Ole2reuobJAAP15xNT2iv0TEwWpWmwpbH9OLyec1oEsdulZ8M93vIp4cE/gZRBbamq73AzaKZ13vgGBgqF5OW6byhFdApSiKhCtFB1c/6XR/+OPBn3Y+gQcsN7jyyLswWNSsaLHCig3ur8=,iv:gIpi9cbTIsAwfPVi0QkeD7rIqpMZ2DzqZDoEowUKxsE=,tag:KeQWjlj0MF/zX3MlFCNi1A==,type:str]
     pgp:
     -   created_at: '2021-11-09T21:08:26Z'
         enc: |
