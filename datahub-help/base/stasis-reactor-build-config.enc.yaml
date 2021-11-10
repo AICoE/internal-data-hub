@@ -35,13 +35,17 @@ spec:
     -   type: ConfigChange
     -   type: imageChange
         imageChange: {}
+    -   type: GitLab
+        gitlab:
+            secretReference:
+                name: dh-docs-trigger-secret
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2021-11-10T14:59:43Z'
-    mac: ENC[AES256_GCM,data:TKjOrsKAahDSQwAAg5Pe/CV1sGJEl6irfi3SStTsFPSzjTXOnOMEoJzBDYL9bFZPtUzmZAbKuIa00cqY1y5wwayxMzu8qjMyVNVgaszi5bdMClQeEmT+4zN7YKlowRPLbmgFwJgo6eXN5+wxTCWK9Od3Wp8DexW+3UxkaeraeXA=,iv:EkBftNM3Ds5sJf/Jq+nHd/2qiLcE7bxUpxZg58r7ODk=,tag:eZNKJa7wRND6w89ipBOpMA==,type:str]
+    lastmodified: '2021-11-10T15:22:24Z'
+    mac: ENC[AES256_GCM,data:7RDfoQXwpJpVVmcbaMPtXGrhiobq5Ole2reuobJAAP15xNT2iv0TEwWpWmwpbH9OLyec1oEsdulZ8M93vIp4cE/gZRBbamq73AzaKZ13vgGBgqF5OW6byhFdApSiKhCtFB1c/6XR/+OPBn3Y+gQcsN7jyyLswWNSsaLHCig3ur8=,iv:gIpi9cbTIsAwfPVi0QkeD7rIqpMZ2DzqZDoEowUKxsE=,tag:KeQWjlj0MF/zX3MlFCNi1A==,type:str]
     pgp:
     -   created_at: '2021-11-09T21:08:26Z'
         enc: |
