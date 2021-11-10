@@ -1,0 +1,37 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+    labels:
+        app: dh-docs-server
+    name: stasis-reactor
+spec:
+    output:
+        to:
+            kind: ImageStreamTag
+            name: stasis-reactor:latest
+    source:
+        type: Git
+        git:
+            ref: 0.2.5
+            uri: https://gitlab.com/elmiko/stasis-reactor.git
+    strategy:
+        type: Source
+        sourceStrategy:
+            env:
+            -   name: GIT_SSL_NO_VERIFY
+                value: "true"
+            -   name: CONTENT_URLS
+                value: https://gitlab.cee.redhat.com/data-hub/dh-docs.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/cja-topic-modeling.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/openshift-sme-mailing-list-analysis.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/insights-drift-analysis-baselines.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/data-science-workflows.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/ocp4-anomaly-detection.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/sentiment-analysis-demo.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/insights-configuration-files-analysis.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/categorical-encoding-internal.git#master
+            from:
+                kind: ImageStreamTag
+                name: nodejs-10-centos7:latest
+    triggers:
+    -   type: GitHub
+        github:
+            secretReference: dh-docs-github-trigger-secret
+    -   type: Generic
+        generic:
+            secretReference: dh-docs-trigger-secret
+    -   type: ConfigChange
+    -   type: ImageChange
+        imageChange: {}
