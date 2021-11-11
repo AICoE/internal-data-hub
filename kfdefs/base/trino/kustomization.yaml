@@ -14,6 +14,7 @@ patchesStrategicMerge:
 
 resources:
   - trino-service-monitor.yaml
+  - trino-blackbox-service-monitor.yaml
 
 generators:
 - ./secret-generator.yaml
