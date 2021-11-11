@@ -93,4 +93,3 @@ spec:
             cpu: 50m
             memory: 50Mi
       restartPolicy: Always
-      progressDeadlineSeconds: 2400
