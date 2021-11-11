@@ -30,3 +30,14 @@ patchesJson6902:
       - op: add
         path: /spec/namespaceSelector/matchNames/0
         value: dh-sandbox-telemetry-grafana
+  - target:
+      kind: RoleBinding
+      name: telemeter-groups
+      group: authorization.openshift.io
+      version: v1
+    patch: |
+      - op: add
+        path: /subjects/-
+        value:
+          kind: ServiceAccount
+          name: data-foundation-pms
