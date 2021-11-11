@@ -31,6 +31,8 @@ data:
           method: GET
           valid_status_codes: [200, 201, 202, 203, 204, 205, 206, 207, 208, 403]
           preferred_ip_protocol: "ip4"
+          tls_config:
+            ca_file: /etc/certs/caCertificate
 
 ---
 apiVersion: apps/v1
@@ -53,6 +55,9 @@ spec:
       - name: config-volume
         configMap:
           name: blackbox
+      - name: rh-it-ca-certificate-secret
+        secret:
+          secretName: rh-it-ca-certificate-secret
       containers:
       - image: quay.io/integreatly/prometheus-blackbox-exporter:v0.19.0
         name: blackbox-exporter
@@ -62,6 +67,9 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /tmp
+        - mountPath: "/etc/certs"
+          name: rh-it-ca-certificate-secret
+          readOnly: true
         ports:
         - containerPort: 9115
           protocol: TCP
