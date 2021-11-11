@@ -8,7 +8,6 @@ resources:
   - stasis-reactor-deployment-config.yaml
   - stasis-reactor-service.yaml
   - stasis-reactor-route.yaml
-  - stasis-reactor-build-config.yaml
 
 generators:
   - ./secret-generator.yaml
