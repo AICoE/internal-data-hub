@@ -8,6 +8,7 @@ resources:
   - stasis-reactor-deployment-config.yaml
   - stasis-reactor-service.yaml
   - stasis-reactor-route.yaml
+  - datahub-help-blackbox-service-monitor.yaml
 
 generators:
   - ./secret-generator.yaml
