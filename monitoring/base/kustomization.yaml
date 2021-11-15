@@ -7,3 +7,5 @@ generators:
 
 resources:
   - blackbox-exporter.yaml
+  - datahub-help-blackbox-service-monitor.yaml
+  - trino-blackbox-service-monitor.yaml

@@ -24,6 +24,8 @@ spec:
   jobLabel: prometheus.io/joblabel
   namespaceSelector:
     matchNames:
+      - dh-dev-monitoring
+      - dh-stage-monitoring
       - dh-prod-monitoring
   selector:
     matchLabels:
