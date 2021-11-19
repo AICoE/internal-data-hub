@@ -17,7 +17,7 @@ spec:
         for: 2m
         labels:
           severity: critical
-          datahubalert: true
+          datahubalert: "true"
       - alert: Data Hub Probe Success Burn Rate
         annotations:
           message: 'High error budget burn for {{ $labels.target }} (current value: {{ $value }}).'
@@ -29,7 +29,7 @@ spec:
         for: 15m
         labels:
           severity: critical
-          datahubalert: true
+          datahubalert: "true"
       - alert: Data Hub Probe Success Burn Rate
         annotations:
           message: 'High error budget burn for {{ $labels.target }} (current value: {{ $value }}).'
@@ -41,7 +41,7 @@ spec:
         for: 1h
         labels:
           severity: warning
-          datahubalert: true
+          datahubalert: "true"
       - alert: Data Hub Probe Success Burn Rate
         annotations:
           message: 'High error budget burn for {{ $labels.target }} (current value: {{ $value }}).'
@@ -53,4 +53,4 @@ spec:
         for: 3h
         labels:
           severity: warning
-          datahubalert: true
+          datahubalert: "true"
