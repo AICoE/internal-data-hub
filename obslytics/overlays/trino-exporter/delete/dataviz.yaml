@@ -1,0 +1,20 @@
+---
+$patch: delete
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: obslytics-data-exporter-dataviz
+
+---
+$patch: delete
+apiVersion: v1
+kind: Service
+metadata:
+  name: obslytics-data-exporter-dataviz
+
+---
+$patch: delete
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: dataviz

@@ -1,0 +1,48 @@
+---
+$patch: delete
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: obslytics-data-exporter
+
+---
+$patch: delete
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: obslytics-data-exporter
+
+---
+$patch: delete
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: obslytics-pyscripts
+
+---
+$patch: delete
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: obslytics-pyscripts
+
+---
+$patch: delete
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: tools
+
+---
+$patch: delete
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: python-36-rhel7
+
+---
+$patch: delete
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: tools

@@ -1,0 +1,39 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: dh-prod-thanos-extractor
+
+resources:
+  - ../../bases/
+
+
+generators:
+  - secrets/secret-generator.yaml
+
+patchesStrategicMerge:
+  - delete/alert-template.yaml
+  - delete/images.yaml
+  - delete/dataviz.yaml
+  - delete/obslytics-cron-workflow.yaml
+  - delete/verification-cron-workflow.yaml
+
+
+patchesJson6902:
+  - path: backfill-cron-workflow.yaml
+    target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: CronWorkflow
+      name: obslytics-data-exporter-backfill-cron-workflows
+  - path: workflow-templates.yaml
+    target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: WorkflowTemplate
+      name: obslytics-data-exporter-workflow-template
+  - path: triggers.yaml
+    target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: WorkflowTemplate
+      name: obslytics-data-exporter-workflow-triggers

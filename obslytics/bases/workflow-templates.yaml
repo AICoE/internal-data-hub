@@ -33,6 +33,7 @@ spec:
                 - name: resolution
                   value: "{{inputs.parameters.resolution}}"
             withParam: "{{inputs.parameters.metrics_list}}"
+
     - name: metric-worker
       parallelism: 1
       inputs:
@@ -446,3 +447,79 @@ spec:
               cur.fetchone()
               sys.stdout.write("Done!")
               sys.stdout.flush()
+
+    - name: run-trino-exporter
+      retryStrategy:
+        limit: 5
+      inputs:
+        parameters:
+          - name: metric
+          - name: start_timestamp
+          - name: step
+          - name: delay
+          - name: resolution
+          - name: dryrun
+      activeDeadlineSeconds: 600
+      script:
+        image: quay.io/opendatahub/trino:356
+        command: [/bin/bash, -e]
+        env:
+          - name: TRINO_USER
+            valueFrom:
+              secretKeyRef:
+                name: trino-admin-credentials
+                key: TRINO_USER
+          - name: TRINO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: trino-admin-credentials
+                key: TRINO_PASSWORD
+          - name: TRINO_HOST
+            valueFrom:
+              secretKeyRef:
+                name: trino-admin-credentials
+                key: TRINO_HOST
+        source: |
+          set -x
+
+          echo "Calling Script with Params:"
+          epoch=`date --date="{{inputs.parameters.start_timestamp}}" +"%s"`
+          echo "START       : ${epoch} ({{inputs.parameters.start_timestamp}})"
+          echo "METRIC      : {{inputs.parameters.metric}}"
+          echo "STEP        : {{inputs.parameters.step}}"
+          echo "DELAY       : {{inputs.parameters.delay}}"
+          echo "RESOLUTION  : {{inputs.parameters.resolution}}"
+          echo "PREFIX      : trino/"
+
+          echo "DONE.""
+
+          # # Config params
+          # export INPUT_CONFIG_FILE="/etc/obslytics-data-exporter/input-config.yaml"
+          # export STORAGE_CONFIG_FILE="/etc/obslytics-data-exporter/storage-config.yaml"
+          #
+          # # Input Params
+          # export METRIC_MAX_TIME="${epoch}"
+          # export METRIC_STEP="{{inputs.parameters.step}}"
+          # export METRIC_DELAY="{{inputs.parameters.delay}}"
+          # export METRIC_MATCH="{{inputs.parameters.metric}}"
+          #
+          # # Storage Params
+          # export OUTPUT_FILE_TYPE="parquet"
+          # export OUTPUT_METRIC_RESOLUTION="{{inputs.parameters.resolution}}"
+          # export METRIC_STORAGE_PREFIX="trinoexport/"
+          #
+          # # Mode Parameters
+          # export VERIFY_DATA_STORED="false"
+          # export DRYRUN="{{inputs.parameters.dryrun}}"
+          #
+          # bash ./run.sh
+          # echo "Export Complete."
+
+        resources:
+          request:
+            memory: 10Gi
+          limits:
+            memory: 10Gi
+        volumeMounts:
+          - name: obslytics-data-exporter-workflow-secrets
+            mountPath: /etc/obslytics-data-exporter

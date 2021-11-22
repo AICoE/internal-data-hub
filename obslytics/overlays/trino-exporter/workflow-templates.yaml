@@ -1,0 +1,63 @@
+---
+- op: replace
+  path: /spec/templates/0/parallelism
+  value: 1
+
+- op: replace
+  path: /spec/templates/1/dag/tasks/0/arguments/parameters/5/value
+  value: "true"
+
+- op: replace
+  path: /spec/templates/1/dag/tasks/0/arguments/parameters/5/value
+  value: ""
+
+- op: replace
+  path: /spec/templates/1/dag/tasks/0/template
+  value: run-trino-exporter
+
+- op: replace
+  path: /spec/templates/2/script/image
+  value: quay.io/internaldatahub/obslytics-data-exporter:stable
+
+- op: replace
+  path: /spec/templates/2/resources/limits/memory
+  value: 12Gi
+
+- op: replace
+  path: /spec/templates/3/script/image
+  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+
+- op: replace
+  path: /spec/templates/3/script/source
+  value: |
+    set -x
+    python py/gap_detector.py \
+        --storage_config /etc/obslytics-data-exporter/storage-config.yaml \
+        --prefix trinoexport/ \
+        --metric {{inputs.parameters.metric}} \
+        --step {{inputs.parameters.step}} \
+        --delay {{inputs.parameters.delay}} \
+        --from_timestamp {{inputs.parameters.backfill_from_timestamp}} \
+        --earliest_timestamp {{inputs.parameters.min_ts}} \
+        --max_timestamps {{inputs.parameters.backfill_count}} \
+        --output_file /mnt/out/tslist \
+        --verbose \
+        --backfill
+
+- op: replace
+  path: /spec/templates/3/resources/limits/memory
+  value: 12Gi
+
+- op: replace
+  path: /spec/templates/3/resources/requests/memory
+  value: 12Gi
+
+- op: replace
+  path: /spec/templates/7/script/image
+  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+
+- op: remove
+  path: /spec/templates/5
+
+- op: remove
+  path: /spec/templates/4

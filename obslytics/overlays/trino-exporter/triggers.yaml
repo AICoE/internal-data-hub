@@ -1,0 +1,6 @@
+---
+- op: remove
+  path: /spec/templates/2
+
+- op: remove
+  path: /spec/templates/0
