@@ -25,14 +25,19 @@ spec:
             items:
               - key: RH-IT-Root-CA.crt
                 path: RH-IT-Root-CA.crt
+        - name: prometheus-exporter
+          secret:
+            secretName: trino-config-monitoring
+            items:
+              - key: config.yaml
+                path: config.yaml
+            defaultMode: 420
         - name: trino-config-volume
           secret:
             secretName: trino-config
             items:
               - key: config-coordinator.properties
                 path: config-coordinator.properties
-              - key: jvm-coordinator.config
-                path: jvm-coordinator.config
               - key: log.properties
                 path: log.properties
               - key: node.properties
@@ -60,6 +65,23 @@ spec:
                 path: hive.properties
               - key: jmx.properties
                 path: jmx.properties
+              - key: prometheus.properties
+                path: prometheus.properties
+        - name: trino-jvm-coordinator-config
+          secret:
+            secretName: trino-jvm-coordinator-config
+            items:
+              - key: jvm-coordinator.config
+                path: jvm-coordinator.config
+            defaultMode: 420
+        - name: trino-truststore
+          secret:
+            secretName: trino-truststore
+            defaultMode: 420
+        - name: trino-telemetry-sa-token
+          secret:
+            secretName: trino-telemetry-sa-token
+            defaultMode: 420
       containers:
         - resources:
             requests:
@@ -69,6 +91,9 @@ spec:
               cpu: $(trino_cpu_limit)
               memory: $(trino_memory_limit)
           name: trino-coordinator
+          args:
+            - --config=/etc/trino/config-coordinator.properties
+            - --jvm-config=/etc/trino/jvm-config/jvm-coordinator.config
           command:
             - /usr/lib/trino/bin/run-trino
           env:
@@ -96,7 +121,12 @@ spec:
             - name: trino-catalogs-volume
               mountPath: /etc/trino/catalog
             - name: root-ca
+              mountPath: /etc/certs
+            - name: prometheus-exporter
+              mountPath: /etc/trino/prometheus
+            - name: trino-truststore
               mountPath: /etc/trino/certs
-          args:
-            - --config=/etc/trino/config-coordinator.properties
-            - --jvm-config=/etc/trino/jvm-coordinator.config
+            - name: trino-jvm-coordinator-config
+              mountPath: /etc/trino/jvm-config
+            - name: trino-telemetry-sa-token
+              mountPath: /etc/trino/telemetry-sa-token

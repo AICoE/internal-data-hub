@@ -11,6 +11,7 @@ patchesStrategicMerge:
   - trino-config-secret.yaml
   - trino-coordinator-dc.yaml
   - trino-service.yaml
+  - trino-worker-dc.yaml
 
 resources:
   - trino-service-monitor.yaml

@@ -1,0 +1,74 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: trino-worker
+  labels:
+    component.opendatahub.io/name: trino
+    instance: trino
+    opendatahub.io/component: 'true'
+    role: trino-worker
+spec:
+  template:
+    spec:
+      volumes:
+        - name: trino-config-volume
+          secret:
+            secretName: trino-config
+            items:
+              - key: config-worker.properties
+                path: config-worker.properties
+              - key: log.properties
+                path: log.properties
+              - key: node.properties
+                path: node.properties
+        - name: trino-jvm-worker-config
+          secret:
+            secretName: trino-jvm-worker-config
+            items:
+              - key: jvm-worker.config
+                path: jvm-worker.config
+            defaultMode: 420
+        - name: root-ca
+          secret:
+            secretName: root-ca
+            items:
+              - key: RH-IT-Root-CA.crt
+                path: RH-IT-Root-CA.crt
+            defaultMode: 420
+        - name: trino-catalogs-volume
+          secret:
+            secretName: trino-catalog
+            defaultMode: 420
+            items:
+              - key: hive.properties
+                path: hive.properties
+              - key: jmx.properties
+                path: jmx.properties
+              - key: prometheus.properties
+                path: prometheus.properties
+        - name: trino-truststore
+          secret:
+            secretName: trino-truststore
+            defaultMode: 420
+        - name: trino-telemetry-sa-token
+          secret:
+            secretName: trino-telemetry-sa-token
+            defaultMode: 420
+      containers:
+        - name: trino-worker
+          args:
+            - --config=/etc/trino/config-worker.properties
+            - --jvm-config=/etc/trino/jvm-config/jvm-worker.config
+          volumeMounts:
+            - name: trino-config-volume
+              mountPath: /etc/trino
+            - name: trino-catalogs-volume
+              mountPath: /etc/trino/catalog
+            - name: root-ca
+              mountPath: /etc/certs
+            - name: trino-truststore
+              mountPath: /etc/trino/certs
+            - name: trino-jvm-worker-config
+              mountPath: /etc/trino/jvm-config
+            - name: trino-telemetry-sa-token
+              mountPath: /etc/trino/telemetry-sa-token

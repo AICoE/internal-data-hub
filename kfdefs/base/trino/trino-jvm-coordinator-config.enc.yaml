@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: trino-jvm-coordinator-config
+stringData:
+    jvm-coordinator.config: ENC[AES256_GCM,data:DkcR6wBgcymi5XsnEl43qwPeFfEKeEsuW16tSaCI7OWuUjuylVNZ6OlleEoW8XFao6G7qybYVEV1G7F+XFapLW1gNfOOvUdJ6aXbNIbrPGOh83YXBz421P6I6Js8KEHcmPiQ9yEfK+JvYsPBNZO+Om+mHbe9zyNPqCsUKuZPni0EtLxPbaRNQpvQIs52z8uSScyi6MpURIjIBfXJzReeAQZVT6FB3oDlEQtx1udydTbtUb86DU6P+R543zkPdZW3QxWNR+3GYH6MZqGFP9S0WWhSml4yrr2yO++jKCKRXzEut+89y1roU7OskoMRxyvYrtnIKn1LqG45t4bQL9yV1nxQBjV3iOXsJSroK9ULanCRRtY96HlT4FuCzow0LVS335/ocX6zPu8otvJvDLgHDkJxIpr50ZHnpIfdRICZaaE74+M5QlQQXwRt96POW3rq9lji0dQWH+TzPugBzuK7cX4VX6p94r4AoTSRvkS+FZDyJa20GhUixPm+2jaRIc/kTUqYktQv3ncRLYSdHGKHkE+6I31HYb6q0JwuB/iIlUyTI/dXkAKQNDISoR8x6oApQgN9paEWAXXft0sItVrNbqUjRZ7QnFU6KyDLmv08PKVYph9XqAAadT7zeBxEU7TeCPLc9IzBSekBW1D1nYwpXEHZGAIExKCfuf0yQUwrB2aHU1TLBY1E9AW1nlxuiP9G1ZfgfntXAxhBJ+dBWricWvnmuerTWbHR6WfBSGtUgByKmzPQV+TkYGWKM5DOXaKtBa6xbeMTTQzdubjlrBc=,iv:A8pavgQ3FDsqHgtK9fe2DBU7prcTbBvrR7ra7UeOVHo=,tag:Xd/Vd2dNstCwrBYOKaSYNA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    lastmodified: '2021-11-22T21:12:57Z'
+    mac: ENC[AES256_GCM,data:HBoad/dTBJ4KdtmsWzfLQYPHNeJBGKAozh1bTQn/hOpVHc+/VUOmFhMYUi4/CvjRjLSle4XAfuaNXUzFkxn0VYcHpu/HgMaYGalleARn2bXr6tuDz3CByIT4g9OO322xzRkYJnuo8dQb04hqPx37RqzFJnrbrkALSSFYmy8QJT4=,iv:0D4kycexLLoUAfjonVoEwEEq76PpMQyrXcw+V9Gk+9g=,tag:xs6K77Mr0fJPqsRV5zaF5w==,type:str]
+    pgp:
+    -   created_at: '2021-11-22T21:12:57Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQEMA/irrHa183bxAQf/c1iq+f0zt99wVXZ5g8E+ZIOHAKt3dCGmWjQeDZsz4Nbj
+            3PTGmmdNraF0Bxca5VovM3gGzF29PWi4JywcCcbfOb+wEdx5tWsPkWmgOMOMsIKO
+            pINyeao/+kIj/FUpMtbokNDWy14QMzsUSZQYvdHXUwGAF55zlrJVwQ1E+74sLua/
+            xW3r5jovHhM1+/WD8TyKC3pL5B/AZJeDq5giqAoe9k5ATaJkjk16aj5y1NmoV0e9
+            HZ3GiJ/fDyGQtvPHZFYn4JowoERVGQiS3HnKSzqBOtcZKKkqw8dP3karhSJ4p++A
+            42769L4mkspcMnAfaMLJxhONT67OJk7MmfmBT8KrftJeATAiCb63KGzOI63R8Zel
+            kJsgy3dLpCNTV4xe4d19flmthdP+h6ujlsx/HbRYGJRxlDqYErOdidpAn78WyKcu
+            ZhMIbwC+PJwX70mdFpImIh4o9y4e/ZEy8P3mqrI6Pg==
+            =4LbR
+            -----END PGP MESSAGE-----
+        fp: EFDB9AFBD18936D9AB6B2EECBD2C73FF891FBC7E
+    encrypted_regex: ^(data|stringData|tls)$
+    version: 3.5.0
