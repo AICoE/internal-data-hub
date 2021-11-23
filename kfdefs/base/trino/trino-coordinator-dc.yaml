@@ -65,6 +65,8 @@ spec:
                 path: hive.properties
               - key: jmx.properties
                 path: jmx.properties
+              - key: prometheus.properties
+                path: prometheus.properties
         - name: trino-jvm-coordinator-config
           secret:
             secretName: trino-jvm-coordinator-config
@@ -75,6 +77,10 @@ spec:
         - name: trino-truststore
           secret:
             secretName: trino-truststore
+            defaultMode: 420
+        - name: trino-telemetry-sa-token
+          secret:
+            secretName: trino-telemetry-sa-token
             defaultMode: 420
       containers:
         - resources:
@@ -122,3 +128,5 @@ spec:
               mountPath: /etc/trino/certs
             - name: trino-jvm-coordinator-config
               mountPath: /etc/trino/jvm-config
+            - name: trino-telemetry-sa-token
+              mountPath: /etc/trino/telemetry-sa-token
