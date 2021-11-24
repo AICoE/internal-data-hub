@@ -23,7 +23,12 @@
     "cluster:usage:consumption:rhods:cpu:seconds:rate5m",
     "csv_succeeded",
     "rhods_total_users",
-    "rhods_aggregate_availability"
+    "rhods_aggregate_availability",
+    "id_version",
+    "id_install_type",
+    "id_provider",
+    "cluster:usage:resources:sum",
+    "cam_app_workload_migrations"
   ]'
   # TODO: add the following metrics to this list
   # "cluster_operator_conditions",  # TODO: times out
@@ -52,6 +57,11 @@
     - csv_succeeded
     - rhods_total_users
     - rhods_aggregate_availability
+    - id_version
+    - id_install_type
+    - id_provider
+    - cluster:usage:resources:sum
+    - cam_app_workload_migrations
     # TODO: add the following metrics to this list
     # - cluster_operator_conditions  # TODO: times out
 - op: replace
@@ -79,6 +89,11 @@
     - csv_succeeded
     - rhods_total_users
     - rhods_aggregate_availability
+    - id_version
+    - id_install_type
+    - id_provider
+    - cluster:usage:resources:sum
+    - cam_app_workload_migrations
     # TODO: add the following metrics to this list
     # - cluster_operator_conditions  # TODO: times out
 
