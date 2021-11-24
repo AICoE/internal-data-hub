@@ -461,7 +461,7 @@ spec:
           - name: dryrun
       activeDeadlineSeconds: 600
       script:
-        image: quay.io/opendatahub/trino:356
+        image: quay.io/gmfrasca/obslytics-pyscripts:trino-etl-dev
         command: [/bin/bash, -e]
         env:
           - name: TRINO_USER
@@ -481,45 +481,19 @@ spec:
                 key: TRINO_HOST
         source: |
           set -x
-
-          echo "Calling Script with Params:"
-          epoch=`date --date="{{inputs.parameters.start_timestamp}}" +"%s"`
-          echo "START       : ${epoch} ({{inputs.parameters.start_timestamp}})"
-          echo "METRIC      : {{inputs.parameters.metric}}"
-          echo "STEP        : {{inputs.parameters.step}}"
-          echo "DELAY       : {{inputs.parameters.delay}}"
-          echo "RESOLUTION  : {{inputs.parameters.resolution}}"
-          echo "PREFIX      : trino/"
-
-          echo "DONE.""
-
-          # # Config params
-          # export INPUT_CONFIG_FILE="/etc/obslytics-data-exporter/input-config.yaml"
-          # export STORAGE_CONFIG_FILE="/etc/obslytics-data-exporter/storage-config.yaml"
-          #
-          # # Input Params
-          # export METRIC_MAX_TIME="${epoch}"
-          # export METRIC_STEP="{{inputs.parameters.step}}"
-          # export METRIC_DELAY="{{inputs.parameters.delay}}"
-          # export METRIC_MATCH="{{inputs.parameters.metric}}"
-          #
-          # # Storage Params
-          # export OUTPUT_FILE_TYPE="parquet"
-          # export OUTPUT_METRIC_RESOLUTION="{{inputs.parameters.resolution}}"
-          # export METRIC_STORAGE_PREFIX="trinoexport/"
-          #
-          # # Mode Parameters
-          # export VERIFY_DATA_STORED="false"
-          # export DRYRUN="{{inputs.parameters.dryrun}}"
-          #
-          # bash ./run.sh
-          # echo "Export Complete."
-
+          python py/trino_etl.py \
+            --config_file /etc/config/trino-etl-config.yaml \
+            --metric "{{inputs.parameters.metric}}" \
+            --start_timestamp "{{inputs.parameters.start_timestamp}}" \
+            --duration "{{inputs.parameters.step}}s" \
+            --verbose
         resources:
           request:
-            memory: 10Gi
+            memory: 4Gi
           limits:
-            memory: 10Gi
+            memory: 4Gi
         volumeMounts:
           - name: obslytics-data-exporter-workflow-secrets
             mountPath: /etc/obslytics-data-exporter
+          - name: trino-etl-config
+            mountPath: /etc/config

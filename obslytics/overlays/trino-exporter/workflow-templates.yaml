@@ -9,7 +9,7 @@
 
 - op: replace
   path: /spec/templates/1/dag/tasks/0/arguments/parameters/5/value
-  value: ""
+  value: "true"
 
 - op: replace
   path: /spec/templates/1/dag/tasks/0/template
@@ -25,7 +25,7 @@
 
 - op: replace
   path: /spec/templates/3/script/image
-  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+  value: quay.io/internaldatahub/obslytics-pyscripts:stable
 
 - op: replace
   path: /spec/templates/3/script/source
@@ -54,7 +54,7 @@
 
 - op: replace
   path: /spec/templates/7/script/image
-  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
+  value: quay.io/internaldatahub/obslytics-pyscripts:stable
 
 - op: remove
   path: /spec/templates/5

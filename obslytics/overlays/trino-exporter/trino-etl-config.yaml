@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: trino-etl-config
+data:
+  trino-etl-config.yaml: |
+    trino:
+      host_env: TRINO_HOST
+      port: 443
+      http_scheme: https
+      user_env: TRINO_USER
+      password_env: TRINO_PASSWORD
+      input_catalog: prometheus
+      input_schema: default
+      output_catalog: iceberg
+      output_schema: telemetry_iceberg

@@ -6,3 +6,10 @@
 - op: replace
   path: /spec/workflowSpec/ttlSecondsAfterFinished
   value: 86400
+
+- op: add
+  path: /spec/workflowSpec/volumes/-
+  value:
+    name: trino-etl-config
+    configMap:
+      name: trino-etl-config
