@@ -84,8 +84,8 @@
 
 - op: replace
   path: /spec/templates/1/parallelism
-  value: 10
+  value: 20
 
 - op: replace
   path: /spec/templates/1/steps/1/0/arguments/parameters/0/value
-  value: '15'
+  value: '30'
