@@ -2,7 +2,9 @@
 - op: replace
   path: /spec/templates/0/steps/1/0/withItems
   value:
-    - cluster_version
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_version
 - op: replace
   path: /spec/templates/1/steps/0/0/withItems
   value:
