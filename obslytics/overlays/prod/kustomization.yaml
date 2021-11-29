@@ -10,12 +10,6 @@ generators:
   - secrets/secret-generator.yaml
 
 patchesJson6902:
-  - path: obslytics-cron-workflow.yaml
-    target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: CronWorkflow
-      name: obslytics-data-exporter-cron-workflow
   - path: backfill-cron-workflow.yaml
     target:
       group: argoproj.io

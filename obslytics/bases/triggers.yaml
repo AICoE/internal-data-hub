@@ -10,39 +10,6 @@ spec:
   podGC:
     strategy: OnWorkflowSuccess
   templates:
-    - name: trigger-workflow
-      steps:
-        - - name: run
-            arguments:
-              parameters:
-                # This is always overlayed with a full list of metrics
-                - name: metrics_list
-                  value: '["cluster_version"]'
-                - name: start_timestamp
-                  value: "{{workflow.parameters.start_timestamp}}"
-                - name: step
-                  value: '1800'
-                - name: delay
-                  value: '36000'
-                - name: resolution
-                  value: 5m
-            templateRef:
-              name: obslytics-data-exporter-workflow-template
-              template: init
-        - - name: get-all-partitioned-tables
-            templateRef:
-              name: obslytics-data-exporter-workflow-template
-              template: extract-partitioned-table-names
-        - - name: partition-updater
-            arguments:
-              parameters:
-                - name: table_defs
-                  value: "{{item}}"
-            templateRef:
-              name: obslytics-data-exporter-workflow-template
-              template: update-partition-metadata
-            withParam: "{{steps.get-all-partitioned-tables.outputs.parameters.tables_list}}"
-
     - name: trigger-backfill-workflow
       parallelism: 3
       steps:
