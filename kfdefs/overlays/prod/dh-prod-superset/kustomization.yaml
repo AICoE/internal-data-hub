@@ -102,7 +102,7 @@ patchesJson6902:
   - patch: |
       - op: add
         path: "/spec/storageClassName"
-        value: ceph-dyn-datahub-prod-psi
+        value: dynamic-nfs
     target:
       kind: PersistentVolumeClaim
       name: postgresql
