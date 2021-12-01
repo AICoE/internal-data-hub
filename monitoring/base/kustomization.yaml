@@ -11,3 +11,4 @@ resources:
   - blackbox-recording-rules.yaml
   - datahub-help-blackbox-service-monitor.yaml
   - trino-blackbox-service-monitor.yaml
+  - superset-blackbox-service-monitor.yaml
