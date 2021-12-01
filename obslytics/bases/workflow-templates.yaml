@@ -17,6 +17,7 @@ spec:
           - name: step
           - name: delay
           - name: resolution
+          - name: worker_size
       steps:
         - - name: metric-split
             template: metric-worker
@@ -32,6 +33,8 @@ spec:
                   value: "{{inputs.parameters.delay}}"
                 - name: resolution
                   value: "{{inputs.parameters.resolution}}"
+                - name: worker_size
+                  value: "{{inputs.parameters.worker_size}}"
             withParam: "{{inputs.parameters.metrics_list}}"
     - name: metric-worker
       parallelism: 1
@@ -42,10 +45,11 @@ spec:
           - name: step
           - name: delay
           - name: resolution
+          - name: worker_size
       dag:
         tasks:
-          - name: process-metric
-            template: run-obslytics
+          - name: process-metric-small
+            template: run-obslytics-small
             arguments:
               parameters:
                 - name: metric
@@ -60,6 +64,41 @@ spec:
                   value: "{{inputs.parameters.resolution}}"
                 - name: dryrun
                   value: ""
+            when: "{{inputs.parameters.worker_size}} == 'small'"
+          - name: process-metric-large
+            template: run-obslytics-large
+            arguments:
+              parameters:
+                - name: metric
+                  value: "{{inputs.parameters.metric}}"
+                - name: start_timestamp
+                  value: "{{inputs.parameters.start_timestamp}}"
+                - name: step
+                  value: "{{inputs.parameters.step}}"
+                - name: delay
+                  value: "{{inputs.parameters.delay}}"
+                - name: resolution
+                  value: "{{inputs.parameters.resolution}}"
+                - name: dryrun
+                  value: ""
+            when: "{{inputs.parameters.worker_size}} == 'large'"
+          - name: process-metric-xl
+            template: run-obslytics-xl
+            arguments:
+              parameters:
+                - name: metric
+                  value: "{{inputs.parameters.metric}}"
+                - name: start_timestamp
+                  value: "{{inputs.parameters.start_timestamp}}"
+                - name: step
+                  value: "{{inputs.parameters.step}}"
+                - name: delay
+                  value: "{{inputs.parameters.delay}}"
+                - name: resolution
+                  value: "{{inputs.parameters.resolution}}"
+                - name: dryrun
+                  value: ""
+            when: "{{inputs.parameters.worker_size}} == 'xl'"
 
     - name: normalize-timestamps
       activeDeadlineSeconds: 600
@@ -157,7 +196,7 @@ spec:
           - name: obslytics-data-exporter-workflow-secrets
             mountPath: /etc/obslytics-data-exporter
 
-    - name: run-obslytics
+    - name: run-obslytics-large
       retryStrategy:
         limit: 5
       inputs:
@@ -229,6 +268,7 @@ spec:
           - name: resolution
           - name: step
           - name: backfill_min_ts
+          - name: worker_size
       steps:
         - - name: get-timestamps
             arguments:
@@ -262,6 +302,8 @@ spec:
                   value: "{{inputs.parameters.step}}"
                 - name: resolution
                   value: "5m"
+                - name: worker_size
+                  value: "{{inputs.parameters.worker_size}}"
             templateRef:
               name: "obslytics-data-exporter-workflow-template"
               template: init
@@ -446,3 +488,121 @@ spec:
               cur.fetchone()
               sys.stdout.write("Done!")
               sys.stdout.flush()
+
+    - name: run-obslytics-small
+      retryStrategy:
+        limit: 5
+      inputs:
+        parameters:
+          - name: metric
+          - name: start_timestamp
+          - name: step
+          - name: delay
+          - name: resolution
+          - name: dryrun
+      activeDeadlineSeconds: 600
+      script:
+        image: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+        command: [/bin/bash, -e]
+        source: |
+          set -x
+          export GOGC=30
+
+          echo "Calling Script with Params:"
+          epoch=`date --date="{{inputs.parameters.start_timestamp}}" +"%s"`
+          echo "START       : ${epoch} ({{inputs.parameters.start_timestamp}})"
+          echo "METRIC      : {{inputs.parameters.metric}}"
+          echo "STEP        : {{inputs.parameters.step}}"
+          echo "DELAY       : {{inputs.parameters.delay}}"
+          echo "RESOLUTION  : {{inputs.parameters.resolution}}"
+          echo "PREFIX      : data/"
+
+          # Config params
+          export INPUT_CONFIG_FILE="/etc/obslytics-data-exporter/input-config.yaml"
+          export STORAGE_CONFIG_FILE="/etc/obslytics-data-exporter/storage-config.yaml"
+
+          # Input Params
+          export METRIC_MAX_TIME="${epoch}"
+          export METRIC_STEP="{{inputs.parameters.step}}"
+          export METRIC_DELAY="{{inputs.parameters.delay}}"
+          export METRIC_MATCH="{{inputs.parameters.metric}}"
+
+          # Storage Params
+          export OUTPUT_FILE_TYPE="parquet"
+          export OUTPUT_METRIC_RESOLUTION="{{inputs.parameters.resolution}}"
+          export METRIC_STORAGE_PREFIX="data/"
+
+          # Mode Parameters
+          export VERIFY_DATA_STORED="false"
+          export DRYRUN="{{inputs.parameters.dryrun}}"
+
+          bash ./run.sh
+          echo "Export Complete."
+
+        resources:
+          request:
+            memory: 2Gi
+          limits:
+            memory: 2Gi
+        volumeMounts:
+          - name: obslytics-data-exporter-workflow-secrets
+            mountPath: /etc/obslytics-data-exporter
+
+    - name: run-obslytics-xl
+      retryStrategy:
+        limit: 5
+      inputs:
+        parameters:
+          - name: metric
+          - name: start_timestamp
+          - name: step
+          - name: delay
+          - name: resolution
+          - name: dryrun
+      activeDeadlineSeconds: 600
+      script:
+        image: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+        command: [/bin/bash, -e]
+        source: |
+          set -x
+          export GOGC=30
+
+          echo "Calling Script with Params:"
+          epoch=`date --date="{{inputs.parameters.start_timestamp}}" +"%s"`
+          echo "START       : ${epoch} ({{inputs.parameters.start_timestamp}})"
+          echo "METRIC      : {{inputs.parameters.metric}}"
+          echo "STEP        : {{inputs.parameters.step}}"
+          echo "DELAY       : {{inputs.parameters.delay}}"
+          echo "RESOLUTION  : {{inputs.parameters.resolution}}"
+          echo "PREFIX      : data/"
+
+          # Config params
+          export INPUT_CONFIG_FILE="/etc/obslytics-data-exporter/input-config.yaml"
+          export STORAGE_CONFIG_FILE="/etc/obslytics-data-exporter/storage-config.yaml"
+
+          # Input Params
+          export METRIC_MAX_TIME="${epoch}"
+          export METRIC_STEP="{{inputs.parameters.step}}"
+          export METRIC_DELAY="{{inputs.parameters.delay}}"
+          export METRIC_MATCH="{{inputs.parameters.metric}}"
+
+          # Storage Params
+          export OUTPUT_FILE_TYPE="parquet"
+          export OUTPUT_METRIC_RESOLUTION="{{inputs.parameters.resolution}}"
+          export METRIC_STORAGE_PREFIX="data/"
+
+          # Mode Parameters
+          export VERIFY_DATA_STORED="false"
+          export DRYRUN="{{inputs.parameters.dryrun}}"
+
+          bash ./run.sh
+          echo "Export Complete."
+
+        resources:
+          request:
+            memory: 16Gi
+          limits:
+            memory: 16Gi
+        volumeMounts:
+          - name: obslytics-data-exporter-workflow-secrets
+            mountPath: /etc/obslytics-data-exporter

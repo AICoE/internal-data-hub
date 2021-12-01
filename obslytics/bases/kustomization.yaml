@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - backfill-cron-workflow.yaml
   - images.yaml
-  - obslytics-cron-workflow.yaml
   - triggers.yaml
   - verification-cron-workflow.yaml
   - workflow-templates.yaml

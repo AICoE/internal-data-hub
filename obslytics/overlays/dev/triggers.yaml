@@ -1,16 +1,15 @@
 ---
 - op: replace
-  path: /spec/templates/0/steps/0/0/arguments/parameters/0/value
-  value: '["cluster_version"]'
+  path: /spec/templates/0/steps/1/0/withItems
+  value:
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_version
 - op: replace
-  path: /spec/templates/1/steps/1/0/withItems
+  path: /spec/templates/1/steps/0/0/withItems
   value:
     - cluster_version
 - op: replace
-  path: /spec/templates/2/steps/0/0/withItems
-  value:
-    - cluster_version
-- op: replace
-  path: /spec/templates/1/steps/1/0/arguments/parameters/0/value
+  path: /spec/templates/0/steps/1/0/arguments/parameters/0/value
   value:
     - 4
