@@ -67,9 +67,24 @@
       name: rhods_total_users
     - size: large
       backfill_to: 2019-06-01T00:00:00Z
-      name: rhods_aggregate_availability
-    # TODO: add the following metrics to this list
-    # - cluster_operator_conditions  # TODO: times out
+      name: id_version
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: id_install_type
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: id_provider
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cam_app_workload_migrations
+    # TODO: add the following metrics to this list (currently timeout or OOMKill)
+    # - size: xl
+    #   backfill_to: 2019-06-01T00:00:00Z
+    #   name: cluster:usage:resources:sum
+    # - size: xl
+    #   backfill_to: 2019-06-01T00:00:00Z
+    #   cluster_operator_conditions
+
 - op: replace
   path: /spec/templates/1/steps/0/0/withItems
   value:
