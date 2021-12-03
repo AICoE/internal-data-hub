@@ -3,16 +3,16 @@
   path: /spec/templates/0/steps/1/0/withItems
   value:
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-08-01T00:00:00Z
       name: ceph_cluster_total_bytes
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-08-01T00:00:00Z
       name: ceph_cluster_total_used_raw_bytes
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-08-01T00:00:00Z
       name: cluster_infrastructure_provider
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-07-01T00:00:00Z
       name: cluster_installer
     - size: large
       backfill_to: 2019-06-01T00:00:00Z
@@ -27,44 +27,47 @@
       backfill_to: 2019-06-01T00:00:00Z
       name: cluster:node_instance_type_count:sum
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2020-02-01T00:00:00Z
       name: id_version_ebs_account_internal:cluster_subscribed
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-07-01T00:00:00Z
       name: instance:etcd_object_counts:sum
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-09-01T00:00:00Z
       name: node_role_os_version_machine:cpu_capacity_cores:sum
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-08-01T00:00:00Z
       name: subscription_sync_total
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-08-01T00:00:00Z
       name: workload:cpu_usage_cores:sum
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-08-01T00:00:00Z
       name: workload:memory_usage_bytes:sum
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2019-08-01T00:00:00Z
       name: subscription_labels
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2021-01-01T00:00:00Z
       name: ebs_account_account_type_email_domain_internal
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2021-01-01T00:00:00Z
       name: visual_web_terminal_sessions_total
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2021-07-01T00:00:00Z
       name: acm_managed_cluster_info
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2021-03-01T00:00:00Z
       name: cluster:usage:consumption:rhods:cpu:seconds:rate5m
     - size: large
       backfill_to: 2019-06-01T00:00:00Z
       name: csv_succeeded
     - size: large
-      backfill_to: 2019-06-01T00:00:00Z
+      backfill_to: 2021-07-01T00:00:00Z
       name: rhods_total_users
+    - size: large
+      backfill_to: 2021-07-01T00:00:00Z
+      name: rhods_aggregate_availability
     - size: large
       backfill_to: 2019-06-01T00:00:00Z
       name: id_version
@@ -110,8 +113,13 @@
     - csv_succeeded
     - rhods_total_users
     - rhods_aggregate_availability
+    - id_version
+    - id_install_type
+    - id_provider
+    - cam_app_workload_migrations
     # TODO: add the following metrics to this list
     # - cluster_operator_conditions  # TODO: times out
+    # - cam_app_workload_migrations
 
 - op: replace
   path: /spec/templates/0/parallelism
