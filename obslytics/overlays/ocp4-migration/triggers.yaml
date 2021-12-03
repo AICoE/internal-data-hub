@@ -1,71 +1,92 @@
 ---
 - op: replace
-  path: /spec/templates/0/steps/0/0/arguments/parameters/0/value
-  value: '[
-    "ceph_cluster_total_bytes",
-    "ceph_cluster_total_used_raw_bytes",
-    "cluster_infrastructure_provider",
-    "cluster_installer",
-    "cluster_version",
-    "cluster:capacity_cpu_cores:sum",
-    "cluster:capacity_memory_bytes:sum",
-    "cluster:node_instance_type_count:sum",
-    "id_version_ebs_account_internal:cluster_subscribed",
-    "instance:etcd_object_counts:sum",
-    "node_role_os_version_machine:cpu_capacity_cores:sum",
-    "subscription_sync_total",
-    "workload:cpu_usage_cores:sum",
-    "workload:memory_usage_bytes:sum",
-    "subscription_labels",
-    "ebs_account_account_type_email_domain_internal",
-    "visual_web_terminal_sessions_total",
-    "acm_managed_cluster_info",
-    "cluster:usage:consumption:rhods:cpu:seconds:rate5m",
-    "csv_succeeded",
-    "rhods_total_users",
-    "rhods_aggregate_availability",
-    "id_version",
-    "id_install_type",
-    "id_provider",
-    "cluster:usage:resources:sum",
-    "cam_app_workload_migrations"
-  ]'
-  # TODO: add the following metrics to this list
-  # "cluster_operator_conditions",  # TODO: times out
-- op: replace
-  path: /spec/templates/1/steps/1/0/withItems
+  path: /spec/templates/0/steps/1/0/withItems
   value:
-    - ceph_cluster_total_bytes
-    - ceph_cluster_total_used_raw_bytes
-    - cluster_infrastructure_provider
-    - cluster_installer
-    - cluster_version
-    - cluster:capacity_cpu_cores:sum
-    - cluster:capacity_memory_bytes:sum
-    - cluster:node_instance_type_count:sum
-    - id_version_ebs_account_internal:cluster_subscribed
-    - instance:etcd_object_counts:sum
-    - node_role_os_version_machine:cpu_capacity_cores:sum
-    - subscription_sync_total
-    - workload:cpu_usage_cores:sum
-    - workload:memory_usage_bytes:sum
-    - subscription_labels
-    - ebs_account_account_type_email_domain_internal
-    - visual_web_terminal_sessions_total
-    - acm_managed_cluster_info
-    - cluster:usage:consumption:rhods:cpu:seconds:rate5m
-    - csv_succeeded
-    - rhods_total_users
-    - rhods_aggregate_availability
-    - id_version
-    - id_install_type
-    - id_provider
-    - cluster:usage:resources:sum
-    - cam_app_workload_migrations
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: ceph_cluster_total_bytes
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: ceph_cluster_total_used_raw_bytes
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_infrastructure_provider
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_installer
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_version
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster:capacity_cpu_cores:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster:capacity_memory_bytes:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster:node_instance_type_count:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: id_version_ebs_account_internal:cluster_subscribed
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: instance:etcd_object_counts:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: node_role_os_version_machine:cpu_capacity_cores:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: subscription_sync_total
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: workload:cpu_usage_cores:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: workload:memory_usage_bytes:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: subscription_labels
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: ebs_account_account_type_email_domain_internal
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: visual_web_terminal_sessions_total
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: acm_managed_cluster_info
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster:usage:consumption:rhods:cpu:seconds:rate5m
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: csv_succeeded
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: rhods_total_users
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: rhods_aggregate_availability
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: id_version
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: id_install_type
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: id_provider
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster:usage:resources:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cam_app_workload_migrations
     # TODO: add the following metrics to this list
     # - cluster_operator_conditions  # TODO: times out
 - op: replace
-  path: /spec/templates/2/steps/0/0/withItems
+  path: /spec/templates/1/steps/0/0/withItems
   value:
     - ceph_cluster_total_bytes
     - ceph_cluster_total_used_raw_bytes
@@ -98,9 +119,9 @@
     # - cluster_operator_conditions  # TODO: times out
 
 - op: replace
-  path: /spec/templates/1/parallelism
-  value: 10
+  path: /spec/templates/0/parallelism
+  value: 20
 
 - op: replace
-  path: /spec/templates/1/steps/1/0/arguments/parameters/0/value
-  value: '15'
+  path: /spec/templates/0/steps/1/0/arguments/parameters/0/value
+  value: '30'
