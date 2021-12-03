@@ -150,7 +150,7 @@ spec:
           python py/gap_detector.py \
               --storage_config /etc/obslytics-data-exporter/storage-config.yaml \
               --prefix data/ \
-              --metric {{inputs.parameters.metric}} \
+              --metric {{inputs.parameters.metric}}/ \
               --step {{inputs.parameters.step}} \
               --delay {{inputs.parameters.delay}} \
               --from_timestamp {{inputs.parameters.backfill_from_timestamp}} \
