@@ -20,23 +20,6 @@
   value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-pyscripts:latest
 
 - op: replace
-  path: /spec/templates/3/script/source
-  value: |
-    set -x
-    python py/gap_detector.py \
-        --storage_config /etc/obslytics-data-exporter/storage-config.yaml \
-        --prefix data/ \
-        --metric {{inputs.parameters.metric}} \
-        --step {{inputs.parameters.step}} \
-        --delay {{inputs.parameters.delay}} \
-        --from_timestamp {{inputs.parameters.backfill_from_timestamp}} \
-        --earliest_timestamp {{inputs.parameters.min_ts}} \
-        --max_timestamps {{inputs.parameters.backfill_count}} \
-        --output_file /mnt/out/tslist \
-        --verbose \
-        --backfill
-
-- op: replace
   path: /spec/templates/3/resources/limits/memory
   value: 12Gi
 
