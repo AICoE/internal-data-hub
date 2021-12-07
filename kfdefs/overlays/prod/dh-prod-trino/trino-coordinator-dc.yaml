@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trino-coordinator
+  labels:
+    instance: trino
+    role: trino-coordinator
+spec:
+  selector:
+    matchLabels:
+      instance: trino
+      role: trino-coordinator
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        instance: trino
+        role: trino-coordinator
+    spec:
+      replicas: 4
