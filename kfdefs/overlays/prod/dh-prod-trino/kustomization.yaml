@@ -12,7 +12,7 @@ generators:
 patchesStrategicMerge:
   - trino-db-pvc.yaml
   - trino-config-secret.yaml
-  - trino-coordinator-dc.yaml
+  - trino-worker-dc.yaml
 
 patchesJson6902:
   - patch: |
