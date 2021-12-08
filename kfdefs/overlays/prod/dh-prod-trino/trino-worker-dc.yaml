@@ -6,16 +6,4 @@ metadata:
     instance: trino
     role: trino-worker
 spec:
-  selector:
-    matchLabels:
-      instance: trino
-      role: trino-worker
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        instance: trino
-        role: trino-worker
-    spec:
-      replicas: 4
+  replicas: 4
