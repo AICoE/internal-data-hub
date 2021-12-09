@@ -7,8 +7,15 @@ bases:
   - github.com/opendatahub-io/odh-manifests/superset/base?ref=6464fe3f5d5f1360511c1854b8d4c70e113f46af
 
 patchesStrategicMerge:
-  - superset-config-secret.yaml
   - ./superset-deployment.yaml
 
 generators:
 - ./secret-generator.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+secretGenerator:
+  - name: superset-config
+    behavior: replace
+    files:
+      - superset_config.py
