@@ -81,8 +81,8 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchExpressions:
-                    - key: instance
+                    - key: role
                       operator: In
                       values:
-                        - trino
+                        - trino-worker
                 topologyKey: topology.kubernetes.io/zone
