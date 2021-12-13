@@ -77,7 +77,7 @@ patchesJson6902:
   - patch: |
       - op: replace
         path: /data/trino_memory_limit
-        value: '64Gi'
+        value: '32Gi'
     target:
       kind: ConfigMap
       name: trino-config
