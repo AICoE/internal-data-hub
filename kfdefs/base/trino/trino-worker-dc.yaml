@@ -74,3 +74,15 @@ spec:
               mountPath: /etc/trino/jvm-config
             - name: trino-telemetry-sa-token
               mountPath: /etc/trino/telemetry-sa-token
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: instance
+                      operator: In
+                      values:
+                        - trino
+                topologyKey: topology.kubernetes.io/zone
