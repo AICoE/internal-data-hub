@@ -7,6 +7,9 @@ spec:
     spec:
       containers:
       - name: superset
+        env:
+          - name: SUPERSET_ADDITIONAL_CONFIG
+            value: /etc/superset/superset_additional_config.py
         volumeMounts:
           - mountPath: "/etc/certs"
             name: trino-route-certificate-secret
