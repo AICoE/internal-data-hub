@@ -6,6 +6,13 @@ namespace: dh-dev-trino
 resources:
   - ../../../base/trino
 
+generators:
+  - secret-generator.yaml
+
+patchesStrategicMerge:
+  - trino-config-secret.yaml
+  - trino-worker-dc.yaml
+
 patchesJson6902:
   - patch: |
       - op: replace
@@ -14,7 +21,7 @@ patchesJson6902:
             - name: s3_endpoint_url
               value: s3.upshift.redhat.com
             - name: s3_credentials_secret
-              value: prod-aws-secret
+              value: dev-aws-secret
             - name: trino_db_secret
               value: prod-trino-db-secret
       - op: add
@@ -34,4 +41,28 @@ patchesJson6902:
       group: kfdef.apps.kubeflow.org
       kind: KfDef
       name: opendatahub
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/s3_endpoint_url
+        value: s3.upshift.redhat.com
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/trino_cpu_limit
+        value: '2'
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/trino_memory_limit
+        value: '4Gi'
+    target:
+      kind: ConfigMap
+      name: trino-config
       version: v1
