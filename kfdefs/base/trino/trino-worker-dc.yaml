@@ -56,6 +56,47 @@ spec:
           secret:
             secretName: trino-telemetry-sa-token
             defaultMode: 420
+      initContainers:
+        - name: trino-memory-limit
+          image: 'registry.access.redhat.com/ubi8/ubi-minimal:8.4-208' # TODO: Check which image to use
+          resources:
+            limits:
+              cpu: 150m
+              memory: 50Mi
+            requests:
+              cpu: 150m
+              memory: 20Mi
+          command:
+            - /bin/sh
+            - -c
+            - >
+              get_memory_limit() {
+                  # TODO: Get memory limit and cast into a number
+                  MEMORY_LIMIT=${25Gi/Gi/""}
+              }
+              get_percentages() {
+                  # TODO: Get the percentages  
+                  MAX_MEMORY_PER_NODE_PERCENTAGE=0.1
+                  MAX_TOTAL_MEMORY_PER_NODE_PERCENTAGE=0.3
+                  MAX_MEMORY_PERCENTAGE=0.5
+              }
+
+              calc_values() { awk "BEGIN{ printf \"%.0f\n\", $* }"; }
+
+              get_memory_limit
+              get_percentages
+
+              # calculate memory with the percentages
+              max_memory_per_node=$(calc_values $MEMORY_LIMIT*$MAX_MEMORY_PER_NODE_PERCENTAGE)
+              max_total_memory_per_node=$(calc_values $MEMORY_LIMIT*$MAX_TOTAL_MEMORY_PER_NODE_PERCENTAGE)
+              max_memory=$(calc_values $MEMORY_LIMIT*$MAX_MEMORY_PERCENTAGE)
+
+              # TODO: Set Up the values
+
+              echo "${max_memory_per_node}GB"
+              echo "${max_total_memory_per_node}GB"
+              echo "${max_memory}GB"
+
       containers:
         - name: trino-worker
           args:
