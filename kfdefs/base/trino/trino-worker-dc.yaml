@@ -70,9 +70,11 @@ spec:
             - /bin/sh
             - -c
             - >
+              calc_values() { awk "BEGIN{ printf \"%.0f\n\", $* }"; }
+
               get_memory_limit() {
                   # TODO: Get memory limit and cast into a number
-                  MEMORY_LIMIT=${25Gi/Gi/""}
+                  MEMORY_LIMIT=${MEMORY_LIMIT/Gi/""}
               }
               get_percentages() {
                   # TODO: Get the percentages  
@@ -81,18 +83,27 @@ spec:
                   MAX_MEMORY_PERCENTAGE=0.5
               }
 
-              calc_values() { awk "BEGIN{ printf \"%.0f\n\", $* }"; }
+              round_zero_values() {
+                  [[ $1 = 0 ]] && value=1 || value=$1
+                  echo $value
+              }
 
               get_memory_limit
               get_percentages
 
+              if [[ (( $MAX_MEMORY_PER_NODE_PERCENTAGET > 1 )) || (( $MAX_TOTAL_MEMORY_PER_NODE_PERCENTAGE > 1 )) || (( $MAX_MEMORY_PERCENTAGE > 1 )) ]] ; then
+                  echo "Error, not enough memory"
+                  exit 1
+              fi
+
               # calculate memory with the percentages
-              max_memory_per_node=$(calc_values $MEMORY_LIMIT*$MAX_MEMORY_PER_NODE_PERCENTAGE)
-              max_total_memory_per_node=$(calc_values $MEMORY_LIMIT*$MAX_TOTAL_MEMORY_PER_NODE_PERCENTAGE)
-              max_memory=$(calc_values $MEMORY_LIMIT*$MAX_MEMORY_PERCENTAGE)
+              max_memory_per_node=$(round_zero_values "$(calc_values $MEMORY_LIMIT*$MAX_MEMORY_PER_NODE_PERCENTAGE)")
+              max_total_memory_per_node=$(round_zero_values "$(calc_values $MEMORY_LIMIT*$MAX_TOTAL_MEMORY_PER_NODE_PERCENTAGE)")
+              max_memory=$(round_zero_values "$(calc_values $MEMORY_LIMIT*$MAX_MEMORY_PERCENTAGE)")
+
+              total_dynamic_memory="$((($max_memory_per_node + $max_total_memory_per_node + $max_memory)))"
 
               # TODO: Set Up the values
-
               echo "${max_memory_per_node}GB"
               echo "${max_total_memory_per_node}GB"
               echo "${max_memory}GB"
