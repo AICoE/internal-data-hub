@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: idh-superset
 
 bases:
-  - github.com/opendatahub-io/odh-manifests/superset/base?ref=6464fe3f5d5f1360511c1854b8d4c70e113f46af
+  - github.com/opendatahub-io/odh-manifests/superset/base?ref=c4d94c3308e6555715dcadf6461115c926724253
 
 patchesStrategicMerge:
   - ./superset-deployment.yaml
@@ -14,8 +14,8 @@ generators:
 
 generatorOptions:
   disableNameSuffixHash: true
-secretGenerator:
-  - name: superset-config
-    behavior: replace
+configMapGenerator:
+  - name: superset-config-py
+    behavior: merge
     files:
-      - superset_config.py
+      - superset_additional_config.py
