@@ -81,61 +81,58 @@
       backfill_to: 2019-06-01T00:00:00Z
       name: cam_app_workload_migrations
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-11-01T00:00:00Z
       name: cluster:vmi_request_cpu_cores:sum
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-09-01T00:00:00Z
       name: kafka_id:strimzi_resource_state:max_over_time1h
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-09-01T00:00:00Z
       name: kafka_id:kafka_broker_quota_totalstorageusedbytes:max_over_time1h_gibibytes
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-09-01T00:00:00Z
       name: kafka_id:haproxy_server_bytes_in_out_total:rate1h_gibibytes
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-09-01T00:00:00Z
       name: kafka_id:haproxy_server_bytes_out_total:rate1h_gibibytes
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-09-01T00:00:00Z
       name: kafka_id:haproxy_server_bytes_in_total:rate1h_gibibytes
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-07-01T00:00:00Z
       name: acm_top500_mcs:acm_managed_cluster_info
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
-      name: acm_managed_cluster_info
-    - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-09-01T00:00:00Z
       name: cluster:alertmanager_integrations:max
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-11-01T00:00:00Z
       name: avalanche_metric_mmmmm_0_0
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-07-01T00:00:00Z
       name: openshift:build_by_strategy:sum
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-07-01T00:00:00Z
       name: instance:etcd_network_peer_round_trip_time_seconds:histogram_quantile
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-07-01T00:00:00Z
       name: instance:etcd_mvcc_db_total_size_in_bytes:sum
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-09-01T00:00:00Z
       name: namespace_job:scrape_samples_post_metric_relabeling:topk3
     - size: large
       backfill_to: 2021-06-01T00:00:00Z
       name: id_network_type
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-07-01T00:00:00Z
       name: instance:etcd_mvcc_db_total_size_in_use_in_bytes:sum
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-09-01T00:00:00Z
       name: namespace_job:scrape_series_added:topk3_sum1h
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-07-01T00:00:00Z
       name: instance:etcd_disk_backend_commit_duration_seconds:histogram_quantile
     - size: large
-      backfill_to: 2021-06-01T00:00:00Z
+      backfill_to: 2021-07-01T00:00:00Z
       name: instance:etcd_disk_wal_fsync_duration_seconds:histogram_quantile
     # TODO: add the following metrics to this list (currently timeout or OOMKill)
     # - size: xl
@@ -181,4 +178,4 @@
 
 - op: replace
   path: /spec/templates/0/steps/1/0/arguments/parameters/0/value
-  value: '30'
+  value: '20'
