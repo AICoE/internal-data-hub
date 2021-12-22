@@ -120,3 +120,4 @@ patchesJson6902:
 patchesStrategicMerge:
   - ./supersetdb-deployment-pvc-backup.yaml
   - ./supersetdb-service-nodePort.yaml
+  - ./superset-service-account.yaml
