@@ -134,6 +134,60 @@
     - size: large
       backfill_to: 2021-07-01T00:00:00Z
       name: instance:etcd_disk_wal_fsync_duration_seconds:histogram_quantile
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: job:noobaa_total_unhealthy_buckets:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: job:noobaa_total_object_count:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: job:noobaa_bucket_count:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: job:ceph_versions_running:count
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: job:ceph_osd_metadata:count
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: job:kube_pv:count
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: noobaa_total_usage
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: noobaa_accounts_num
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: ceph_health_status
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: job:ceph_pools_iops:total
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: job:ceph_pools_iops_bytes:total
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: node_uname_info
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_feature_set
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster:virt_platform_nodes:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: node_role_os_version_machine:cpu_capacity_sockets:sum
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster:network_attachment_definition_enabled_instance_up:max
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: cluster:network_attachment_definition_instances:max
+    - size: large
+      backfill_to: 2019-06-01T00:00:00Z
+      name: console_url
     # TODO: add the following metrics to this list (currently timeout or OOMKill)
     # - size: xl
     #   backfill_to: 2019-06-01T00:00:00Z
