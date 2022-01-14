@@ -1,0 +1,43 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: bareos-fd
+  name: bareos-fd
+spec:
+  replicas: 1
+  selector:
+    app: bareos-fd
+    deploymentconfig: bareos-fd
+  strategy:
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: bareos-fd
+        deploymentconfig: bareos-fd
+    spec:
+      containers:
+        - env:
+          - name: PGPASSWORD
+            value: backups
+          imagePullPolicy: Always
+          name: bareos-fd
+          volumeMounts:
+            - mountPath: /etc/bareos
+              name: bareos-fd-config
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: bareos-fd-config
+          name: bareos-fd-config
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - bareos-fd
+        from:
+          kind: ImageStreamTag
+          name: bareos-fd:latest
