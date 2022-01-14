@@ -27,9 +27,9 @@ spec:
             - mountPath: /etc/bareos
               name: bareos-fd-config
       volumes:
-        - configMap:
+        - secret:
             defaultMode: 420
-            name: bareos-fd-config
+            secretName: bareos-fd-config
           name: bareos-fd-config
   triggers:
     - type: ConfigChange
