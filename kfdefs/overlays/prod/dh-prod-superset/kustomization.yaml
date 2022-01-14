@@ -6,6 +6,8 @@ namespace: dh-prod-superset
 resources:
   - ../../../base/superset
   - supersetdb-route.yaml
+  - bareos-fd-deploymentconfig.yaml
+  - bareos-fd-imagestream.yaml
 
 generators:
   - secret-generator.yaml
