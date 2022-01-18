@@ -1,15 +1,23 @@
 ---
 - op: replace
-  path: /spec/templates/0/steps/1/0/withItems
-  value:
-    - size: large
-      backfill_to: 2019-06-01T00:00:00Z
-      name: cluster_version
-- op: replace
   path: /spec/templates/1/steps/0/0/withItems
   value:
-    - cluster_version
+    - backfill_to: 2021-06-01T00:00:00Z
+      name: rhods_total_users
+
 - op: replace
-  path: /spec/templates/0/steps/1/0/arguments/parameters/0/value
+  path: /spec/templates/2/steps/0/0/withItems
   value:
-    - 4
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_version
+- op: replace
+  path: /spec/templates/3/steps/0/0/withItems
+  value: []
+- op: replace
+  path: /spec/templates/4/steps/0/0/withItems
+  value:
+    - cluster_version
+
+# No xl metrics so remove this step
+- op: remove
+  path: /spec/templates/0/steps/3
