@@ -2,51 +2,51 @@
 # Small Metrics
 - op: replace
   path: /spec/templates/1/steps/0/0/withItems
-  value: []
+  value:
     # TODO: rearrange in cron order once everything is fully backfilled
-    ##### 2019-12-01 - 2020-06-01 #####
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: process_cpu_seconds_total
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: process_max_fds
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: process_open_fds
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: process_resident_memory_bytes
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: process_start_time_seconds
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: process_virtual_memory_bytes
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: python_gc_objects_uncollectable_total
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: python_info
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: python_gc_collections_total
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: python_gc_objects_collected_total
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: scrape_series_added
-    # - backfill_to: 2020-01-01T00:00:00Z
-    #   name: name_reason:cluster_operator_unavailable:count
-    # - backfill_to: 2020-01-01T00:00:00Z
-    #   name: cnv:vmi_status_running:count
-    # - backfill_to: 2020-01-01T00:00:00Z
-    #   name: name_reason:cluster_operator_degraded:count
-    # - backfill_to: 2020-01-01T00:00:00Z
-    #   name: csv_abnormal
-    # - backfill_to: 2020-01-01T00:00:00Z
-    #   name: cluster:usage:pods:terminal:workload:sum
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: id_version:cluster_available
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: count:up0
-    # - backfill_to: 2020-04-01T00:00:00Z
-    #   name: cluster:telemetry_selected_series:count
-    # - backfill_to: 2020-04-01T00:00:00Z
-    #   name: insightsclient_request_send_total
-    # - backfill_to: 2020-02-01T00:00:00Z
-    #   name: cluster:apiserver_current_inflight_requests:sum:max_over_time:2m
+    #### 2019-12-01 - 2020-06-01 #####
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: process_cpu_seconds_total
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: process_max_fds
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: process_open_fds
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: process_resident_memory_bytes
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: process_start_time_seconds
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: process_virtual_memory_bytes
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: python_gc_objects_uncollectable_total
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: python_info
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: python_gc_collections_total
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: python_gc_objects_collected_total
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: scrape_series_added
+    - backfill_to: 2020-01-01T00:00:00Z
+      name: name_reason:cluster_operator_unavailable:count
+    - backfill_to: 2020-01-01T00:00:00Z
+      name: cnv:vmi_status_running:count
+    - backfill_to: 2020-01-01T00:00:00Z
+      name: name_reason:cluster_operator_degraded:count
+    - backfill_to: 2020-01-01T00:00:00Z
+      name: csv_abnormal
+    - backfill_to: 2020-01-01T00:00:00Z
+      name: cluster:usage:pods:terminal:workload:sum
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: id_version:cluster_available
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: count:up0
+    - backfill_to: 2020-04-01T00:00:00Z
+      name: cluster:telemetry_selected_series:count
+    - backfill_to: 2020-04-01T00:00:00Z
+      name: insightsclient_request_send_total
+    - backfill_to: 2020-02-01T00:00:00Z
+      name: cluster:apiserver_current_inflight_requests:sum:max_over_time:2m
 
     ##### 2020-06-01 - 2020-12-05 #####
     # - backfill_to: 2020-10-01T00:00:00Z
@@ -376,7 +376,3 @@
 # No active xl metrics so remove this step
 - op: remove
   path: /spec/templates/0/steps/3
-
-# No active small metrics so remove this step
-- op: remove
-  path: /spec/templates/0/steps/1
