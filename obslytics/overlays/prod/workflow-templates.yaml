@@ -108,3 +108,11 @@
         --from_timestamp {{inputs.parameters.verification_from_timestamp}} \
         --max_timestamps {{inputs.parameters.verify_count}} \
         --delay {{inputs.parameters.delay}} \
+
+- op: replace
+  path: /spec/templates/10/script/image
+  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest
+
+- op: replace
+  path: /spec/templates/11/script/image
+  value: docker-registry.default.svc:5000/dh-prod-thanos-extractor/obslytics-data-exporter:latest

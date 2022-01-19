@@ -11,7 +11,6 @@ spec:
     strategy: OnWorkflowSuccess
   templates:
     - name: trigger-backfill-workflow
-      parallelism: 3
       steps:
         - - name: normalize-timestamps
             arguments:
@@ -23,13 +22,38 @@ spec:
             templateRef:
               name: obslytics-data-exporter-workflow-template
               template: normalize-timestamps
-        - - name: run-backfill-workflow
+        - - name: small-metrics
+            template: small-metrics-backfill
+            arguments:
+              parameters:
+                - name: backfill_from_timestamp
+                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
+        - - name: large-metrics
+            template: large-metrics-backfill
+            arguments:
+              parameters:
+                - name: backfill_from_timestamp
+                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
+        - - name: xl-metrics
+            template: xl-metrics-backfill
+            arguments:
+              parameters:
+                - name: backfill_from_timestamp
+                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
+
+    - name: small-metrics-backfill
+      parallelism: 18
+      inputs:
+        parameters:
+          - name: backfill_from_timestamp
+      steps:
+        - - name: run-backfill-workflow-smallmetrics
             arguments:
               parameters:
                 - name: backfill_count
                   value: '2'
                 - name: backfill_from_timestamp
-                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
+                  value: "{{inputs.parameters.backfill_from_timestamp}}"
                 - name: step
                   value: '1800'
                 - name: metric
@@ -41,14 +65,73 @@ spec:
                 - name: backfill_min_ts
                   value: "{{item.backfill_to}}"
                 - name: worker_size
-                  value: "{{item.size}}"
+                  value: "small"
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: backfill-metric
+            withItems: [] # This is always overlayed with a full list of metrics
+
+    - name: large-metrics-backfill
+      parallelism: 3
+      inputs:
+        parameters:
+          - name: backfill_from_timestamp
+      steps:
+        - - name: run-backfill-workflow-largemetrics
+            arguments:
+              parameters:
+                - name: backfill_count
+                  value: '2'
+                - name: backfill_from_timestamp
+                  value: "{{inputs.parameters.backfill_from_timestamp}}"
+                - name: step
+                  value: '1800'
+                - name: metric
+                  value: "{{item.name}}"
+                - name: delay
+                  value: '43200'
+                - name: resolution
+                  value: 5m
+                - name: backfill_min_ts
+                  value: "{{item.backfill_to}}"
+                - name: worker_size
+                  value: "large"
             templateRef:
               name: obslytics-data-exporter-workflow-template
               template: backfill-metric
             withItems: # This is always overlayed with a full list of metrics
-              - size: large
-                backfill_to: 2019-06-01T00:00:00Z
+              - backfill_to: 2019-06-01T00:00:00Z
                 name: cluster_version
+
+    - name: xl-metrics-backfill
+      parallelism: 1
+      inputs:
+        parameters:
+          - name: backfill_from_timestamp
+      steps:
+        - - name: run-backfill-workflow-xlmetrics
+            arguments:
+              parameters:
+                - name: backfill_count
+                  value: '2'
+                - name: backfill_from_timestamp
+                  value: "{{inputs.parameters.backfill_from_timestamp}}"
+                - name: step
+                  value: '1800'
+                - name: metric
+                  value: "{{item.name}}"
+                - name: delay
+                  value: '43200'
+                - name: resolution
+                  value: 5m
+                - name: backfill_min_ts
+                  value: "{{item.backfill_to}}"
+                - name: worker_size
+                  value: "xl"
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: backfill-metric
+            withItems: [] # This is always overlayed with a full list of metrics
         - - name: get-all-partitioned-tables
             templateRef:
               name: obslytics-data-exporter-workflow-template
