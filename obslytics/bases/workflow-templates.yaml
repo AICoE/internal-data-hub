@@ -606,3 +606,56 @@ spec:
         volumeMounts:
           - name: obslytics-data-exporter-workflow-secrets
             mountPath: /etc/obslytics-data-exporter
+
+    # The same as the regular backfill-metric template, but with 6x timestamp parallelism
+    - name: backfill-small-metric
+      parallelism: 6
+      inputs:
+        parameters:
+          - name: backfill_count
+          - name: backfill_from_timestamp
+          - name: delay
+          - name: metric
+          - name: resolution
+          - name: step
+          - name: backfill_min_ts
+          - name: worker_size
+      steps:
+        - - name: get-timestamps
+            arguments:
+              parameters:
+                - name: backfill_count
+                  value: "{{inputs.parameters.backfill_count}}"
+                - name: backfill_from_timestamp
+                  value: "{{inputs.parameters.backfill_from_timestamp}}"
+                - name: metric
+                  value: "{{inputs.parameters.metric}}"
+                - name: step
+                  value: "{{inputs.parameters.step}}"
+                - name: min_ts
+                  value: "{{inputs.parameters.backfill_min_ts}}"
+                - name: delay
+                  value: "{{inputs.parameters.delay}}"
+            templateRef:
+              name: "obslytics-data-exporter-workflow-template"
+              template: get-timestamp-list
+
+        - - name: run
+            arguments:
+              parameters:
+                - name: delay
+                  value: "0"  # DO NOT change, this is a delay off of the already detected gaps, and should always be 0.
+                - name: metrics_list
+                  value: "[\"{{inputs.parameters.metric}}\"]"
+                - name: start_timestamp
+                  value: "{{item}}"
+                - name: step
+                  value: "{{inputs.parameters.step}}"
+                - name: resolution
+                  value: "5m"
+                - name: worker_size
+                  value: "{{inputs.parameters.worker_size}}"
+            templateRef:
+              name: "obslytics-data-exporter-workflow-template"
+              template: init
+            withParam: "{{steps.get-timestamps.outputs.parameters.tslist}}"

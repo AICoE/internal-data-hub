@@ -81,7 +81,7 @@ spec:
                   value: "small"
             templateRef:
               name: obslytics-data-exporter-workflow-template
-              template: backfill-metric
+              template: backfill-small-metric
             withItems: [] # This is always overlayed with a full list of metrics
 
     - name: large-metrics-backfill
