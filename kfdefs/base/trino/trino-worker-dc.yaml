@@ -85,4 +85,4 @@ spec:
                       operator: In
                       values:
                         - trino-worker
-                topologyKey: topology.kubernetes.io/zone
+                topologyKey: kubernetes.io/hostname
