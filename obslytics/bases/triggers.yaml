@@ -40,6 +40,19 @@ spec:
               parameters:
                 - name: backfill_from_timestamp
                   value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
+        - - name: get-all-partitioned-tables
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: extract-partitioned-table-names
+        - - name: partition-updater
+            arguments:
+              parameters:
+                - name: table_defs
+                  value: "{{item}}"
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: update-partition-metadata
+            withParam: "{{steps.get-all-partitioned-tables.outputs.parameters.tables_list}}"
 
     - name: small-metrics-backfill
       parallelism: 18
@@ -68,7 +81,7 @@ spec:
                   value: "small"
             templateRef:
               name: obslytics-data-exporter-workflow-template
-              template: backfill-metric
+              template: backfill-small-metric
             withItems: [] # This is always overlayed with a full list of metrics
 
     - name: large-metrics-backfill
@@ -132,19 +145,7 @@ spec:
               name: obslytics-data-exporter-workflow-template
               template: backfill-metric
             withItems: [] # This is always overlayed with a full list of metrics
-        - - name: get-all-partitioned-tables
-            templateRef:
-              name: obslytics-data-exporter-workflow-template
-              template: extract-partitioned-table-names
-        - - name: partition-updater
-            arguments:
-              parameters:
-                - name: table_defs
-                  value: "{{item}}"
-            templateRef:
-              name: obslytics-data-exporter-workflow-template
-              template: update-partition-metadata
-            withParam: "{{steps.get-all-partitioned-tables.outputs.parameters.tables_list}}"
+
 
     - name: trigger-verification-workflow
       parallelism: 3
