@@ -119,8 +119,8 @@
 
 - op: replace
   path: /spec/templates/10/retryStrategy/limit
-  value: 1
+  value: 0
 
 - op: replace
   path: /spec/templates/11/retryStrategy/limit
-  value: 1
+  value: 0
