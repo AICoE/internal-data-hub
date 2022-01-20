@@ -83,4 +83,4 @@
 
 # No small metrics so remove this step
 - op: remove
-  path: /spec/templates/0/steps/1
+  path: /spec/templates/0/steps/2
