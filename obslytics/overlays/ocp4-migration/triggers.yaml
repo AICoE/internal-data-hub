@@ -39,12 +39,8 @@
       name: cluster:usage:pods:terminal:workload:sum
     - backfill_to: 2020-02-01T00:00:00Z
       name: id_version:cluster_available
-    - backfill_to: 2020-02-01T00:00:00Z
-      name: count:up0
     - backfill_to: 2020-04-01T00:00:00Z
       name: cluster:telemetry_selected_series:count
-    - backfill_to: 2020-04-01T00:00:00Z
-      name: insightsclient_request_send_total
     - backfill_to: 2020-02-01T00:00:00Z
       name: cluster:apiserver_current_inflight_requests:sum:max_over_time:2m
 
@@ -307,6 +303,12 @@
     # - backfill_to: 2019-06-01T00:00:00Z
     #   name: cluster_version_payload
 
+    # - backfill_to: 2020-02-01T00:00:00Z
+    #   name: count:up0
+    # - backfill_to: 2020-04-01T00:00:00Z
+    #   name: insightsclient_request_send_total
+
+
 # XL Metrics
 - op: replace
   path: /spec/templates/3/steps/0/0/withItems
@@ -347,7 +349,6 @@
     - cam_app_workload_migrations
     # TODO: add the following metrics to this list
     # - cluster_operator_conditions  # TODO: times out
-    # - cam_app_workload_migrations
 
 - op: replace
   path: /spec/templates/1/parallelism
@@ -363,7 +364,7 @@
 
 - op: replace
   path: /spec/templates/1/steps/0/0/arguments/parameters/0/value
-  value: '20'
+  value: '80'
 
 - op: replace
   path: /spec/templates/2/steps/0/0/arguments/parameters/0/value

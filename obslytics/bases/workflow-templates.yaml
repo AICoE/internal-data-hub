@@ -541,9 +541,9 @@ spec:
 
         resources:
           request:
-            memory: 2Gi
+            memory: 3Gi
           limits:
-            memory: 2Gi
+            memory: 3Gi
         volumeMounts:
           - name: obslytics-data-exporter-workflow-secrets
             mountPath: /etc/obslytics-data-exporter
