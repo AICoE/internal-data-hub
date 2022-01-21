@@ -388,6 +388,7 @@ spec:
               user=os.environ["TRINO_USER"],
               catalog='hive',
               http_scheme='https',
+              verify=False,
               auth=trino.auth.BasicAuthentication(os.environ["TRINO_USER"], os.environ["TRINO_PASSWORD"])
           )
           cur = conn.cursor()
@@ -472,6 +473,7 @@ spec:
               user=os.environ["TRINO_USER"],
               catalog='hive',
               http_scheme='https',
+              verify=False,
               auth=trino.auth.BasicAuthentication(os.environ["TRINO_USER"], os.environ["TRINO_PASSWORD"])
           )
 
