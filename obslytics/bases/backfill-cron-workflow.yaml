@@ -9,7 +9,7 @@ metadata:
   name: obslytics-data-exporter-backfill-cron-workflows
 spec:
   schedule: 15,45 * * * *
-  concurrencyPolicy: Allow
+  concurrencyPolicy: Replace
   workflowSpec:
     arguments:
       parameters:

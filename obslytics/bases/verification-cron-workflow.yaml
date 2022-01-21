@@ -9,7 +9,7 @@ metadata:
   name: obslytics-data-exporter-verification-cron-workflows
 spec:
   schedule: 0 */4 * * *
-  concurrencyPolicy: Allow
+  concurrencyPolicy: Replace
   workflowSpec:
     arguments:
       parameters:
