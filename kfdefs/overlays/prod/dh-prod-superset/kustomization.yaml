@@ -8,6 +8,7 @@ resources:
   - supersetdb-route.yaml
   - bareos-fd-deploymentconfig.yaml
   - bareos-fd-imagestream.yaml
+  - bareos-fd-service.yaml
 
 generators:
   - secret-generator.yaml
