@@ -3,4 +3,4 @@ kind: CatalogSource
 metadata:
   name: addon-managed-odh-catalog
 spec:
-  image: quay.io/modh/qe-catalog-source:v150-7
+  image: quay.io/modh/qe-catalog-source:v1507-140-upgrade
