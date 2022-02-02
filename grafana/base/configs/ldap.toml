@@ -1,0 +1,27 @@
+[[servers]]
+host = "ldap.corp.redhat.com"
+port = 389
+use_ssl = true
+start_tls = true
+ssl_skip_verify = true
+root_ca_cert = "/etc/grafana-secrets/default-ingress-cert/ca-bundle.crt"
+
+search_filter = "(uid=%s)"
+search_base_dns = ["ou=Users,dc=redhat,dc=com"]
+
+[[servers.group_mappings]]
+group_dn = "cn=data-hub-openshift-admins,ou=adhoc,ou=managedGroups,dc=redhat,dc=com"
+org_role = "Admin"
+grafana_admin = true
+
+[[servers.group_mappings]]
+group_dn = "*"
+org_role = "Viewer"
+
+[servers.attributes]
+email =  "mail"
+id = "dn"
+name = "cn"
+preferredUsername = "uid"
+username = "uid"
+member_of = "memberOf"
