@@ -28,5 +28,7 @@ spec:
             - grafana
     ingress:
         enabled: true
+    secrets:
+    - default-ingress-cert
     configMaps:
     - ldap-config

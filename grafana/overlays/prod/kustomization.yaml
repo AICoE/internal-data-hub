@@ -5,3 +5,8 @@ namespace: dh-prod-monitoring
 
 resources:
   - ../../base
+
+generators:
+  - secret-generator.yaml
+generatorOptions:
+  disableNameSuffixHash: true
