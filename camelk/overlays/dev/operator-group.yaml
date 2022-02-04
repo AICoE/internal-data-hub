@@ -1,0 +1,7 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: dh-dev-camel-k
+spec:
+  targetNamespaces:
+  - dh-dev-camel-k
