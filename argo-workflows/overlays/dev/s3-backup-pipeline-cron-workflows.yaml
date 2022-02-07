@@ -1,0 +1,40 @@
+---
+- op: replace
+  path: /spec/schedule
+  value: "0 * * * *"
+
+- op: replace
+  path: /spec/workflowSpec/arguments/parameters/0/value
+  value: policy-dev
+
+- op: replace
+  path: /spec/workflowSpec/arguments/parameters/1/value
+  value: local
+
+- op: replace
+  path: /spec/workflowSpec/arguments/parameters/2/value
+  value: '["DH-DEV-GFRASCA-POLICY-TEST"]'
+
+- op: replace
+  path: /spec/workflowSpec/arguments/parameters/3/value
+  value: ""
+
+- op: replace
+  path: /spec/workflowSpec/arguments/parameters/7/value
+  value: 'http://path-to-your-argo-server.apps.nip.io'
+
+- op: replace
+  path: /spec/workflowSpec/templates/1/steps/0/0/arguments/parameters/0/value
+  value: policy-dev
+
+- op: replace
+  path: /spec/workflowSpec/templates/1/steps/0/0/arguments/parameters/1/value
+  value: local
+
+- op: replace
+  path: /spec/workflowSpec/templates/1/steps/0/0/arguments/parameters/2/value
+  value: '["DH-DEV-GFRASCA-POLICY-TEST"]'
+
+- op: replace
+  path: /spec/workflowSpec/templates/1/steps/0/0/arguments/parameters/3/value
+  value: ""

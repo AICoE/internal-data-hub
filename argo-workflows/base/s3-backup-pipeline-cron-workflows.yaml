@@ -1,0 +1,151 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: "s3-backup-pipeline-workflow-"
+  labels:
+    owner: "s3-backup-util"
+    app: "s3-backup-pipeline"
+    pipeline: "s3-backup-pipeline"
+  name: "s3-backup-pipeline-cron-workflows"
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: "Allow"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: src_profile
+          value: replace_me
+        - name: dest_profile
+          value: replace_me
+        - name: bucket_list
+          value: '["DH-DEV-REPLACE-ME"]'
+        - name: rclone_params
+          value: '--s3-storage-class=GLACIER'
+        - name: alerts_to
+          value: data-hub-alerts@redhat.com
+        - name: alerts_from
+          value: s3-backup-alerts@redhat.com
+        - name: alerts_smtp_server
+          value: smtp.corp.redhat.com
+        - name: argo_ui_host
+          value: 'http://argo-ui-route-dh-prod-argo.cloud.datahub.psi.redhat.com/'
+    ttlSecondsAfterFinished: 86400
+    entrypoint: start-backup-job
+    onExit: exit-handler
+    templates:
+      - name: start-backup-job
+        inputs:
+          parameters:
+            - name: src_profile
+            - name: dest_profile
+            - name: bucket_list
+            - name: rclone_params
+        steps:
+          - - name: run
+              arguments:
+                parameters:
+                  - name: src_profile
+                    value: "{{inputs.parameters.src_profile}}"
+                  - name: dest_profile
+                    value: "{{inputs.parameters.dest_profile}}"
+                  - name: bucket_list
+                    value: "{{inputs.parameters.bucket_list}}"
+                  - name: rclone_params
+                    value: "{{inputs.parameters.rclone_params}}"
+              template: backup-entrypoint
+
+      - name: backup-entrypoint
+        steps:
+          - - name: trigger-job
+              template: backup-job
+              arguments:
+                parameters:
+                  - name: src_profile
+                    value: replace_me
+                  - name: dest_profile
+                    value: replace_me
+                  - name: bucket_list
+                    value: '["DH-DEV-REPLACE-ME"]'
+                  - name: rclone_params
+                    value: '--s3-storage-class=GLACIER'
+
+      - name: backup-job
+        parallelism: 1
+        inputs:
+          parameters:
+            - name: src_profile
+            - name: dest_profile
+            - name: bucket_list
+            - name: rclone_params
+        steps:
+          - - name: bucket-split
+              template: backup-worker
+              arguments:
+                parameters:
+                  - name: src_profile
+                    value: "{{inputs.parameters.src_profile}}"
+                  - name: src_bucket
+                    value: "{{item}}"
+                  - name: dest_profile
+                    value: "{{inputs.parameters.dest_profile}}"
+                  - name: dest_bucket
+                    value: "{{item}}"
+                  - name: rclone_params
+                    value: "{{inputs.parameters.rclone_params}}"
+              withParam: "{{inputs.parameters.bucket_list}}"
+
+      - name: backup-worker
+        activeDeadlineSeconds: 1800
+        inputs:
+          parameters:
+            - name: src_profile
+            - name: src_bucket
+            - name: dest_profile
+            - name: dest_bucket
+            - name: rclone_params
+        script:
+          image: rclone/rclone:latest
+          command: [/bin/sh, -e]
+          source: |
+            set -x
+            lower_dest_bucket=`echo "{{inputs.parameters.dest_bucket}}" | tr '[:upper:]' '[:lower:]'`
+            src_bucket="{{inputs.parameters.src_profile}}:{{inputs.parameters.src_bucket}}"
+            dest_bucket="{{inputs.parameters.dest_profile}}:$lower_dest_bucket"
+            extra_params="{{inputs.parameters.rclone_params}}"
+            if [ "{{inputs.parameters.dest_profile}}" == "local" ]; then
+              # local is for debugging, put into a writable directory.
+              dest_bucket="{{inputs.parameters.dest_profile}}:/tmp/$lower_dest_bucket"
+            fi
+            echo "Creating Bucket $dest_bucket if it doesnt exit yet..."
+            rclone --config /etc/s3-backup-pipeline/rclone.conf mkdir --verbose ${dest_bucket}
+            echo "RClone Copying from $src_bucket to $dest_bucket..."
+            rclone --config /etc/s3-backup-pipeline/rclone.conf copy --verbose ${extra_params} ${src_bucket} ${dest_bucket}
+            echo "Rclone complete."
+          resources:
+            limits:
+              memory: 2Gi
+          volumeMounts:
+            - name: "s3-backup-pipeline-secrets"
+              mountPath: /etc/s3-backup-pipeline
+
+      - name: exit-handler
+        steps:
+          - - name: notify
+              templateRef:
+                name: alert-template
+                template: notify-template
+              when: "{{workflow.status}} != Succeeded"
+              arguments:
+                parameters:
+                - name: argo-ui-host
+                  value: "{{workflow.parameters.argo_ui_host}}"
+                - name: alert-email-smtp-server
+                  value: "{{workflow.parameters.alerts_smtp_server}}"
+                - name: alert-from-email
+                  value: "{{workflow.parameters.alerts_from}}"
+                - name: alert-to-email-list
+                  value: "{{workflow.parameters.alerts_to}}"
+    volumes:
+    - name: "s3-backup-pipeline-secrets"
+      secret:
+        secretName: "s3-backup-pipeline-secrets"
