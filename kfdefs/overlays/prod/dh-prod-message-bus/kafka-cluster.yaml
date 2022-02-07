@@ -1,0 +1,37 @@
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: "three"
+spec:
+  kafka:
+    readinessProbe:
+      initialDelaySeconds: 175
+    livenessProbe:
+      initialDelaySeconds: 175
+    template:
+      pod:
+        affinity:
+          # We do not want the Kafka nodes to run on our Baremetal Elasticsearch
+          # nodes. See http://strimzi.io/docs/0.8.1/#assembly-scheduling-deployment-configuration-kafka-connect
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: "provider"
+                    operator: In
+                    values:
+                      - "gpu-baremetal"
+    replicas: 5
+    config:
+      offsets.topic.replication.factor: 5
+      transaction.state.log.min.isr: 2
+      min.insync.replicas: 2
+      default.replication.factor: 5
+    storage:
+      size: "3000Gi"
+      class: "ceph-dyn-datahub-prod-psi"
+  zookeeper:
+    replicas: 3
+    storage:
+      class: "ceph-dyn-datahub-prod-psi"

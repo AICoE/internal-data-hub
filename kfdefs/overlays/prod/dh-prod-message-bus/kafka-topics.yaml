@@ -1,0 +1,1515 @@
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ciumb.trans20180907.cvp.pipeline
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ciumb.trans20180907.cvp.pipeline
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ciumb.trans20180907.cvp.stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ciumb.trans20180907.cvp.stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ciumb.trans20180907.cvp.test
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ciumb.trans20180907.cvp.test
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ciumb.trans20180907.non-cvp
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ciumb.trans20180907.non-cvp
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dh-test
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dh-test
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: fedmsg.production
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: fedmsg.production
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ingest.logstash
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ingest.logstash
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ingest.rsyslog
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 10
+  replicas: 5
+  topicName: ingest.rsyslog
+  config:
+    retention.ms: 86400000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: quayingest.prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: quayingest.prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-shipshift-prod-logs-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 14
+  replicas: 5
+  topicName: dynamic-shipshift-prod-logs-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: umbingest.prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: umbingest.prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-radas
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-radas
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-3sn-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-3sn-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-3sn-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-3sn-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-ccit-lfa-alpha
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-ccit-lfa-alpha
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnc-logs
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: dynamic-pnc-logs
+  config:
+    retention.ms: 2592000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnc-stage-logs
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: dynamic-pnc-stage-logs
+  config:
+    retention.ms: 2592000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnc-dev-logs
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: dynamic-pnc-dev-logs
+  config:
+    retention.ms: 2592000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-indy-logs
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 20
+  replicas: 5
+  topicName: dynamic-indy-logs
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-metaxor-dev
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-metaxor-dev
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-metaxor-qa
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-metaxor-qa
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-metaxor-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-metaxor-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-metaxor-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-metaxor-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-quay-io-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 14
+  replicas: 5
+  topicName: dynamic-quay-io-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-quay-io-staging
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 6
+  replicas: 5
+  topicName: dynamic-quay-io-staging
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-quay-io-testing
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-quay-io-testing
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-container-repo-auto-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-container-repo-auto-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-container-repo-auto-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-container-repo-auto-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-mars-pulp-monitoring
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-mars-pulp-monitoring
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-clair-wrapper-qa
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-clair-wrapper-qa
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-clair-wrapper-dev
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-clair-wrapper-dev
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-clair-wrapper-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-clair-wrapper-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-clair-wrapper-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-clair-wrapper-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-gutentag
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-gutentag
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-gutentag-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-gutentag-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-gutentag-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-gutentag-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-mars-automars
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-mars-automars
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ai.ingest
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ai.ingest
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-find-missing-sources
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-find-missing-sources
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-bz-ldap-group-sync-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-bz-ldap-group-sync-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-bz-ldap-group-sync-dev
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-bz-ldap-group-sync-dev
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-aicoeactivity-ingest-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-aicoeactivity-ingest-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-clair-qa
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-clair-qa
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-clair-dev
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-clair-dev
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-clair-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-clair-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-clair-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-clair-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-cyborg-regidoresevents-ingest-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-cyborg-regidoresevents-ingest-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-cyborg-regidoreshangout-ingest-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-cyborg-regidoreshangout-ingest-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-cyborg-regidorestrello-ingest-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-cyborg-regidorestrello-ingest-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-cyborg-regidoresjira-ingest-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-cyborg-regidoresjira-ingest-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-cyborg-regidoresgitlab-ingest-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-cyborg-regidoresgitlab-ingest-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-cyborg-regidores-github-ingest-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-cyborg-regidores-github-ingest-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-intern-bootcamp
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-intern-bootcamp
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-intern-answers
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-intern-answers
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-ludus-events-ingest-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-ludus-events-ingest-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ai.stage.ingest
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ai.stage.ingest
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-cnv
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-cnv
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-vitals
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-vitals
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-rhel8-prp-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-rhel8-prp-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-rhel8-prp-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-rhel8-prp-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-greenwave-anomaly-detect
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-greenwave-anomaly-detect
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-dev-logs-input
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: pnc-dev-logs-input
+  config:
+    retention.ms: 864000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-dev-logs-db-out
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: pnc-dev-logs-db-out
+  config:
+    retention.ms: 2592000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-stage-logs-input
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: pnc-stage-logs-input
+  config:
+    retention.ms: 2592000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-stage-logs-db-out
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: pnc-stage-logs-db-out
+  config:
+    retention.ms: 2592000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-logs-input
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: pnc-logs-input
+  config:
+    retention.ms: 2592000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-logs-db-out
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: pnc-logs-db-out
+  config:
+    retention.ms: 2592000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-tower-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-tower-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-tower-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-tower-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-dh-grafana-anomaly-detect
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-dh-grafana-anomaly-detect
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-snitch-qa
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-snitch-qa
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-snitch-dev
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-snitch-dev
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-snitch-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-snitch-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnt-devops-snitch-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnt-devops-snitch-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccit-data-integrator-test
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ccit-data-integrator-test
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-dev-insights-operator-archive-new
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 8
+  replicas: 5
+  topicName: ccx-dev-insights-operator-archive-new
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-dev-insights-operator-archive-synced
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 8
+  replicas: 5
+  topicName: ccx-dev-insights-operator-archive-synced
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-dev-insights-operator-archive-rules-results
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ccx-dev-insights-operator-archive-rules-results
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-dev-insights-operator-archive-features
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 4
+  replicas: 5
+  topicName: ccx-dev-insights-operator-archive-features
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-qa-insights-operator-archive-new
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 8
+  replicas: 5
+  topicName: ccx-qa-insights-operator-archive-new
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-qa-insights-operator-archive-synced
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 8
+  replicas: 5
+  topicName: ccx-qa-insights-operator-archive-synced
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-qa-insights-operator-archive-rules-results
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ccx-qa-insights-operator-archive-rules-results
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-qa-insights-operator-archive-features
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ccx-qa-insights-operator-archive-features
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-prod-insights-operator-archive-new
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 8
+  replicas: 5
+  topicName: ccx-prod-insights-operator-archive-new
+  config:
+    retention.ms: 432000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-prod-insights-operator-archive-synced
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 8
+  replicas: 5
+  topicName: ccx-prod-insights-operator-archive-synced
+  config:
+    retention.ms: 432000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-prod-insights-operator-archive-rules-results
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ccx-prod-insights-operator-archive-rules-results
+  config:
+    retention.ms: 432000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-prod-insights-operator-archive-features
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: ccx-prod-insights-operator-archive-features
+  config:
+    retention.ms: 432000000
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-tft
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-tft
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-honeybadger
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-honeybadger
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-ccx-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-ccx-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-ccx-qa
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-ccx-qa
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-ccx-dev
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-ccx-dev
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-dev-rule-nomination-process
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: ccx-dev-rule-nomination-process
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-dev-rule-nomination-update
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: ccx-dev-rule-nomination-update
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-qa-rule-nomination-process
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: ccx-qa-rule-nomination-process
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-qa-rule-nomination-update
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: ccx-qa-rule-nomination-update
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-prod-rule-nomination-process
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: ccx-prod-rule-nomination-process
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ccx-prod-rule-nomination-update
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: ccx-prod-rule-nomination-update
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-sysops-ansible-tower
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-sysops-ansible-tower
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-umb
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-umb
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-rsyslog
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 30
+  replicas: 5
+  topicName: dynamic-rsyslog
+  config:
+    retention.bytes: 48318357341
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-logstash
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-logstash
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-prodsec-dev-sdengine-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-prodsec-dev-sdengine-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-prodsec-dev-sdengine-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-prodsec-dev-sdengine-prod
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-prodsec-dev-sdengine-test
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-prodsec-dev-sdengine-test
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-exd-meteor
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-exd-meteor
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-cnv-qe-testing
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-cnv-qe-testing
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-expunge
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-expunge
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-cloud-governance-index
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-cloud-governance-index
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-assisted-service-events
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-assisted-service-events
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-green-stage-logs-input
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-green-stage-logs-input
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-green-stage-logs-db-output
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-green-stage-logs-db-output
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-green-logs-input
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-green-logs-input
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-green-logs-db-output
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-green-logs-db-output
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-green-devel-logs-input
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-green-devel-logs-input
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-green-devel-logs-db-output
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-green-devel-logs-db-output
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnc-green-stage-logs
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnc-green-stage-logs
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnc-green-logs
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnc-green-logs
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-pnc-green-devel-logs
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-pnc-green-devel-logs
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-kni-qe-ci-results
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-kni-qe-ci-results
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-kni-qe-ci-test
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-kni-qe-ci-test
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-kni-qe-ci-data
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-kni-qe-ci-data
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-kni-qe-ci-ipi
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-kni-qe-ci-ipi
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-kni-qe-ci-testrun-results
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-kni-qe-ci-testrun-results
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: dynamic-kni-qe-ci-dashboard
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: dynamic-kni-qe-ci-dashboard
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: log-event-duration-prod-v2-log-store-changelog
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: log-event-duration-prod-v2-log-store-changelog
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: log-event-duration-devel-v2-log-store-changelog
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: log-event-duration-devel-v2-log-store-changelog
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: log-event-duration-green-stage-v2-log-store-changelog
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: log-event-duration-green-stage-v2-log-store-changelog
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: log-event-duration-prod-v3-log-store-changelog
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: log-event-duration-prod-v3-log-store-changelog
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: log-event-duration-stage-v2-log-store-changelog
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 1
+  replicas: 5
+  topicName: log-event-duration-stage-v2-log-store-changelog
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-notifications-master
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-notifications-master
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-notifications-stable-next
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-notifications-stable-next
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-notifications-stable-current
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-notifications-stable-current
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-notifications-stage
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-notifications-stage
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: pnc-notifications-prod
+  labels:
+    strimzi.io/cluster: three
+spec:
+  partitions: 2
+  replicas: 5
+  topicName: pnc-notifications-prod
