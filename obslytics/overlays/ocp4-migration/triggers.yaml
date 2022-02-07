@@ -77,46 +77,46 @@
     #   name: code:apiserver_request_total:rate:sum
 
     ##### 2020-12-01 - 2021-06-01 #####
-    # - backfill_to: 2020-12-01T00:00:00Z
-    #   name: cluster:usage:openshift:ingress:request_error:fraction5m
-    # - backfill_to: 2020-12-01T00:00:00Z
-    #   name: cluster:usage:openshift:ingress:request_total:irate5m
-    # - backfill_to: 2020-12-01T00:00:00Z
-    #   name: cluster:usage:workload:ingress:request_error:fraction5m
-    # - backfill_to: 2020-12-01T00:00:00Z
-    #   name: cluster:usage:workload:ingress:request_total:irate5m
-    # - backfill_to: 2020-12-01T00:00:00Z
-    #   name: rhmi_status
-    # - backfill_to: 2020-12-01T00:00:00Z
-    #   name: id_cloudpak_type
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:vsphere_vcenter_info:sum
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:vsphere_esxi_version_total:sum
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:vsphere_node_hw_version_total:sum
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:kube_persistentvolume_plugin_type_counts:sum
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:usage:openshift:ingress_request_error:fraction5m
-    # - backfill_to: 2020-12-01T00:00:00Z
-    #   name: cluster:usage:workload:kube_running_pod_ready:avg
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:usage:workload:ingress_request_error:fraction5m
-    # - backfill_to: 2020-12-01T00:00:00Z
-    #   name: cluster:usage:kube_node_ready:avg5m
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:usage:kube_schedulable_node_ready_reachable:avg5m
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:usage:ingress_frontend_connections:sum
-    # - backfill_to: 2020-12-01T00:00:00Z
-    #   name: cluster:usage:openshift:kube_running_pod_ready:avg
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:usage:openshift:ingress_request_total:irate5m
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:usage:ingress_frontend_bytes_in:rate5m:sum
-    # - backfill_to: 2021-01-01T00:00:00Z
-    #   name: cluster:usage:ingress_frontend_bytes_out:rate5m:sum
+    - backfill_to: 2020-12-01T00:00:00Z
+      name: cluster:usage:openshift:ingress:request_error:fraction5m
+    - backfill_to: 2020-12-01T00:00:00Z
+      name: cluster:usage:openshift:ingress:request_total:irate5m
+    - backfill_to: 2020-12-01T00:00:00Z
+      name: cluster:usage:workload:ingress:request_error:fraction5m
+    - backfill_to: 2020-12-01T00:00:00Z
+      name: cluster:usage:workload:ingress:request_total:irate5m
+    - backfill_to: 2020-12-01T00:00:00Z
+      name: rhmi_status
+    - backfill_to: 2020-12-01T00:00:00Z
+      name: id_cloudpak_type
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:vsphere_vcenter_info:sum
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:vsphere_esxi_version_total:sum
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:vsphere_node_hw_version_total:sum
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:kube_persistentvolume_plugin_type_counts:sum
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:usage:openshift:ingress_request_error:fraction5m
+    - backfill_to: 2020-12-01T00:00:00Z
+      name: cluster:usage:workload:kube_running_pod_ready:avg
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:usage:workload:ingress_request_error:fraction5m
+    - backfill_to: 2020-12-01T00:00:00Z
+      name: cluster:usage:kube_node_ready:avg5m
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:usage:kube_schedulable_node_ready_reachable:avg5m
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:usage:ingress_frontend_connections:sum
+    - backfill_to: 2020-12-01T00:00:00Z
+      name: cluster:usage:openshift:kube_running_pod_ready:avg
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:usage:openshift:ingress_request_total:irate5m
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:usage:ingress_frontend_bytes_in:rate5m:sum
+    - backfill_to: 2021-01-01T00:00:00Z
+      name: cluster:usage:ingress_frontend_bytes_out:rate5m:sum
 
     ##### 2019-06-01 and earlier  #####
     # - backfill_to: 2019-06-01T00:00:00Z
