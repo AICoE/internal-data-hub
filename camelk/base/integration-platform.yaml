@@ -1,0 +1,9 @@
+apiVersion: camel.apache.org/v1
+kind: IntegrationPlatform
+metadata:
+  name: camel-k
+  labels:
+    app: "camel-k"
+spec:
+  build:
+    baseImage: quay.io/internaldatahub/openjdk11:slim
