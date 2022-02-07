@@ -1,4 +1,4 @@
 ---
 creation_rules:
-  - encrypted_regex: '^(data|stringData|basicAuthPassword|admin_password)$'
+  - encrypted_regex: '^(data|stringData|basicAuthPassword|admin_password|httpHeaderValue1)$'
     pgp: 'EFDB9AFBD18936D9AB6B2EECBD2C73FF891FBC7E'
