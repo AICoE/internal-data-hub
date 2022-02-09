@@ -611,7 +611,7 @@ spec:
 
     # The same as the regular backfill-metric template, but with 6x timestamp parallelism
     - name: backfill-small-metric
-      parallelism: 6
+      parallelism: 3
       inputs:
         parameters:
           - name: backfill_count
