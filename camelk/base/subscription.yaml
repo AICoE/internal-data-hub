@@ -1,10 +1,10 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: red-hat-camel-k
+  name: red-hat-community-camel-k
 spec:
-  channel: 1.6.x
+  channel: stable-1.8
   installPlanApproval: Automatic
-  name: red-hat-camel-k
-  source: redhat-operators
+  name: red-hat-community-camel-k
+  source: community-operators
   sourceNamespace: openshift-marketplace
