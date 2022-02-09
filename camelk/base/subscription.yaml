@@ -5,6 +5,6 @@ metadata:
 spec:
   channel: stable-1.8
   installPlanApproval: Automatic
-  name: red-hat-community-camel-k
+  name: camel-k
   source: community-operators
   sourceNamespace: openshift-marketplace
