@@ -8,3 +8,7 @@ spec:
   build:
     baseImage: quay.io/internaldatahub/openjdk11:slim
     timeout: 30m0s
+  traits:
+    prometheus:
+      configuration:
+        enabled: true
