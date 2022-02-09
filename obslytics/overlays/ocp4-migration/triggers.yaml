@@ -352,7 +352,7 @@
 
 - op: replace
   path: /spec/templates/1/parallelism
-  value: 20
+  value: 40
 
 - op: replace
   path: /spec/templates/2/parallelism
