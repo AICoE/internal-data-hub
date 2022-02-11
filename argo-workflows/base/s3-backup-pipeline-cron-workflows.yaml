@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  generateName: "s3-backup-pipeline-workflow-"
+  generateName: "s3-backup-util-workflow-"
   labels:
     owner: "s3-backup-util"
-    app: "s3-backup-pipeline"
+    app: "s3-backup-util"
     pipeline: "s3-backup-pipeline"
   name: "s3-backup-pipeline-cron-workflows"
 spec:
@@ -70,7 +70,7 @@ spec:
                     value: '--s3-storage-class=GLACIER'
 
       - name: backup-job
-        parallelism: 1
+        parallelism: 5
         inputs:
           parameters:
             - name: src_profile
@@ -95,7 +95,7 @@ spec:
               withParam: "{{inputs.parameters.bucket_list}}"
 
       - name: backup-worker
-        activeDeadlineSeconds: 1800
+        activeDeadlineSeconds: 18000
         inputs:
           parameters:
             - name: src_profile
@@ -117,16 +117,16 @@ spec:
               dest_bucket="{{inputs.parameters.dest_profile}}:/tmp/$lower_dest_bucket"
             fi
             echo "Creating Bucket $dest_bucket if it doesnt exit yet..."
-            rclone --config /etc/s3-backup-pipeline/rclone.conf mkdir --verbose ${dest_bucket}
+            rclone --config /etc/s3-backup-util/rclone.conf mkdir --verbose ${dest_bucket}
             echo "RClone Copying from $src_bucket to $dest_bucket..."
-            rclone --config /etc/s3-backup-pipeline/rclone.conf copy --verbose ${extra_params} ${src_bucket} ${dest_bucket}
+            rclone --config /etc/s3-backup-util/rclone.conf copy --verbose ${extra_params} ${src_bucket} ${dest_bucket}
             echo "Rclone complete."
           resources:
             limits:
               memory: 2Gi
           volumeMounts:
-            - name: "s3-backup-pipeline-secrets"
-              mountPath: /etc/s3-backup-pipeline
+            - name: "s3-backup-util-secrets"
+              mountPath: /etc/s3-backup-util
 
       - name: exit-handler
         steps:
@@ -146,6 +146,6 @@ spec:
                 - name: alert-to-email-list
                   value: "{{workflow.parameters.alerts_to}}"
     volumes:
-    - name: "s3-backup-pipeline-secrets"
+    - name: "s3-backup-util-secrets"
       secret:
-        secretName: "s3-backup-pipeline-secrets"
+        secretName: "s3-backup-util-secrets"
