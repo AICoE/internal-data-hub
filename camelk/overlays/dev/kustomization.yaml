@@ -6,3 +6,8 @@ namespace: dh-dev-camel-k
 resources:
   - ../../base
   - operator-group.yaml
+
+generators:
+  - secret-generator.yaml
+generatorOptions:
+  disableNameSuffixHash: true

@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - integration-platform.yaml
   - subscription.yaml
+  - kafka2trino.yaml
