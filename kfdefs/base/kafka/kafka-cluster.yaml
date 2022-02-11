@@ -194,6 +194,13 @@ spec:
                     values:
                       - ""
     replicas: 1
+    resources:
+      requests:
+        memory: 30Gi
+        cpu: "1"
+      limits:
+        memory: 40Gi
+        cpu: "2"
     metricsConfig:
       type: jmxPrometheusExporter
       valueFrom:
@@ -219,8 +226,6 @@ spec:
       auto.create.topics.enable: false
       log.message.format.version: "3.0.0"
       default.replication.factor: 1
-
-
     storage:
       type: persistent-claim
       size: "10Gi"
@@ -228,6 +233,13 @@ spec:
       deleteClaim: false
   zookeeper:
     replicas: 1
+    resources:
+      requests:
+        memory: 3Gi
+        cpu: "1"
+      limits:
+        memory: 4Gi
+        cpu: "1"
     storage:
       type: persistent-claim
       size: "10Gi"
