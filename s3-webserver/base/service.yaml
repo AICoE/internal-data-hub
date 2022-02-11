@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cvp-webserver-s3webserver
+  labels:
+    app: cvp-webserver-s3webserver
+    template: s3webserver
+spec:
+  selector:
+    component: cvp-webserver-s3webserver
+  ports:
+    - protocol: TCP
+      targetPort: 1337
+      port: 1337

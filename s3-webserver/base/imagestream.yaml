@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  labels:
+    app: s3webserver
+    template: s3webserver
+  name: s3webserver
+spec:
+  tags:
+    - name: latest
