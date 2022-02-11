@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  name: cvp-webserver
+  labels:
+    app: cvp-webserver-s3webserver
+    template: s3webserver
+spec:
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      minReadySeconds: 600
+  template:
+    metadata:
+      name: s3webserver
+      labels:
+        app: s3webserver
+        component: cvp-webserver-s3webserver
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: s3webserver
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512m
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: APP_SCRIPT
+              value: /app/run.sh
+            - name: CONFIG_FILE
+              value: /etc/s3webserver/s3webserver.config.yaml
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cvp-webserver-s3webserver-secrets
+                  key: s3-access-key
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cvp-webserver-s3webserver-secrets
+                  key: s3-secret-key
+          volumeMounts:
+            - name: config
+              mountPath: /etc/s3webserver
+      volumes:
+        - name: config
+          configMap:
+            name: cvp-webserver-s3webserver-config
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        from:
+          kind: ImageStreamTag
+          name: s3webserver:latest
+        containerNames:
+          - s3webserver

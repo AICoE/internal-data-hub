@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Route
+metadata:
+  name: cvp-webserver
+  annotations:
+    haproxy.router.openshift.io/timeout: 10m
+  labels:
+    app: s3webserver
+    template: s3webserver
+spec:
+  to:
+    kind: Service
+    name: cvp-webserver-s3webserver
+
+---
+apiVersion: v1
+kind: Route
+metadata:
+  name: cvp-webserver-loadbalanced
+  annotations:
+    haproxy.router.openshift.io/timeout: 10m
+  labels:
+    app: s3webserver
+    template: s3webserver
+spec:
+  host: external-ci-coldstorage.datahub.redhat.com
+  to:
+    kind: Service
+    name: cvp-webserver-s3webserver
