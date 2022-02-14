@@ -1,0 +1,30 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: idh-kfp-tekton
+
+bases:
+  - github.com/operate-first/apps/kfp-tekton/base?ref=fd78d428ecaa452a4b8d867bcd9ff07780880088
+
+patchesStrategicMerge:
+  - kfp-tekton-config.yaml
+
+generators:
+  - secret-generator.yaml
+
+images:
+  - name: docker.io/aipipeline/metadata-writer
+    newName: quay.io/internaldatahub/metadata-writer
+    newTag: 1.1.0
+  - name: docker.io/aipipeline/persistenceagent
+    newName: quay.io/internaldatahub/persistenceagent
+    newTag: 1.1.0
+  - name: docker.io/aipipeline/scheduledworkflow
+    newName: quay.io/internaldatahub/scheduledworkflow
+    newTag: 1.1.0
+  - name: docker.io/aipipeline/frontend
+    newName: quay.io/internaldatahub/frontend
+    newTag: 1.1.0
+  - name: docker.io/aipipeline/api-server
+    newName: quay.io/internaldatahub/api-server
+    newTag: 1.1.0
