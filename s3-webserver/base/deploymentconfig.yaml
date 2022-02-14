@@ -7,10 +7,6 @@ metadata:
     template: s3webserver
 spec:
   replicas: 1
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      minReadySeconds: 600
   template:
     metadata:
       name: s3webserver
