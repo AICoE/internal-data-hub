@@ -1,0 +1,36 @@
+---
+apiVersion: camel.apache.org/v1
+kind: Integration
+metadata:
+  name: kafka2trino-pnc-logs
+spec:
+  dependencies:
+    - 'mvn:io.trino:trino-jdbc:368'
+    - 'mvn:org.apache.commons:commons-dbcp2:2.9.0'
+    - 'camel:kafka'
+    - 'mvn:org.apache.camel.k:camel-k-runtime'
+  flows:
+  - from:
+      uri: 'kafka:dynamic-pnc-logs'
+      steps:
+        - log:
+            logging-level: INFO
+            message: 'Processing message: ${body}'
+        - to:
+            uri: >-
+                sql:insert into iceberg.kafka.pnc_logs (message, timestamp) values (:#${body}, current_timestamp)
+            parameters:
+              batch: true
+              useMessageBodyForSql: false
+  traits:
+    prometheus:
+      configuration:
+        enabled: true
+    mount:
+      configuration:
+        configs:
+          - 'configmap:kafka-properties'
+          - 'configmap:trino-beans'
+        resources:
+          - >-
+            secret:kafka2trino-truststore@/etc/camel/conf.d/_secrets/kafka2trino-truststore
