@@ -1,7 +1,0 @@
-namespace: dh-stage-ingest
-resources:
-  - ../../bases/rsyslog
-patchesStrategicMerge:
-  - rsyslog.yaml
-generators:
-  - ./secrets/secret-generator.yaml
