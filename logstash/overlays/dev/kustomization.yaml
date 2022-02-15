@@ -1,7 +1,0 @@
-namespace: dh-dev-ingest
-resources:
-  - ../../bases/logstash
-patchesStrategicMerge:
-  - logstash.yaml
-generators:
-  - ./secrets/secret-generator.yaml
