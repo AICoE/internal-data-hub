@@ -5,8 +5,6 @@ metadata:
     app: grafana
   name: camelk-dashboard
 spec:
-  CustomFolderName: General
-  name: camelk-dashboard.json
   json: |
       {
         "annotations": {
