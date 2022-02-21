@@ -5,6 +5,7 @@ namespace: dh-prod-monitoring
 
 resources:
   - ../../base
+  - dashboards
 
 generators:
   - secret-generator.yaml

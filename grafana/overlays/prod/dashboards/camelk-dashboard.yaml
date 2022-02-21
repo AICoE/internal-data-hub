@@ -1,0 +1,2393 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app: grafana
+  name: camelk-dashboard
+spec:
+  CustomFolderName: General
+  name: camelk-dashboard.json
+  json: |
+      {
+        "annotations": {
+          "list": [
+            {
+              "builtIn": 1,
+              "datasource": "-- Grafana --",
+              "enable": true,
+              "hide": true,
+              "iconColor": "rgba(0, 211, 255, 1)",
+              "name": "Annotations & Alerts",
+              "target": {
+                "limit": 100,
+                "matchAny": false,
+                "tags": [],
+                "type": "dashboard"
+              },
+              "type": "dashboard"
+            }
+          ]
+        },
+        "editable": true,
+        "gnetId": null,
+        "graphTooltip": 0,
+        "id": 5,
+        "iteration": 1645036621579,
+        "links": [],
+        "panels": [
+          {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 0
+            },
+            "id": 8,
+            "panels": [],
+            "title": "Live Statistics",
+            "type": "row"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "none"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 2,
+              "x": 0,
+              "y": 1
+            },
+            "id": 10,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "auto"
+            },
+            "pluginVersion": "8.1.1",
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "count by (namespace) (application_camel_context_exchanges_completed_total{namespace=\"$namespace\", camelContext=\"$context\"})",
+                "format": "time_series",
+                "interval": "",
+                "legendFormat": "",
+                "queryType": "randomWalk",
+                "refId": "A"
+              },
+              {
+                "hide": false,
+                "refId": "B"
+              }
+            ],
+            "title": "Instances",
+            "type": "stat"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 2,
+              "x": 2,
+              "y": 1
+            },
+            "id": 12,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "auto"
+            },
+            "pluginVersion": "8.1.1",
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "topk(1,count by (namespace) (application_camel_route_exchanges_completed_total{namespace=\"$namespace\", routeId=\"$route\"}))",
+                "interval": "",
+                "legendFormat": "",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Routes",
+            "type": "stat"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 2,
+              "x": 4,
+              "y": 1
+            },
+            "id": 14,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "auto"
+            },
+            "pluginVersion": "8.1.1",
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum(application_camel_context_exchanges_inflight_count{namespace=\"$namespace\", camelContext=\"$context\",})",
+                "interval": "",
+                "legendFormat": "",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Consumers Inflight",
+            "type": "stat"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 4,
+              "x": 6,
+              "y": 1
+            },
+            "id": 16,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "auto"
+            },
+            "pluginVersion": "8.1.1",
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum(application_camel_context_exchanges_completed_total{namespace=\"$namespace\", camelContext=\"$context\"})",
+                "interval": "",
+                "legendFormat": "",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Completed Exchanges",
+            "type": "stat"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 3,
+              "x": 10,
+              "y": 1
+            },
+            "id": 18,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "auto"
+            },
+            "pluginVersion": "8.1.1",
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum(application_camel_context_exchanges_failed_total{namespace=\"$namespace\", camelContext=\"$context\"})",
+                "interval": "",
+                "legendFormat": "",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Failed Exchanges",
+            "type": "stat"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "s"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 4,
+              "x": 13,
+              "y": 1
+            },
+            "id": 47,
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "auto"
+            },
+            "pluginVersion": "8.1.1",
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (namespace) (application_camel_context_uptime_seconds{namespace=\"$namespace\", camelContext=\"$context\"})",
+                "interval": "",
+                "legendFormat": "",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Camel-K Uptime",
+            "type": "stat"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "displayMode": "auto",
+                  "filterable": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 7,
+              "x": 17,
+              "y": 1
+            },
+            "id": 20,
+            "options": {
+              "showHeader": true
+            },
+            "pluginVersion": "8.1.1",
+            "sort": {
+              "col": 3,
+              "desc": true
+            },
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "count by(instance,camelContext) (application_camel_context_exchanges_total{namespace=\"$namespace\", camelContext=\"$context\"})",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A"
+              }
+            ],
+            "title": "Pods Per Node Distribution",
+            "transform": "table",
+            "transformations": [
+              {
+                "id": "groupBy",
+                "options": {
+                  "fields": {
+                    "Value": {
+                      "aggregations": [],
+                      "operation": "groupby"
+                    },
+                    "instance": {
+                      "aggregations": [],
+                      "operation": "groupby"
+                    }
+                  }
+                }
+              }
+            ],
+            "type": "table"
+          },
+          {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 5
+            },
+            "id": 6,
+            "panels": [],
+            "title": "Namespace Processing Rates",
+            "type": "row"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 2,
+                  "pointSize": 4,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 4,
+              "x": 0,
+              "y": 6
+            },
+            "id": 49,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "hidden",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (namespace) (increase(application_camel_context_exchanges_total[1h]))",
+                "interval": "1h",
+                "legendFormat": "{{job}}",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Camel-K All Exchanges Per Hour - Total",
+            "type": "timeseries"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 2,
+                  "pointSize": 4,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 4,
+              "x": 4,
+              "y": 6
+            },
+            "id": 50,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (job) (increase(application_camel_context_exchanges_total[1h]))",
+                "interval": "1h",
+                "legendFormat": "{{job}}",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Camel-K All Exchanges Per Hour - Per Job",
+            "type": "timeseries"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 2,
+                  "pointSize": 4,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 4,
+              "x": 8,
+              "y": 6
+            },
+            "id": 56,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "hidden",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (namespace) (increase(application_camel_context_exchanges_completed_total[1h]))",
+                "interval": "1h",
+                "legendFormat": "{{job}}",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Camel-K Completed Exchanges Per Hour - Total",
+            "type": "timeseries"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 2,
+                  "pointSize": 4,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 4,
+              "x": 12,
+              "y": 6
+            },
+            "id": 55,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (job) (increase(application_camel_context_exchanges_completed_total[1h]))",
+                "interval": "1h",
+                "legendFormat": "{{job}}",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Camel-K Completed Exchanges Per Hour - Per Job",
+            "type": "timeseries"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 2,
+                  "pointSize": 4,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 4,
+              "x": 16,
+              "y": 6
+            },
+            "id": 4,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "hidden",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (namespace) (increase(application_camel_context_exchanges_failed_total[1h]))",
+                "interval": "1h",
+                "legendFormat": "{{job}}",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Failed Exchanges Per Hour - Total",
+            "type": "timeseries"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 2,
+                  "pointSize": 4,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 4,
+              "x": 20,
+              "y": 6
+            },
+            "id": 48,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (job) (increase(application_camel_context_exchanges_failed_total[1h]))",
+                "interval": "1h",
+                "legendFormat": "{{job}}",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Failed Exchanges Per Hour - Per Job",
+            "type": "timeseries"
+          },
+          {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 13
+            },
+            "id": 24,
+            "panels": [],
+            "title": "Execution Times Per Route Since Start",
+            "type": "row"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "s"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 2,
+              "x": 0,
+              "y": 14
+            },
+            "id": 39,
+            "options": {
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true,
+              "text": {}
+            },
+            "pluginVersion": "8.1.1",
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (routeId) (application_camel_route_processing_rate_per_second{namespace=\"$namespace\", camelContext=\"$context\", routeId=~\"$route\"})",
+                "interval": "",
+                "legendFormat": "",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Avg Exec time: $route",
+            "type": "gauge"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "s"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 5,
+              "x": 2,
+              "y": 14
+            },
+            "id": 53,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "hidden",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "pluginVersion": "8.1.1",
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (routeId) (application_camel_route_processing_rate_per_second{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"})",
+                "interval": "",
+                "legendFormat": "",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Avg Exec time: $route - All Instances",
+            "type": "timeseries"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 0,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "percentage",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "s"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 5,
+              "x": 7,
+              "y": 14
+            },
+            "id": 54,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "pluginVersion": "8.1.1",
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (routeId, job) (application_camel_route_processing_rate_per_second{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"})",
+                "interval": "",
+                "legendFormat": "{{job}}",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Avg Exec time: $route - Per Instance",
+            "type": "timeseries"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 14,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "s"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 6,
+              "x": 12,
+              "y": 14
+            },
+            "id": 41,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "hidden",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (routeId) (application_camel_route_processing_seconds{namespace=\"$namespace\", camelContext=\"$context\", routeId=~\"$route\"}) / sum by (routeId) (application_camel_route_exchanges_total{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"})",
+                "interval": "",
+                "legendFormat": "",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Processing Seconds Per Execution Rate: $route - All Instances",
+            "type": "timeseries"
+          },
+          {
+            "datasource": "prod-data-hub",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 14,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "s"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 6,
+              "x": 18,
+              "y": 14
+            },
+            "id": 42,
+            "options": {
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom"
+              },
+              "tooltip": {
+                "mode": "single"
+              }
+            },
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "sum by (routeId, pod) (application_camel_route_processing_seconds{namespace=\"$namespace\", camelContext=\"$context\", routeId=~\"$route\"}) / sum by (routeId, pod) (application_camel_route_exchanges_total{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"})",
+                "interval": "",
+                "legendFormat": "{{pod}}",
+                "queryType": "randomWalk",
+                "refId": "A"
+              }
+            ],
+            "title": "Processing Seconds Per Execution Rate: $route  - Per Instance",
+            "type": "timeseries"
+          },
+          {
+            "collapsed": true,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 20
+            },
+            "id": 26,
+            "panels": [
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 2,
+                  "x": 0,
+                  "y": 21
+                },
+                "id": 28,
+                "options": {
+                  "colorMode": "value",
+                  "graphMode": "none",
+                  "justifyMode": "auto",
+                  "orientation": "auto",
+                  "reduceOptions": {
+                    "calcs": [
+                      "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                  },
+                  "text": {},
+                  "textMode": "auto"
+                },
+                "pluginVersion": "8.1.1",
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum(irate(application_camel_route_exchanges_total{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}[1m]))",
+                    "interval": "",
+                    "legendFormat": "",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "Exchanges/sec: $route",
+                "type": "stat"
+              },
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 5,
+                  "x": 2,
+                  "y": 21
+                },
+                "id": 30,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "hidden",
+                    "placement": "bottom"
+                  },
+                  "tooltip": {
+                    "mode": "single"
+                  }
+                },
+                "repeat": null,
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum by (camelContext) (irate(application_camel_route_exchanges_total{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}[5m]))",
+                    "interval": "5m",
+                    "legendFormat": "",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "$route Exchanges/sec - All Instances",
+                "type": "timeseries"
+              },
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 5,
+                  "x": 7,
+                  "y": 21
+                },
+                "id": 32,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom"
+                  },
+                  "tooltip": {
+                    "mode": "single"
+                  }
+                },
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "irate(application_camel_route_exchanges_total{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}[5m])",
+                    "interval": "5m",
+                    "legendFormat": "{{job}}",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "$route Exchanges/sec - Per Instance",
+                "type": "timeseries"
+              },
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 2,
+                  "x": 12,
+                  "y": 21
+                },
+                "id": 34,
+                "options": {
+                  "colorMode": "value",
+                  "graphMode": "none",
+                  "justifyMode": "auto",
+                  "orientation": "auto",
+                  "reduceOptions": {
+                    "calcs": [
+                      "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                  },
+                  "text": {},
+                  "textMode": "auto"
+                },
+                "pluginVersion": "8.1.1",
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum(application_camel_route_exchanges_inflight_count{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"})",
+                    "interval": "",
+                    "legendFormat": "",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "Current Inflight: $route",
+                "type": "stat"
+              },
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 5,
+                  "x": 14,
+                  "y": 21
+                },
+                "id": 36,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "hidden",
+                    "placement": "bottom"
+                  },
+                  "tooltip": {
+                    "mode": "single"
+                  }
+                },
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum by (camelContext) (application_camel_route_exchanges_inflight_count{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"})",
+                    "interval": "",
+                    "legendFormat": "",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "$route Inflight Exchanges - All Instances",
+                "type": "timeseries"
+              },
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 5,
+                  "x": 19,
+                  "y": 21
+                },
+                "id": 37,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom"
+                  },
+                  "tooltip": {
+                    "mode": "single"
+                  }
+                },
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum by (job) (application_camel_route_exchanges_inflight_count{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"})",
+                    "interval": "",
+                    "legendFormat": "{{job}}",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "$route Inflight Exchanges - Per Instances",
+                "type": "timeseries"
+              }
+            ],
+            "title": "Traffic Per Route",
+            "type": "row"
+          },
+          {
+            "collapsed": true,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 21
+            },
+            "id": 22,
+            "panels": [
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "percentage",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    },
+                    "unit": "s"
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 2,
+                  "x": 0,
+                  "y": 28
+                },
+                "id": 43,
+                "options": {
+                  "reduceOptions": {
+                    "calcs": [
+                      "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                  },
+                  "showThresholdLabels": false,
+                  "showThresholdMarkers": true,
+                  "text": {}
+                },
+                "pluginVersion": "8.1.1",
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum by (routeId) (increase(application_camel_route_processing_rate_per_second{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}[5m])) ",
+                    "interval": "",
+                    "legendFormat": "",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "Avg Exec time: $route",
+                "type": "gauge"
+              },
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "percentage",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    },
+                    "unit": "s"
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 5,
+                  "x": 2,
+                  "y": 28
+                },
+                "id": 51,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "hidden",
+                    "placement": "bottom"
+                  },
+                  "tooltip": {
+                    "mode": "single"
+                  }
+                },
+                "pluginVersion": "8.1.1",
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum by (routeId) (increase(application_camel_route_processing_rate_per_second{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}[5m])) ",
+                    "interval": "5m",
+                    "legendFormat": "",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "Avg Exec time: $route - All Instances",
+                "type": "timeseries"
+              },
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "percentage",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    },
+                    "unit": "s"
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 5,
+                  "x": 7,
+                  "y": 28
+                },
+                "id": 52,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom"
+                  },
+                  "tooltip": {
+                    "mode": "single"
+                  }
+                },
+                "pluginVersion": "8.1.1",
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum by (routeId,job) (increase(application_camel_route_processing_rate_per_second{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}[5m])) ",
+                    "interval": "5m",
+                    "legendFormat": "{{job}}",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "Avg Exec time: $route - Per Instance",
+                "type": "timeseries"
+              },
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 14,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    },
+                    "unit": "s"
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 6,
+                  "x": 12,
+                  "y": 28
+                },
+                "id": 44,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "hidden",
+                    "placement": "bottom"
+                  },
+                  "tooltip": {
+                    "mode": "single"
+                  }
+                },
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum by (routeId) (increase(application_camel_route_processing_seconds{namespace=\"$namespace\", camelContext=\"$context\", routeId=~\"$route\"}[5m])) / sum by (routeId) (increase(application_camel_route_exchanges_total{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}[5m]))",
+                    "interval": "",
+                    "legendFormat": "",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "Processing Seconds Per Execution Rate: $route - All Instances",
+                "type": "timeseries"
+              },
+              {
+                "datasource": "prod-data-hub",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 14,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    },
+                    "unit": "s"
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 6,
+                  "w": 6,
+                  "x": 18,
+                  "y": 28
+                },
+                "id": 45,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom"
+                  },
+                  "tooltip": {
+                    "mode": "single"
+                  }
+                },
+                "targets": [
+                  {
+                    "exemplar": true,
+                    "expr": "sum by (routeId, pod) (increase(application_camel_route_processing_seconds{namespace=\"$namespace\", camelContext=\"$context\", routeId=~\"$route\"}[5m])) / sum by (routeId, pod) (increase(application_camel_route_exchanges_total{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}[5m]))",
+                    "interval": "",
+                    "legendFormat": "{{pod}}",
+                    "queryType": "randomWalk",
+                    "refId": "A"
+                  }
+                ],
+                "title": "Processing Seconds Per Execution Rate: $route - Per Instance",
+                "type": "timeseries"
+              }
+            ],
+            "title": "Execution Times Per Route Over Last 5 Minutes",
+            "type": "row"
+          }
+        ],
+        "refresh": false,
+        "schemaVersion": 30,
+        "style": "dark",
+        "tags": [],
+        "templating": {
+          "list": [
+            {
+              "allValue": null,
+              "current": {
+                "selected": false,
+                "text": "dh-prod-camel-k",
+                "value": "dh-prod-camel-k"
+              },
+              "datasource": "prod-data-hub",
+              "definition": "label_values(application_camel_route_exchanges_completed_total, namespace)",
+              "description": null,
+              "error": null,
+              "hide": 0,
+              "includeAll": false,
+              "label": "Namespace",
+              "multi": false,
+              "name": "namespace",
+              "options": [],
+              "query": {
+                "query": "label_values(application_camel_route_exchanges_completed_total, namespace)",
+                "refId": "StandardVariableQuery"
+              },
+              "refresh": 1,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "type": "query"
+            },
+            {
+              "allValue": null,
+              "current": {
+                "selected": true,
+                "text": "camel-1",
+                "value": "camel-1"
+              },
+              "datasource": "prod-data-hub",
+              "definition": "label_values(application_camel_route_exchanges_completed_total{namespace=\"$namespace\"}, camelContext)",
+              "description": null,
+              "error": null,
+              "hide": 0,
+              "includeAll": false,
+              "label": "Camel Context",
+              "multi": false,
+              "name": "context",
+              "options": [],
+              "query": {
+                "query": "label_values(application_camel_route_exchanges_completed_total{namespace=\"$namespace\"}, camelContext)",
+                "refId": "StandardVariableQuery"
+              },
+              "refresh": 1,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "type": "query"
+            },
+            {
+              "allValue": null,
+              "current": {
+                "selected": false,
+                "text": "route1",
+                "value": "route1"
+              },
+              "datasource": "prod-data-hub",
+              "definition": "label_values(application_camel_route_exchanges_completed_total{namespace=\"$namespace\", camelContext=\"$context\"}, routeId)",
+              "description": null,
+              "error": null,
+              "hide": 0,
+              "includeAll": false,
+              "label": "Camel Route",
+              "multi": false,
+              "name": "route",
+              "options": [],
+              "query": {
+                "query": "label_values(application_camel_route_exchanges_completed_total{namespace=\"$namespace\", camelContext=\"$context\"}, routeId)",
+                "refId": "StandardVariableQuery"
+              },
+              "refresh": 1,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "type": "query"
+            },
+            {
+              "allValue": null,
+              "current": {
+                "selected": false,
+                "text": "dh-prod-camel-k/kafka2trino-pnc-logs",
+                "value": "dh-prod-camel-k/kafka2trino-pnc-logs"
+              },
+              "datasource": "prod-data-hub",
+              "definition": "label_values(application_camel_route_processing_seconds{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}, job)",
+              "description": null,
+              "error": null,
+              "hide": 2,
+              "includeAll": false,
+              "label": "Integration",
+              "multi": false,
+              "name": "job",
+              "options": [],
+              "query": {
+                "query": "label_values(application_camel_route_processing_seconds{namespace=\"$namespace\", camelContext=\"$context\", routeId=\"$route\"}, job)",
+                "refId": "StandardVariableQuery"
+              },
+              "refresh": 1,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "type": "query"
+            }
+          ]
+        },
+        "time": {
+          "from": "now-7d",
+          "to": "now"
+        },
+        "timepicker": {},
+        "timezone": "",
+        "title": "Camel-K",
+        "uid": "eXvO1L-nz",
+        "version": 21
+      }
