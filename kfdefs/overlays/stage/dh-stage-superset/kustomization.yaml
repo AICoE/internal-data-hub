@@ -37,7 +37,7 @@ patchesJson6902:
   - patch: |
       - op: replace
         path: /data/superset_cpu_requests
-        value: 500m
+        value: "1"
     target:
       kind: ConfigMap
       name: superset-config
@@ -45,22 +45,6 @@ patchesJson6902:
   - patch: |
       - op: replace
         path: /data/superset_memory_requests
-        value: 512Mi
-    target:
-      kind: ConfigMap
-      name: superset-config
-      version: v1
-  - patch: |
-      - op: replace
-        path: /data/superset_cpu_limits
-        value: 1000m
-    target:
-      kind: ConfigMap
-      name: superset-config
-      version: v1
-  - patch: |
-      - op: replace
-        path: /data/superset_memory_limits
         value: 1Gi
     target:
       kind: ConfigMap
@@ -68,23 +52,23 @@ patchesJson6902:
       version: v1
   - patch: |
       - op: replace
+        path: /data/superset_cpu_limits
+        value: "2"
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_memory_limits
+        value: 2Gi
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
         path: /data/superset_db_cpu_requests
-        value: 500m
-    target:
-      kind: ConfigMap
-      name: superset-config
-      version: v1
-  - patch: |
-      - op: replace
-        path: /data/superset_db_memory_requests
-        value: 512Mi
-    target:
-      kind: ConfigMap
-      name: superset-config
-      version: v1
-  - patch: |
-      - op: replace
-        path: /data/superset_db_cpu_limits
         value: 1000m
     target:
       kind: ConfigMap
@@ -92,8 +76,24 @@ patchesJson6902:
       version: v1
   - patch: |
       - op: replace
+        path: /data/superset_db_memory_requests
+        value: 1Gi
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/superset_db_cpu_limits
+        value: 2000m
+    target:
+      kind: ConfigMap
+      name: superset-config
+      version: v1
+  - patch: |
+      - op: replace
         path: /data/superset_db_memory_limits
-        value: 512Mi
+        value: 2Gi
     target:
       kind: ConfigMap
       name: superset-config
