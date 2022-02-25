@@ -45,36 +45,36 @@
       name: cluster:apiserver_current_inflight_requests:sum:max_over_time:2m
 
     ##### 2020-06-01 - 2020-12-05 #####
-    # - backfill_to: 2020-10-01T00:00:00Z
-    #   name: che_workspace_started_total
-    # - backfill_to: 2020-10-01T00:00:00Z
-    #   name: che_workspace_start_time_seconds_count
-    # - backfill_to: 2020-10-01T00:00:00Z
-    #   name: che_workspace_start_time_seconds_sum
-    # - backfill_to: 2020-10-01T00:00:00Z
-    #   name: che_workspace_failure_total
-    # - backfill_to: 2020-10-01T00:00:00Z
-    #   name: che_workspace_status
-    # - backfill_to: 2020-10-01T00:00:00Z
-    #   name: id_code:apiserver_request_error_rate_sum:max
-    # - backfill_to: 2020-10-01T00:00:00Z
-    #   name: cco_credentials_mode
-    # - backfill_to: 2020-07-01T00:00:00Z
-    #   name: cluster_master_schedulable
-    # - backfill_to: 2020-09-01T00:00:00Z
-    #   name: cluster:kube_persistentvolumeclaim_resource_requests_storage_bytes:provisioner:sum
-    # - backfill_to: 2020-09-01T00:00:00Z
-    #   name: id_primary_host_type
-    # - backfill_to: 2020-09-01T00:00:00Z
-    #   name: cluster:kubelet_volume_stats_used_bytes:provisioner:sum
-    # - backfill_to: 2020-09-01T00:00:00Z
-    #   name: openshift:prometheus_tsdb_head_samples_appended_total:sum
-    # - backfill_to: 2020-09-01T00:00:00Z
-    #   name: monitoring:haproxy_server_http_responses_total:sum
-    # - backfill_to: 2020-09-01T00:00:00Z
-    #   name: openshift:prometheus_tsdb_head_series:sum
-    # - backfill_to: 2020-07-01T00:00:00Z
-    #   name: code:apiserver_request_total:rate:sum
+    - backfill_to: 2020-10-01T00:00:00Z
+      name: che_workspace_started_total
+    - backfill_to: 2020-10-01T00:00:00Z
+      name: che_workspace_start_time_seconds_count
+    - backfill_to: 2020-10-01T00:00:00Z
+      name: che_workspace_start_time_seconds_sum
+    - backfill_to: 2020-10-01T00:00:00Z
+      name: che_workspace_failure_total
+    - backfill_to: 2020-10-01T00:00:00Z
+      name: che_workspace_status
+    - backfill_to: 2020-10-01T00:00:00Z
+      name: id_code:apiserver_request_error_rate_sum:max
+    - backfill_to: 2020-10-01T00:00:00Z
+      name: cco_credentials_mode
+    - backfill_to: 2020-07-01T00:00:00Z
+      name: cluster_master_schedulable
+    - backfill_to: 2020-09-01T00:00:00Z
+      name: cluster:kube_persistentvolumeclaim_resource_requests_storage_bytes:provisioner:sum
+    - backfill_to: 2020-09-01T00:00:00Z
+      name: id_primary_host_type
+    - backfill_to: 2020-09-01T00:00:00Z
+      name: cluster:kubelet_volume_stats_used_bytes:provisioner:sum
+    - backfill_to: 2020-09-01T00:00:00Z
+      name: openshift:prometheus_tsdb_head_samples_appended_total:sum
+    - backfill_to: 2020-09-01T00:00:00Z
+      name: monitoring:haproxy_server_http_responses_total:sum
+    - backfill_to: 2020-09-01T00:00:00Z
+      name: openshift:prometheus_tsdb_head_series:sum
+    - backfill_to: 2020-07-01T00:00:00Z
+      name: code:apiserver_request_total:rate:sum
 
     ##### 2020-12-01 - 2021-06-01 #####
     - backfill_to: 2020-12-01T00:00:00Z
