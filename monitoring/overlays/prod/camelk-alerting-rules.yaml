@@ -1,0 +1,84 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: camelk-alerting-rules
+spec:
+  groups:
+    - name: Camel-K Service Alerts
+      rules:
+      - alert: Data Hub Camel-K Inflight Consumers Down
+        annotations:
+          message: 'No Camel-K Consumers In Flight.'
+          summary: No Camel-K Consumers detected in the dh-prod-camel-k namespace.  This means no ingestion is occuring
+        expr: |
+          sum(application_camel_context_exchanges_inflight_count{namespace="dh-prod-camel-k"}) < 1
+        for: 5m
+        labels:
+          severity: critical
+          datahubalert: "true"
+
+      - alert: Camel-K Operator not Running
+        annotations:
+          message: Camel-K Operator is down
+          summary: The Camel-K Operator pod is not running.
+        expr: |
+          max(max_over_time(kube_pod_container_status_ready{namespace="dh-prod-camel-k", container=~"camel-k-operator.*"}[1h])) < 1
+        for: 5m
+        labels:
+          severity: critical
+          datahubalert: "true"
+
+      - alert: No Camel-K Integrations Running
+        annotations:
+          message: No Camel-K Integrations running
+          summary: There are 0 Camel-K Integrations actively running over the last 5 minutes.
+        expr: |
+          max(max_over_time(kube_pod_container_status_ready{namespace="dh-prod-camel-k", container="integration"}[5m])) < 1
+        for: 5m
+        labels:
+          severity: critical
+          datahubalert: "true"
+
+      - alert: Abnormally Low Kafka2Trino Camel-K Integration Pods
+        annotations:
+          message: Abnormally low number of Kafka2Trino Camel-K Integrations pods
+          summary: For the last 5 minutes, less than 70% of the usual number of Integration pods (average count over the past day) are currently running.
+        expr: |
+          max(max_over_time(kube_pod_container_status_ready{namespace="dh-prod-camel-k", container="integration", pod=~"kafka2trino-.*"}[5m])) < max(avg_over_time(kube_pod_container_status_ready{namespace="dh-prod-camel-k", container="integration", pod=~"kafka2trino-.*"}[1d])) * 0.70
+        for: 5m
+        labels:
+          severity: warning
+          datahubalert: "true"
+
+      - alert: Camel-K Prolonged Zero Uptime
+        annotations:
+          message: Camel-K Detected Uptime is Zero
+          summary: The self-reported uptime of Camel-K has been 0 for at least 5 minutes.
+        expr: |
+          sum(sum_over_time(application_camel_context_uptime_seconds{namespace="dh-prod-camel-k"}[5m])) <= 0
+        for: 5m
+        labels:
+          severity: critical
+          datahubalert: "true"
+
+      - alert: Camel-K Low Exchange Rate
+        annotations:
+          message: Camel-K Low Exchanges Completion Rate
+          summary: No Camel-K exchanges have successfully completed in the last hour
+        expr: |
+          sum(increase(application_camel_context_exchanges_completed_total{namespace="dh-prod-camel-k"}[1h])) <= 0
+        for: 5m
+        labels:
+          severity: warning
+          datahubalert: "true"
+
+      - alert: Camel-K Elevated Exchange Failure Rate
+        annotations:
+          message: Camel-K Failed Exchange Rate Elevated
+          summary: More than 5% of all exchanges in the last hour have failed
+        expr: |
+          (sum(increase(application_camel_context_exchanges_failed_total{namespace="dh-prod-camel-k"}[1h])) / sum(increase(application_camel_context_exchanges_total{namespace="dh-prod-camel-k"}[1h]))) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          datahubalert: "true"
