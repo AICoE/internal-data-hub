@@ -112,11 +112,12 @@ spec:
             - '--https-address=:8443'
             - '--openshift-service-account=grafana'
             - '--upstream=http://localhost:3001'
-            - '--openshift-delegate-urls={"/": {"resource": "route", "verb": "get", "name": "rhods-dashboard"}}'
+            - '--openshift-delegate-urls={"/": {"resource": "route", "verb": "get", "name": "grafana"}}'
             - '--tls-cert=/etc/tls/private/tls.crt'
             - '--tls-key=/etc/tls/private/tls.key'
             - '-cookie-secret-file=/etc/proxy/secrets/session_secret'
             - '-skip-auth-regex=^/metrics'
+            - '--pass-user-bearer-token'
           volumeMounts:
             - mountPath: /etc/proxy/secrets
               name: grafana-proxy-secret
