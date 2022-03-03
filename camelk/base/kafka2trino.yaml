@@ -5,27 +5,31 @@ metadata:
   name: kafka2trino-pnc-logs
 spec:
   dependencies:
-    - 'mvn:io.trino:trino-jdbc:368'
-    - 'mvn:org.apache.commons:commons-dbcp2:2.9.0'
     - 'camel:kafka'
+    - 'camel:sql'
+    - 'mvn:io.trino:trino-jdbc:368'
     - 'mvn:org.apache.camel.k:camel-k-runtime'
-  flows:
-  - from:
-      uri: 'kafka:dynamic-pnc-logs'
-      steps:
-        - log:
-            logging-level: INFO
-            message: 'Processing message: ${body}'
-        - to:
-            uri: >-
-                sql:insert into iceberg.kafka.pnc_logs (message, timestamp) values (:#${body}, current_timestamp)
-            parameters:
-              batch: true
-              useMessageBodyForSql: false
+    - 'mvn:org.apache.commons:commons-dbcp2:2.9.0'
+
+  sources:
+    - content: >-
+        package com.redhat.idh;
+
+        import org.apache.camel.builder.RouteBuilder;
+        import org.apache.camel.builder.AggregationStrategies;
+
+        public class CamelKafkaToTrino extends RouteBuilder {
+            @Override
+            public void configure() {
+
+                from("kafka:dynamic-pnc-logs")
+                        .log("Processing ${body}")
+                        .aggregate(constant(true)).completionSize(20).aggregationStrategy(AggregationStrategies.groupedBody())
+                        .to("sql:insert into iceberg.kafka.pnc_logs(message, timestamp) values ((#, current_timestamp))?batch=true");
+            }
+        }
+      name: CamelKafkaToTrino.java
   traits:
-    prometheus:
-      configuration:
-        enabled: true
     mount:
       configuration:
         configs:
@@ -34,3 +38,6 @@ spec:
         resources:
           - >-
             secret:kafka2trino-truststore@/etc/camel/conf.d/_secrets/kafka2trino-truststore
+    prometheus:
+      configuration:
+        enabled: true
