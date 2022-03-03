@@ -3,8 +3,10 @@ import logging
 
 FEATURE_FLAGS = {
     'ENABLE_TEMPLATE_PROCESSING': True,
-    # Uncomment this when Superset 1.3.0 upgrade is done
-    # 'DASHBOARD_RBAC': True
+    'DASHBOARD_RBAC': True,
+    'DASHBOARD_CROSS_FILTERS': True,
+    'DASHBOARD_NATIVE_FILTERS': True,
+    'DASHBOARD_NATIVE_FILTERS_SET': False  # Set this to True once the flag is stable
 }
 
 AUTH_USER_REGISTRATION_ROLE = 'Datahub'
