@@ -1,7 +1,7 @@
 ---
 - op: replace
   path: /spec/schedule
-  value: "*/30 * * * *"
+  value: "*/15 * * * *"
 
 - op: replace
   path: /spec/workflowSpec/ttlSecondsAfterFinished

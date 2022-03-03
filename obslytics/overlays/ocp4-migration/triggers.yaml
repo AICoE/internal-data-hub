@@ -73,8 +73,6 @@
       name: monitoring:haproxy_server_http_responses_total:sum
     - backfill_to: 2020-09-01T00:00:00Z
       name: openshift:prometheus_tsdb_head_series:sum
-    - backfill_to: 2020-07-01T00:00:00Z
-      name: code:apiserver_request_total:rate:sum
 
     ##### 2020-12-01 - 2021-06-01 #####
     - backfill_to: 2020-12-01T00:00:00Z
@@ -303,10 +301,13 @@
     # - backfill_to: 2019-06-01T00:00:00Z
     #   name: cluster_version_payload
 
+    # TODO: enable these once 'small' metrics backfill is complete
     # - backfill_to: 2020-02-01T00:00:00Z
     #   name: count:up0
     # - backfill_to: 2020-04-01T00:00:00Z
     #   name: insightsclient_request_send_total
+    # - backfill_to: 2020-07-01T00:00:00Z
+    #   name: code:apiserver_request_total:rate:sum
 
 
 # XL Metrics
