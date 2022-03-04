@@ -3,7 +3,7 @@ kind: Secret
 metadata:
     labels:
         application-crd-id: kubeflow-pipelines
-    name: mlpipeline-ceph-artifact
+    name: prod-mlpipeline-ceph-artifact
 stringData:
     OBJECTSTORECONFIG_HOST: ENC[AES256_GCM,data:monprFF37EZyN3GMfnEcuZgUbQQU,iv:4r0ifZr63FnYYRHkYDYiCO1MiMvk99LR9C0gYxOUyRM=,tag:ZmpY4YlHIaPqDBIhVDbegQ==,type:str]
     OBJECTSTORECONFIG_PORT: ENC[AES256_GCM,data:AXPc,iv:hsrMST1lSpaBJqFE3y8Ne15GP/wnq6quljguh7DTpbo=,tag:kv1p9c8UJ7XaRUXvtRiVRg==,type:str]
@@ -17,8 +17,8 @@ sops:
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2022-02-15T17:48:00Z'
-    mac: ENC[AES256_GCM,data:He7yiKfY9bjVC2IKD7T+YBnvyipvNxAn41R6Bm92s7SONI+I9vJ3mtfaX7WlFcnw4D/Ods1THBXx4bVoN3eb/LHcF+IlYnXog4bUV+XMUyVFf5aqC62et3h/5EumKaVsU9swWeG9y44TY/Q32e8XWyWCw5BBvx7cXohX5SpYXak=,iv:o4HIe8/oM1yEma9Y9jicuUUAbTlNGVe3NROBYU6GNHs=,tag:LqC5Cl8vLgGkV9gpR0LsJw==,type:str]
+    lastmodified: '2022-03-04T17:45:17Z'
+    mac: ENC[AES256_GCM,data:oIgJ26IfkMbPPH6Clw4OSlPfT6ow5zkCxtvaWd5xzIzhH845M7vH5hGdEWZqo9Bm70axaM2La1JLmJP7UmIJM8ByfrRqQDGIeqrl0vgm5uyCtW1/+yGDrXtyVGurVEjA+JzzWxUiQ2n+j5PHO02e6ie3uZH97pY8+pDW2E1vaNw=,iv:9OAQ2KuN/lf+1eYy/v/me8+Bhga8+UOZj9z2qJn+J30=,tag:ihV3D5YWBSzqq1HWOcgVrg==,type:str]
     pgp:
     -   created_at: '2022-02-15T17:47:57Z'
         enc: |
