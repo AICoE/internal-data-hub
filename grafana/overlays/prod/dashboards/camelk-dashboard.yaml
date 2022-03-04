@@ -163,7 +163,7 @@ spec:
             "targets": [
               {
                 "exemplar": true,
-                "expr": "topk(1,count by (namespace) (application_camel_route_exchanges_completed_total{namespace=\"$namespace\", routeId=\"$route\"}))",
+                "expr": "topk(1,count by (namespace) (application_camel_route_exchanges_completed_total{namespace=\"$namespace\"}))",
                 "interval": "",
                 "legendFormat": "",
                 "queryType": "randomWalk",
@@ -279,14 +279,14 @@ spec:
             "targets": [
               {
                 "exemplar": true,
-                "expr": "sum(application_camel_context_exchanges_completed_total{namespace=\"$namespace\", camelContext=\"$context\"})",
+                "expr": "sum(increase(application_camel_context_exchanges_completed_total{namespace=\"$namespace\", camelContext=\"$context\"}[1h]))",
                 "interval": "",
                 "legendFormat": "",
                 "queryType": "randomWalk",
                 "refId": "A"
               }
             ],
-            "title": "Completed Exchanges",
+            "title": "Completed Exchanges (Last Hour)",
             "type": "stat"
           },
           {
@@ -335,14 +335,14 @@ spec:
             "targets": [
               {
                 "exemplar": true,
-                "expr": "sum(application_camel_context_exchanges_failed_total{namespace=\"$namespace\", camelContext=\"$context\"})",
+                "expr": "sum(increase(application_camel_context_exchanges_failed_total{namespace=\"$namespace\", camelContext=\"$context\"}[1h]))",
                 "interval": "",
                 "legendFormat": "",
                 "queryType": "randomWalk",
                 "refId": "A"
               }
             ],
-            "title": "Failed Exchanges",
+            "title": "Failed Exchanges (Last Hour)",
             "type": "stat"
           },
           {
