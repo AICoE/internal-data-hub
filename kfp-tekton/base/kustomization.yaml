@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: idh-kfp-tekton
 
 bases:
-  - github.com/operate-first/apps/kfp-tekton/base?ref=91d3ded7b8803cf2158bb3a3824eaef3dccaf2e7
+  - github.com/operate-first/apps/kfp-tekton/base?ref=45c62b24d4b02274e375e83556c7654c0d9d5dbd
 
 patchesStrategicMerge:
   - kfp-tekton-config.yaml
