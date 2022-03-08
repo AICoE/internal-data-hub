@@ -18,7 +18,12 @@ AUTH_ROLES_MAPPING = {
           'ceeandpe': ['Subscriptions', 'CCX Sensitive'],
           'telemeter-auth': ['Telemetry'],
           'telemeter-auto-approval': ['Telemetry'],
-          'telemeter-manual-approval': ['Telemetry']
+          'telemeter-manual-approval': ['Telemetry'],
+          'na-cs-tam-auto': ['CCX Sensitive'],
+          'apac-cs-tam-auto': ['CCX Sensitive'],
+          'latam-cs-tam-auto': ['CCX Sensitive'],
+          'emea-cs-tam-auto': ['CCX Sensitive'],
+          'na-ps-cs-tam-auto': ['CCX Sensitive']
         }
 
 
