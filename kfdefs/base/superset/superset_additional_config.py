@@ -22,7 +22,16 @@ AUTH_ROLES_MAPPING = {
           'apac-cs-tam-auto': ['CCX Sensitive'],
           'latam-cs-tam-auto': ['CCX Sensitive'],
           'emea-cs-tam-auto': ['CCX Sensitive'],
-          'na-ps-cs-tam-auto': ['CCX Sensitive']
+          'na-ps-cs-tam-auto': ['CCX Sensitive'],
+          'emea-cs-csm-auto': ['CCX Sensitive'],
+          'emea-cs-cse-auto': ['CCX Sensitive'],
+          'emea-cs-managers': ['CCX Sensitive'],
+          'apac-cs-csm-auto': ['CCX Sensitive'],
+          'apac-cs-cse-auto': ['CCX Sensitive'],
+          'na-cs-csm-auto': ['CCX Sensitive'],
+          'na-cs-cse-auto': ['CCX Sensitive'],
+          'na-ps-cs-cse-auto': ['CCX Sensitive'],
+          'latam-cs-csm-auto': ['CCX Sensitive']
         }
 
 
