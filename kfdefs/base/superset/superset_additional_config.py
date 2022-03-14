@@ -12,11 +12,10 @@ FEATURE_FLAGS = {
 AUTH_USER_REGISTRATION_ROLE = 'Datahub'
 AUTH_ROLES_MAPPING = {
           'data-hub-openshift-admins': ['Admin'],
-          'mhicks-all': ['CCX'],
           'ccx-dev': ['CCX Sensitive'],
           'candlepin-posix': ['Subscriptions'],
           'ceeandpe': ['Subscriptions', 'CCX Sensitive'],
-          'telemeter-auth': ['Telemetry'],
+          'telemeter-auth': ['Telemetry', 'CCX'],
           'telemeter-auto-approval': ['Telemetry'],
           'telemeter-manual-approval': ['Telemetry'],
           'na-cs-tam-auto': ['CCX Sensitive'],
