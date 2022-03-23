@@ -117,34 +117,34 @@
       name: cluster:usage:ingress_frontend_bytes_out:rate5m:sum
 
     ##### 2019-06-01 and earlier  #####
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: kube_pod_status_ready:etcd:sum
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: scrape_samples_post_metric_relabeling
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: scrape_samples_scraped
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: scrape_duration_seconds
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: kube_pod_status_ready:image_registry:sum
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: etcd_object_counts
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: cluster_operator_conditions
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: up
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: cluster_version_available_updates
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: cluster_operator_up
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: code:apiserver_request_count:rate:sum
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: openshift:memory_usage_bytes:sum
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: openshift:cpu_usage_cores:sum
-    # - backfill_to: 2019-06-01T00:00:00Z
-    #   name: cluster:cpu_usage_cores:sum
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: kube_pod_status_ready:etcd:sum
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: scrape_samples_post_metric_relabeling
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: scrape_samples_scraped
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: scrape_duration_seconds
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: kube_pod_status_ready:image_registry:sum
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: etcd_object_counts
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_operator_conditions
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: up
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_version_available_updates
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: cluster_operator_up
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: code:apiserver_request_count:rate:sum
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: openshift:memory_usage_bytes:sum
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: openshift:cpu_usage_cores:sum
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: cluster:cpu_usage_cores:sum
 
 # Large Metrics
 - op: replace
