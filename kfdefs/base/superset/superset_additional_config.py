@@ -31,7 +31,8 @@ AUTH_ROLES_MAPPING = {
           'na-cs-csm-auto': ['CCX Sensitive'],
           'na-cs-cse-auto': ['CCX Sensitive'],
           'na-ps-cs-cse-auto': ['CCX Sensitive'],
-          'latam-cs-csm-auto': ['CCX Sensitive']
+          'latam-cs-csm-auto': ['CCX Sensitive'],
+          'ccx-pm': ['CCX Sensitive']
         }
 
 
