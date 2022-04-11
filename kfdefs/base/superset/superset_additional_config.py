@@ -34,7 +34,8 @@ AUTH_ROLES_MAPPING = {
           'latam-cs-csm-auto': ['CCX Sensitive', 'CCX'],
           'ccx-pm': ['CCX Sensitive', 'CCX'],
           'ccx-datalake-access': ['CCX'],
-          'ccx-sensitive-datalake-access': ['CCX', 'CCX Sensitive']
+          'ccx-sensitive-datalake-access': ['CCX', 'CCX Sensitive'],
+          'assisted-lakers': ['CCX', 'CCX Sensitive']
         }
 
 
