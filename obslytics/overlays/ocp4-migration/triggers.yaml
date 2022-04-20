@@ -130,8 +130,6 @@
     - backfill_to: 2019-06-01T00:00:00Z
       name: etcd_object_counts
     - backfill_to: 2019-06-01T00:00:00Z
-      name: up
-    - backfill_to: 2019-06-01T00:00:00Z
       name: cluster_version_available_updates
     - backfill_to: 2019-06-01T00:00:00Z
       name: code:apiserver_request_count:rate:sum
@@ -146,6 +144,8 @@
   value:
     # TODO: rearrange in cron order once everything is fully backfilled
     ##### HIGH PRIORITY #####
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: up
     - backfill_to: 2019-08-01T00:00:00Z
       name: ceph_cluster_total_bytes
     - backfill_to: 2019-08-01T00:00:00Z
