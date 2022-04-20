@@ -144,8 +144,6 @@
   value:
     # TODO: rearrange in cron order once everything is fully backfilled
     ##### HIGH PRIORITY #####
-    - backfill_to: 2019-06-01T00:00:00Z
-      name: up
     - backfill_to: 2019-08-01T00:00:00Z
       name: ceph_cluster_total_bytes
     - backfill_to: 2019-08-01T00:00:00Z
@@ -313,9 +311,10 @@
   path: /spec/templates/3/steps/0/0/withItems
   value: []
     # TODO: add the following metrics to this list (currently timeout or OOMKill)
-    # - size: xl
-    #   backfill_to: 2019-06-01T00:00:00Z
-    #   cluster_operator_conditions
+    # - backfill_to: 2019-06-01T00:00:00Z
+    #   name: cluster_operator_conditions
+    # - backfill_to: 2019-06-01T00:00:00Z
+    #   name: up
 
 - op: replace
   path: /spec/templates/4/steps/0/0/withItems
