@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    application-crd-id: kubeflow-pipelines
+  name: minio-service
+spec:
+  clusterIP: 172.30.164.196
+  clusterIPs:
+  - 172.30.164.196
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: minio
+    application-crd-id: kubeflow-pipelines
+  sessionAffinity: None
+  type: ClusterIP
