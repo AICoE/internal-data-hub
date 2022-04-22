@@ -417,7 +417,7 @@ spec:
                           schemas.append(schema)
               except Exception as e:
                   failures_detected = True
-                  print(f"Error adding {row[0]}.{row[1]} to list of partitioned tables. Caused by:")
+                  print("Error adding {}.{} to list of partitioned tables. Caused by:".format(row[0], row[1]))
                   print(e)
 
           with open('/mnt/out/tbl_list','w') as f:
