@@ -397,26 +397,36 @@ spec:
 
           schemas = []
 
+          failures_detected = False
           for row in rows:
-              create_table_sql = cur.execute(row[2])
-              if "partitioned_by" in cur.fetchall()[0][0]:
-                  print("Adding {}.{} to the list of partitioned tables...".format(row[0],row[1]))
+              try:
+                  create_table_sql = cur.execute(row[2])
+                  if "partitioned_by" in cur.fetchall()[0][0]:
+                      print("Adding {}.{} to the list of partitioned tables...".format(row[0],row[1]))
 
-                  schema = next((item for item in schemas if item["name"] == row[0]), None)
+                      schema = next((item for item in schemas if item["name"] == row[0]), None)
 
 
-                  if schema:
-                      schema["tables"].append(row[1])
-                  else:
-                      schema = {}
-                      schema["name"] = row[0]
-                      schema["tables"] = []
-                      schema["tables"].append(row[1])
-                      schemas.append(schema)
+                      if schema:
+                          schema["tables"].append(row[1])
+                      else:
+                          schema = {}
+                          schema["name"] = row[0]
+                          schema["tables"] = []
+                          schema["tables"].append(row[1])
+                          schemas.append(schema)
+              except Exception as e:
+                  failures_detected = True
+                  print(f"Error adding {row[0]}.{row[1]} to list of partitioned tables. Caused by:")
+                  print(e)
 
           with open('/mnt/out/tbl_list','w') as f:
               print("Dumping table list as json data...")
               json.dump(schemas, f)
+
+          if failures_detected:
+              print("Some failures detected.  Returning non-zero exit status")
+              exit(1)
 
         volumeMounts:
           - name: out
@@ -482,14 +492,24 @@ spec:
           schema_name = table_definitions["name"]
           schema_tables = table_definitions["tables"]
 
+          failures_detected = False
           print("Begin partition metadata update for schema {}...".format(schema_name))
           for table in schema_tables:
-              cur = conn.cursor()
-              sys.stdout.write("Updating partition metadata update for table {}...".format(table))
-              cur.execute(UPDATE_PARTITION.format(schema_name, table))
-              cur.fetchone()
-              sys.stdout.write("Done!")
-              sys.stdout.flush()
+              try:
+                  cur = conn.cursor()
+                  sys.stdout.write("Updating partition metadata update for table {}...".format(table))
+                  cur.execute(UPDATE_PARTITION.format(schema_name, table))
+                  cur.fetchone()
+                  sys.stdout.write("Done!")
+                  sys.stdout.flush()
+              except Exception as e:
+                  failures_detected = True
+                  print("Error updating partition metadata for table {}. Caused by:".format(table))
+                  print(e)
+
+          if failures_detected:
+              print("Some failures detected.  Returning non-zero exit status")
+              exit(1)
 
     - name: run-obslytics-small
       retryStrategy:

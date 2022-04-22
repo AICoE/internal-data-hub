@@ -47,6 +47,8 @@ spec:
             continueOn:
               failed: true
         - - name: get-all-partitioned-tables
+            continueOn:
+              failed: true
             templateRef:
               name: obslytics-data-exporter-workflow-template
               template: extract-partitioned-table-names
