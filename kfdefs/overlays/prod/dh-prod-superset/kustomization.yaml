@@ -103,6 +103,22 @@ patchesJson6902:
       name: supersetdb-data
       version: v1
   - patch: |
+      - op: replace
+        path: /spec/resources/limits
+        value: 10GiB
+    target:
+      kind: PersistentVolumeClaim
+      name: supersetdb-data
+      version: v1
+  - patch: |
+      - op: replace
+        path: /spec/resources/requests
+        value: 10GiB
+    target:
+      kind: PersistentVolumeClaim
+      name: supersetdb-data
+      version: v1
+  - patch: |
       - op: add
         path: "/spec/storageClassName"
         value: dynamic-nfs
