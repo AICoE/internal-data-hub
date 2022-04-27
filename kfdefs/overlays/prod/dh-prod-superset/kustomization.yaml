@@ -104,7 +104,7 @@ patchesJson6902:
       version: v1
   - patch: |
       - op: replace
-        path: /spec/resources/limits
+        path: /spec/resources/limits/storage
         value: 10GiB
     target:
       kind: PersistentVolumeClaim
@@ -112,7 +112,7 @@ patchesJson6902:
       version: v1
   - patch: |
       - op: replace
-        path: /spec/resources/requests
+        path: /spec/resources/requests/storage
         value: 10GiB
     target:
       kind: PersistentVolumeClaim
