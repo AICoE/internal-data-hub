@@ -16,7 +16,7 @@ spec:
       container:
         args:
           - notify.py
-        image: "tools:latest"
+        image: "quay.io/internaldatahub/argo-tools:latest"
         command: [python]
         env:
           - name: WORKFLOW_NAME

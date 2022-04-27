@@ -1,3 +1,0 @@
-- op: replace
-  path: /spec/templates/0/container/image
-  value: image-registry.openshift-image-registry.svc:5000/dh-prod-thanos-extractor/tools:latest
