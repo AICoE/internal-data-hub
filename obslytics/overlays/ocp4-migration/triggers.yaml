@@ -143,26 +143,26 @@
   path: /spec/templates/2/steps/0/0/withItems
   value:
     # TODO: rearrange in cron order once everything is fully backfilled
-    - backfill_to: 2020-02-01T00:00:00Z
-      name: cluster:usage:containers:sum
-    - backfill_to: 2020-11-01T00:00:00Z
-      name: cluster:usage:workload:capacity_physical_cpu_cores:max:5m
-    - backfill_to: 2020-11-01T00:00:00Z
-      name: cluster:usage:workload:capacity_physical_cpu_cores:min:5m
-    - backfill_to: 2020-11-01T00:00:00Z
-      name: cluster:usage:workload:capacity_physical_cpu_core_seconds
-    - backfill_to: 2020-07-01T00:00:00Z
-      name: cluster_legacy_scheduler_policy
-    - backfill_to: 2020-08-01T00:00:00Z
-      name: olm_resolution_duration_seconds
-    - backfill_to: 2020-09-01T00:00:00Z
-      name: monitoring:container_memory_working_set_bytes:sum
-    - backfill_to: 2021-01-01T00:00:00Z
-      name: cluster:usage:workload:ingress_request_total:irate5m
-    - backfill_to: 2019-06-01T00:00:00Z
-      name: cluster:memory_usage_bytes:sum
-    - backfill_to: 2019-06-01T00:00:00Z
-      name: cluster_version_payload
+    # - backfill_to: 2020-02-01T00:00:00Z
+    #   name: cluster:usage:containers:sum
+    # - backfill_to: 2020-11-01T00:00:00Z
+    #   name: cluster:usage:workload:capacity_physical_cpu_cores:max:5m
+    # - backfill_to: 2020-11-01T00:00:00Z
+    #   name: cluster:usage:workload:capacity_physical_cpu_cores:min:5m
+    # - backfill_to: 2020-11-01T00:00:00Z
+    #   name: cluster:usage:workload:capacity_physical_cpu_core_seconds
+    # - backfill_to: 2020-07-01T00:00:00Z
+    #   name: cluster_legacy_scheduler_policy
+    # - backfill_to: 2020-08-01T00:00:00Z
+    #   name: olm_resolution_duration_seconds
+    # - backfill_to: 2020-09-01T00:00:00Z
+    #   name: monitoring:container_memory_working_set_bytes:sum
+    # - backfill_to: 2021-01-01T00:00:00Z
+    #   name: cluster:usage:workload:ingress_request_total:irate5m
+    # - backfill_to: 2019-06-01T00:00:00Z
+    #   name: cluster:memory_usage_bytes:sum
+    # - backfill_to: 2019-06-01T00:00:00Z
+    #   name: cluster_version_payload
 
     ##### HIGH PRIORITY #####
     - backfill_to: 2019-08-01T00:00:00Z
