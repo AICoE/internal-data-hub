@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: obslytics-data-exporter-recovery-workflow-
+  labels:
+    owner: obslytics-remote-reader
+    app: obslytics-data-exporter
+    pipeline: obslytics-data-exporter-recovery
+  name: obslytics-data-exporter-recovery-cron-workflows
+spec:
+  schedule: 15,45 * * * *
+  suspend: true
+  concurrencyPolicy: Allow
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: start_timestamp
+          value: "{{workflow.creationTimestamp}}"
+        - name: recover_to
+          value: "2022-04-20T00:00:00Z"  # TODO: user should set this somehow
+    ttlSecondsAfterFinished: 86400
+    entrypoint: cron-trigger
+    templates:
+    - name: cron-trigger
+      steps:
+        - - name: trigger
+            templateRef:
+              name: obslytics-data-exporter-recovery-triggers
+              template: trigger-recovery-workflow
+    volumes:
+    - name: obslytics-data-exporter-workflow-secrets
+      secret:
+        secretName: obslytics-data-exporter-workflow-secrets

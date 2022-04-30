@@ -1,0 +1,219 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: obslytics-data-exporter-recovery-triggers
+  labels:
+    owner: obslytics-remote-reader
+    app: obslytics-data-exporter
+    pipeline: obslytics-data-exporter-recovery
+spec:
+  podGC:
+    strategy: OnWorkflowSuccess
+  templates:
+    - name: trigger-recovery-workflow
+      steps:
+        - - name: normalize-timestamps
+            arguments:
+              parameters:
+                - name: backfill_from_timestamp
+                  value: "{{workflow.parameters.start_timestamp}}"
+                - name: backfill_min_ts
+                  value: 2019-05-30T23:59:59Z  # TODO: figure out a way to determine this dynamically
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: normalize-timestamps
+        - - name: recover-all-metrics
+            template: recover-metrics-backfill
+            arguments:
+              parameters:
+                - name: backfill_from_timestamp
+                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
+            continueOn:
+              failed: true
+        - - name: get-all-partitioned-tables
+            continueOn:
+              failed: true
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: extract-partitioned-table-names
+        - - name: partition-updater
+            arguments:
+              parameters:
+                - name: table_defs
+                  value: "{{item}}"
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: update-partition-metadata
+            withParam: "{{steps.get-all-partitioned-tables.outputs.parameters.tables_list}}"
+
+    - name: recover-metrics
+      parallelism: 20
+      inputs:
+        parameters:
+          - name: backfill_from_timestamp
+      steps:
+        - - name: run-backfill-workflow-largemetrics
+            arguments:
+              parameters:
+                - name: backfill_count
+                  value: '4'
+                - name: backfill_from_timestamp
+                  value: "{{inputs.parameters.backfill_from_timestamp}}"
+                - name: step
+                  value: '1800'
+                - name: metric
+                  value: "{{item}}"
+                - name: delay
+                  value: '43200'
+                - name: resolution
+                  value: 5m
+                - name: backfill_min_ts
+                  value: "{{workflow.parameters.recover_to}}"
+                - name: worker_size
+                  value: "large"
+            templateRef:
+              name: obslytics-data-exporter-workflow-template
+              template: backfill-metric
+            withItems:
+              - process_cpu_seconds_total
+              - process_max_fds
+              - process_open_fds
+              - process_resident_memory_bytes
+              - process_start_time_seconds
+              - process_virtual_memory_bytes
+              - python_gc_objects_uncollectable_total
+              - python_info
+              - python_gc_collections_total
+              - python_gc_objects_collected_total
+              - scrape_series_added
+              - name_reason:cluster_operator_unavailable:count
+              - cnv:vmi_status_running:count
+              - name_reason:cluster_operator_degraded:count
+              - csv_abnormal
+              - cluster:usage:pods:terminal:workload:sum
+              - id_version:cluster_available
+              - cluster:telemetry_selected_series:count
+              - cluster:apiserver_current_inflight_requests:sum:max_over_time:2m
+              - che_workspace_started_total
+              - che_workspace_start_time_seconds_count
+              - che_workspace_start_time_seconds_sum
+              - che_workspace_failure_total
+              - che_workspace_status
+              - id_code:apiserver_request_error_rate_sum:max
+              - cco_credentials_mode
+              - cluster_master_schedulable
+              - cluster:kube_persistentvolumeclaim_resource_requests_storage_bytes:provisioner:sum
+              - id_primary_host_type
+              - cluster:kubelet_volume_stats_used_bytes:provisioner:sum
+              - openshift:prometheus_tsdb_head_samples_appended_total:sum
+              - monitoring:haproxy_server_http_responses_total:sum
+              - openshift:prometheus_tsdb_head_series:sum
+              - cluster:usage:openshift:ingress:request_error:fraction5m
+              - cluster:usage:openshift:ingress:request_total:irate5m
+              - cluster:usage:workload:ingress:request_error:fraction5m
+              - cluster:usage:workload:ingress:request_total:irate5m
+              - rhmi_status
+              - id_cloudpak_type
+              - cluster:vsphere_vcenter_info:sum
+              - cluster:vsphere_esxi_version_total:sum
+              - cluster:vsphere_node_hw_version_total:sum
+              - cluster:kube_persistentvolume_plugin_type_counts:sum
+              - cluster:usage:openshift:ingress_request_error:fraction5m
+              - cluster:usage:workload:kube_running_pod_ready:avg
+              - cluster:usage:workload:ingress_request_error:fraction5m
+              - cluster:usage:kube_node_ready:avg5m
+              - cluster:usage:kube_schedulable_node_ready_reachable:avg5m
+              - cluster:usage:ingress_frontend_connections:sum
+              - cluster:usage:openshift:kube_running_pod_ready:avg
+              - cluster:usage:openshift:ingress_request_total:irate5m
+              - cluster:usage:ingress_frontend_bytes_in:rate5m:sum
+              - cluster:usage:ingress_frontend_bytes_out:rate5m:sum
+              - kube_pod_status_ready:etcd:sum
+              - scrape_samples_post_metric_relabeling
+              - scrape_samples_scraped
+              - scrape_duration_seconds
+              - kube_pod_status_ready:image_registry:sum
+              - etcd_object_counts
+              - cluster_version_available_updates
+              - code:apiserver_request_count:rate:sum
+              - openshift:memory_usage_bytes:sum
+              - openshift:cpu_usage_cores:sum
+              # - cluster:usage:containers:sum
+              # - cluster:usage:workload:capacity_physical_cpu_cores:max:5m
+              # - cluster:usage:workload:capacity_physical_cpu_cores:min:5m
+              # - cluster:usage:workload:capacity_physical_cpu_core_seconds
+              # - cluster_legacy_scheduler_policy
+              # - olm_resolution_duration_seconds
+              # - monitoring:container_memory_working_set_bytes:sum
+              # - cluster:usage:workload:ingress_request_total:irate5m
+              # - cluster:memory_usage_bytes:sum
+              # - cluster_version_payload
+              - ceph_cluster_total_bytes
+              - ceph_cluster_total_used_raw_bytes
+              - cluster_infrastructure_provider
+              - cluster_installer
+              - cluster_version
+              - cluster:capacity_cpu_cores:sum
+              - cluster:capacity_memory_bytes:sum
+              - cluster:node_instance_type_count:sum
+              - id_version_ebs_account_internal:cluster_subscribed
+              - instance:etcd_object_counts:sum
+              - node_role_os_version_machine:cpu_capacity_cores:sum
+              - subscription_sync_total
+              - workload:cpu_usage_cores:sum
+              - workload:memory_usage_bytes:sum
+              - subscription_labels
+              - ebs_account_account_type_email_domain_internal
+              - visual_web_terminal_sessions_total
+              - acm_managed_cluster_info
+              - cluster:usage:consumption:rhods:cpu:seconds:rate5m
+              - csv_succeeded
+              - rhods_total_users
+              - rhods_aggregate_availability
+              - id_version
+              - id_install_type
+              - id_provider
+              - cam_app_workload_migrations
+              - cluster:vmi_request_cpu_cores:sum
+              - kafka_id:strimzi_resource_state:max_over_time1h
+              - kafka_id:kafka_broker_quota_totalstorageusedbytes:max_over_time1h_gibibytes
+              - kafka_id:haproxy_server_bytes_in_out_total:rate1h_gibibytes
+              - kafka_id:haproxy_server_bytes_out_total:rate1h_gibibytes
+              - kafka_id:haproxy_server_bytes_in_total:rate1h_gibibytes
+              - acm_top500_mcs:acm_managed_cluster_info
+              - cluster:alertmanager_integrations:max
+              - avalanche_metric_mmmmm_0_0
+              - openshift:build_by_strategy:sum
+              - instance:etcd_network_peer_round_trip_time_seconds:histogram_quantile
+              - instance:etcd_mvcc_db_total_size_in_bytes:sum
+              - namespace_job:scrape_samples_post_metric_relabeling:topk3
+              - id_network_type
+              - instance:etcd_mvcc_db_total_size_in_use_in_bytes:sum
+              - namespace_job:scrape_series_added:topk3_sum1h
+              - instance:etcd_disk_backend_commit_duration_seconds:histogram_quantile
+              - instance:etcd_disk_wal_fsync_duration_seconds:histogram_quantile
+              - job:noobaa_total_unhealthy_buckets:sum
+              - job:noobaa_total_object_count:sum
+              - job:noobaa_bucket_count:sum
+              - job:ceph_versions_running:count
+              - job:ceph_osd_metadata:count
+              - job:kube_pv:count
+              - noobaa_total_usage
+              - noobaa_accounts_num
+              - ceph_health_status
+              - job:ceph_pools_iops:total
+              - job:ceph_pools_iops_bytes:total
+              - node_uname_info
+              - cluster_feature_set
+              - cluster:virt_platform_nodes:sum
+              - node_role_os_version_machine:cpu_capacity_sockets:sum
+              - cluster:network_attachment_definition_enabled_instance_up:max
+              - cluster:network_attachment_definition_instances:max
+              - console_url
+              # - count:up0
+              # - insightsclient_request_send_total
+              # - code:apiserver_request_total:rate:sum
+              # - cluster_operator_up
+              # - cluster:cpu_usage_cores:sum
+              # - cluster_operator_conditions
+              # - up
