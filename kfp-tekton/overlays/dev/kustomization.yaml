@@ -5,3 +5,11 @@ namespace: dh-dev-kfp-tekton
 
 resources:
   - ../../base
+  - ./secrets/mlpipeline-minio-artifact.yaml
+  - ./deployments/minio.yaml
+  - ./persistentvolumeclaims/minio-pvc.yaml
+  - ./services/minio-service.yaml
+
+patchesStrategicMerge:
+  - ./configmaps/kfp-tekton-config.yaml
+  - ./deployments/ml-pipeline-ui.yaml
