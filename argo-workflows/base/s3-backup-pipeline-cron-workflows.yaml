@@ -28,7 +28,7 @@ spec:
         - name: alerts_smtp_server
           value: smtp.corp.redhat.com
         - name: argo_ui_host
-          value: 'http://argo-ui-route-dh-prod-argo.cloud.datahub.psi.redhat.com/'
+          value: 'http://argo-server-dh-prod-argo.apps.datahub-ocp4.prod.psi.redhat.com/'
     ttlSecondsAfterFinished: 86400
     entrypoint: start-backup-job
     onExit: exit-handler
