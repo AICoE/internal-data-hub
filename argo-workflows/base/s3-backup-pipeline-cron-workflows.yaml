@@ -104,7 +104,7 @@ spec:
             - name: dest_bucket
             - name: rclone_params
         script:
-          image: rclone/rclone:latest
+          image: quay.io/internaldatahub/rclone:latest
           command: [/bin/sh, -e]
           source: |
             set -x
