@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: "s3-backup-util-workflow-manual-"
+  labels:
+    owner: "s3-backup-util"
+    app: "s3-backup-util"
+    pipeline: "backup-pipeline"
+spec:
+  entrypoint: start-backup-job
+  arguments:
+    # You can override these in manual submittions via `argo submit parameterized_trigger.yaml -p param=value`
+    parameters:
+      - name: src_profile
+        value: policy-dev  # Or whatever policy name you have defined in your -vars.yaml file, that has access to the source bucket
+      - name: src_bucket
+        value: DH-SOME-SOURCE-BUCKET
+      - name: dest_profile
+        value: local  # Or whatever policy name you have defined in your -vars.yaml file
+      - name: dest_bucket
+        value: DH-SOME-DESTINATION-BUCKET
+      - name: rclone_params
+        value: ""
+        # value: "--s3-storage-class=GLACIER"  # if storing as a glacier class object
+  templates:
+    - name: start-backup-job
+      inputs:
+        parameters:
+          - name: src_profile
+          - name: src_bucket
+          - name: dest_profile
+          - name: dest_bucket
+          - name: rclone_params
+      steps:
+        - - name: run
+            arguments:
+              parameters:
+                - name: src_profile
+                  value: "{{workflow.parameters.src_profile}}"
+                - name: src_bucket
+                  value: "{{workflow.parameters.src_bucket}}"
+                - name: dest_profile
+                  value: "{{workflow.parameters.dest_profile}}"
+                - name: dest_bucket
+                  value: "{{workflow.parameters.dest_bucket}}"
+                - name: rclone_params
+                  value: "{{workflow.parameters.rclone_params}}"
+            templateRef:
+              name: "s3-backup-util-workflow-template"
+              template: backup-worker
+              #template: backup-entrypoint
+  volumes:
+    - name: "s3-backup-util-secrets"
+      secret:
+        secretname: "s3-backup-util-secrets"
