@@ -5,14 +5,3 @@ namespace: "dh-prod-argo"
 
 resources:
   - ../../base/
-
-generators:
-  - secrets/secret-generator.yaml
-
-patchesJson6902:
-  - path: s3-backup-pipeline-cron-workflows.yaml
-    target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: CronWorkflow
-      name: s3-backup-pipeline-cron-workflows

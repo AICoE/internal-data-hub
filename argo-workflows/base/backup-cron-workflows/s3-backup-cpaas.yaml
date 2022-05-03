@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: s3-backup-cpaas
+  name: s3-backup-cpaas
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: "Replace"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: sync_config
+          value: datahub-s3-backup
+        - name: src_bucket
+          value: DH-SECURE-CPAAS
+        - name: dest_bucket
+          value: dh-secure-cpaas
+    workflowTemplateRef:
+      name: s3-backup

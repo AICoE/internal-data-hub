@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: s3-backup-testing
+  name: s3-backup-testing
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: "Replace"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: sync_config
+          value: datahub-s3-backup
+        - name: src_bucket
+          value: DH-SECURE-S3-BACKUP-UTIL-TESTING
+        - name: dest_bucket
+          value: dh-secure-s3-backup-util-testing
+    workflowTemplateRef:
+      name: s3-backup
