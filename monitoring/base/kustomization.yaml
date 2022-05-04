@@ -13,3 +13,5 @@ resources:
   - trino-blackbox-service-monitor.yaml
   - superset-blackbox-service-monitor.yaml
   - jupyterhub-blackbox-service-monitor.yaml
+  - cvp-s3-webserver-blackbox-service-monitor.yaml
+  - telemeter-lts-dashboards-blackbox-service-monitor.yaml
