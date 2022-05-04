@@ -14,7 +14,7 @@ spec:
         - name: alert-from-email
         - name: alert-to-email-list
       container:
-        image: "tools:latest"
+        image: "quay.io/internaldatahub/argo-tools:latest"
         command: [python]
         env:
           - name: WORKFLOW_FAILURES
