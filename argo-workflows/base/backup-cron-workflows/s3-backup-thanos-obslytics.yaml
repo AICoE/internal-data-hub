@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  generateName: s3-backup-thanos-obslytics
+  generateName: s3-backup-thanos-obslytics-
   name: s3-backup-thanos-obslytics
 spec:
   schedule: "0 0 * * *"

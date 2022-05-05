@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  generateName: s3-backup-marketplace-metering
+  generateName: s3-backup-marketplace-metering-
   name: s3-backup-marketplace-metering
 spec:
   schedule: "0 0 * * *"
