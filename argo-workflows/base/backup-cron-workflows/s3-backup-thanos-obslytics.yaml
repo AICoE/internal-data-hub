@@ -15,5 +15,7 @@ spec:
           value: DH-SECURE-THANOS-OBSLYTICS
         - name: dest_bucket
           value: dh-secure-thanos-obslytics
+        - name: rclone_params
+          value: '--s3-storage-class=GLACIER'
     workflowTemplateRef:
       name: s3-backup

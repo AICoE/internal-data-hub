@@ -15,5 +15,7 @@ spec:
           value: DH-SECURE-MARKETPLACE-METERING
         - name: dest_bucket
           value: dh-secure-marketplace-metering
+        - name: rclone_params
+          value: '--s3-storage-class=GLACIER'
     workflowTemplateRef:
       name: s3-backup

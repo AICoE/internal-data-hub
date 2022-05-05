@@ -15,5 +15,7 @@ spec:
           value: DH-SECURE-S3-BACKUP-UTIL-TESTING
         - name: dest_bucket
           value: dh-secure-s3-backup-util-testing
+        - name: rclone_params
+          value: '--s3-storage-class=GLACIER'
     workflowTemplateRef:
       name: s3-backup

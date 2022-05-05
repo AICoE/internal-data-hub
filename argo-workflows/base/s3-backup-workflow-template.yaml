@@ -9,7 +9,7 @@ spec:
       - name: src_bucket
       - name: dest_bucket
       - name: rclone_params
-        value: '--s3-storage-class=GLACIER'
+        value: ''
       - name: alerts_to
         value: data-hub-alerts@redhat.com
       - name: alerts_from
