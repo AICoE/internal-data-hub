@@ -5,3 +5,4 @@ namespace: "dh-prod-argo"
 
 resources:
   - ../../base/
+  - ./backup-cron-workflows
