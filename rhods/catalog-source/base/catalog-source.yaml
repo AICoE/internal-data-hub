@@ -4,7 +4,7 @@ metadata:
   name: addon-managed-odh-catalog
 spec:
   displayName: Managed Open Data Hub Operator
-  image: quay.io/modh/qe-catalog-source:v1100-6
+  image: quay.io/modh/qe-catalog-source:v1100-12
   publisher: OSD Red Hat Addons
   sourceType: grpc
   secrets:
