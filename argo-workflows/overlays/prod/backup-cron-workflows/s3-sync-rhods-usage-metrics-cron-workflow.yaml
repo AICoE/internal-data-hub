@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  generateName: s3-backup-thanos-obslytics-
-  name: s3-backup-thanos-obslytics
+  generateName: s3-sync-rhods-usage-metrics-
+  name: s3-sync-rhods-usage-metrics
 spec:
   schedule: "0 H * * *"
   concurrencyPolicy: "Replace"
@@ -10,12 +10,10 @@ spec:
     arguments:
       parameters:
         - name: sync_config
-          value: datahub-s3-backup
+          value: rhods-usage-metrics-sync
         - name: src_bucket
-          value: DH-SECURE-THANOS-OBSLYTICS
+          value: rhods-external-usage-metrics
         - name: dest_bucket
-          value: dh-secure-thanos-obslytics
-        - name: rclone_params
-          value: '--s3-storage-class=GLACIER'
+          value: DH-SECURE-RHODS-USAGE-METRICS
     workflowTemplateRef:
       name: s3-backup

@@ -5,3 +5,7 @@ resources:
   - s3-backup-thanos-obslytics.yaml
   - s3-backup-cpaas.yaml
   - s3-backup-marketplace-metering.yaml
+  - s3-sync-tower-analytics-cron-workflow.yaml
+  - s3-sync-tower-analytics-stage-cron-workflow.yaml
+  - s3-sync-rhods-usage-metrics-cron-workflow.yaml
+  - s3-sync-rhods-usage-metrics-dev-cron-workflow.yaml

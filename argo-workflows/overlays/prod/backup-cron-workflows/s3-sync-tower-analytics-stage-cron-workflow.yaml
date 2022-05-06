@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  generateName: s3-backup-thanos-obslytics-
-  name: s3-backup-thanos-obslytics
+  generateName: s3-sync-tower-analytics-stage-
+  name: s3-sync-tower-analytics-stage
 spec:
   schedule: "0 H * * *"
   concurrencyPolicy: "Replace"
@@ -10,12 +10,10 @@ spec:
     arguments:
       parameters:
         - name: sync_config
-          value: datahub-s3-backup
+          value: tower-analytics-stage-sync
         - name: src_bucket
-          value: DH-SECURE-THANOS-OBSLYTICS
+          value: tower-analytics-dbdumps-stage-s3
         - name: dest_bucket
-          value: dh-secure-thanos-obslytics
-        - name: rclone_params
-          value: '--s3-storage-class=GLACIER'
+          value: DH-DEV-TOWER-ANALYTICS
     workflowTemplateRef:
       name: s3-backup

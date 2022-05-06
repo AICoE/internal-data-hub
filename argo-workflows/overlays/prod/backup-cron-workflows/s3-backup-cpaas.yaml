@@ -4,7 +4,7 @@ metadata:
   generateName: s3-backup-cpaas-
   name: s3-backup-cpaas
 spec:
-  schedule: "0 0 * * *"
+  schedule: "0 H * * *"
   concurrencyPolicy: "Replace"
   workflowSpec:
     arguments:
