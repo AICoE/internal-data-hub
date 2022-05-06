@@ -4,7 +4,7 @@ metadata:
   generateName: s3-sync-tower-analytics-stage-
   name: s3-sync-tower-analytics-stage
 spec:
-  schedule: "0 0 * * *"
+  schedule: "0 H * * *"
   concurrencyPolicy: "Replace"
   workflowSpec:
     arguments:
