@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: s3-sync-floorist-
+  name: s3-sync-floorist
+spec:
+  schedule: "0 H * * *"
+  concurrencyPolicy: "Replace"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: sync_config
+          value: floorist-sync
+        - name: src_bucket
+          value: insights-metrics-export-prod
+        - name: dest_bucket
+          value: DH-PROD-RH-INSIGHTS-DATA-EXPORT
+        - name: alerts_to
+          value: insights-compliance@redhat.com
+    workflowTemplateRef:
+      name: s3-backup
