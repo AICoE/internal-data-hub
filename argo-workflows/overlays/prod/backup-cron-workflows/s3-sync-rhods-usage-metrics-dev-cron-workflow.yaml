@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: s3-sync-rhods-usage-metrics-dev-
+  name: s3-sync-rhods-usage-metrics-dev
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: "Replace"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: sync_config
+          value: rhods-usage-metrics-sync
+        - name: src_bucket
+          value: rhods-external-usage-metrics-dev
+        - name: dest_bucket
+          value: DH-SECURE-RHODS-USAGE-METRICS-DEV
+    workflowTemplateRef:
+      name: s3-backup
