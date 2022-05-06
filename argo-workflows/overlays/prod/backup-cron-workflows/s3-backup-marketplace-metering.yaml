@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: s3-backup-marketplace-metering-
+  name: s3-backup-marketplace-metering
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: "Replace"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: sync_config
+          value: datahub-s3-backup
+        - name: src_bucket
+          value: DH-SECURE-MARKETPLACE-METERING
+        - name: dest_bucket
+          value: dh-secure-marketplace-metering
+        - name: rclone_params
+          value: '--s3-storage-class=GLACIER'
+    workflowTemplateRef:
+      name: s3-backup

@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: s3-backup-thanos-obslytics-
+  name: s3-backup-thanos-obslytics
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: "Replace"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: sync_config
+          value: datahub-s3-backup
+        - name: src_bucket
+          value: DH-SECURE-THANOS-OBSLYTICS
+        - name: dest_bucket
+          value: dh-secure-thanos-obslytics
+        - name: rclone_params
+          value: '--s3-storage-class=GLACIER'
+    workflowTemplateRef:
+      name: s3-backup

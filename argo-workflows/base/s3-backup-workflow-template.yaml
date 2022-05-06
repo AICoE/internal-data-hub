@@ -1,0 +1,110 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: s3-backup
+spec:
+  arguments:
+    parameters:
+      - name: sync_config
+      - name: src_bucket
+      - name: dest_bucket
+      - name: rclone_params
+        value: ''
+      - name: alerts_to
+        value: data-hub-alerts@redhat.com
+      - name: alerts_from
+        value: s3-backup-alerts@redhat.com
+      - name: alerts_smtp_server
+        value: smtp.corp.redhat.com
+  entrypoint: backup-entrypoint
+  onExit: exit-handler
+  templates:
+    - name: backup-entrypoint
+      parallelism: 1
+      inputs:
+        parameters:
+          - name: src_bucket
+          - name: dest_bucket
+          - name: rclone_params
+      steps:
+        - - name: trigger-backup
+            template: backup-worker
+            arguments:
+              parameters:
+                - name: src_bucket
+                  value: "{{workflow.parameters.src_bucket}}"
+                - name: dest_bucket
+                  value: "{{workflow.parameters.dest_bucket}}"
+                - name: rclone_params
+                  value: "{{workflow.parameters.rclone_params}}"
+
+    - name: backup-worker
+      activeDeadlineSeconds: 18000
+      inputs:
+        parameters:
+          - name: src_bucket
+          - name: dest_bucket
+          - name: rclone_params
+      script:
+        image: quay.io/internaldatahub/rclone:latest
+        command: [/bin/sh, -e]
+        source: |
+          set -x
+          src_bucket="source:{{inputs.parameters.src_bucket}}"
+          dest_bucket="destination:{{inputs.parameters.dest_bucket}}"
+          extra_params="{{inputs.parameters.rclone_params}}"
+          echo "Creating Bucket $dest_bucket if it doesnt exit yet..."
+          rclone --config /etc/s3-backup-util/rclone.conf mkdir --verbose ${dest_bucket}
+          echo "RClone Copying from $src_bucket to $dest_bucket..."
+          rclone --config /etc/s3-backup-util/rclone.conf copy --verbose ${extra_params} ${src_bucket} ${dest_bucket}
+          echo "Rclone complete."
+        resources:
+          limits:
+            memory: 2Gi
+        volumeMounts:
+          - name: "sync-config"
+            mountPath: /etc/s3-backup-util
+
+    - name: exit-handler
+      steps:
+        - - name: failure-handler
+            template: failure-handler
+            when: "{{workflow.status}} != Succeeded"
+
+    - name: failure-handler
+      steps:
+        - - name: get-host
+            template: get-host
+        - - name: notify
+            templateRef:
+              name: alert-tamplate
+              template: notify-template
+            arguments:
+              parameters:
+                - name: argo-ui-host
+                  value: "{{steps.get-host.outputs.parameters.host}}"
+                - name: alert-email-smtp-server
+                  value: "{{workflow.parameters.alerts_smtp_server}}"
+                - name: alert-from-email
+                  value: "{{workflow.parameters.alerts_from}}"
+                - name: alert-to-email-list
+                  value: "{{workflow.parameters.alerts_to}}"
+
+    - name: get-host
+      outputs:
+        parameters:
+          - name: host
+            valueFrom:
+              jsonPath: "{.spec.host}"
+      resource:
+        action: get
+        manifest: |
+          apiVersion: route.openshift.io/v1
+          kind: Route
+          metadata:
+            name: argo-server
+
+  volumes:
+    - name: sync-config
+      secret:
+        secretName: "{{workflow.parameters.sync_config}}"
