@@ -4,7 +4,7 @@ metadata:
   generateName: s3-backup-marketplace-metering-
   name: s3-backup-marketplace-metering
 spec:
-  schedule: "0 H * * *"
+  schedule: "0 1 * * *"
   concurrencyPolicy: "Replace"
   workflowSpec:
     arguments:

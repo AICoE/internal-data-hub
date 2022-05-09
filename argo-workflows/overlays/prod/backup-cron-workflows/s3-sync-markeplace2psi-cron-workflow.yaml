@@ -4,7 +4,7 @@ metadata:
   generateName: s3-sync-marketplace2psi-
   name: s3-sync-marketplace2psi
 spec:
-  schedule: "0 H * * *"
+  schedule: "0 0 * * *"
   concurrencyPolicy: "Replace"
   workflowSpec:
     arguments:
