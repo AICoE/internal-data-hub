@@ -4,7 +4,7 @@ metadata:
   generateName: s3-sync-floorist-
   name: s3-sync-floorist
 spec:
-  schedule: "0 H * * *"
+  schedule: "0 4 * * *"
   concurrencyPolicy: "Replace"
   workflowSpec:
     arguments:

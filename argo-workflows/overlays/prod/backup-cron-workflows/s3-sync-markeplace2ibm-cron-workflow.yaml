@@ -4,7 +4,7 @@ metadata:
   generateName: s3-sync-marketplace2ibm-
   name: s3-sync-marketplace2ibm
 spec:
-  schedule: "0 H * * *"
+  schedule: "0 0 * * *"
   concurrencyPolicy: "Replace"
   workflowSpec:
     arguments:

@@ -4,7 +4,7 @@ metadata:
   generateName: s3-backup-thanos-obslytics-
   name: s3-backup-thanos-obslytics
 spec:
-  schedule: "0 H * * *"
+  schedule: "0 2 * * *"
   concurrencyPolicy: "Replace"
   workflowSpec:
     arguments:
