@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: s3-sync-marketplace2psi-
+  name: s3-sync-marketplace2psi
+spec:
+  schedule: "0 H * * *"
+  concurrencyPolicy: "Replace"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: sync_config
+          value: marketplace2psi-sync
+        - name: src_bucket
+          value: open-marketplace-prod
+        - name: dest_bucket
+          value: DH-SECURE-MARKETPLACE-METERING/production_data
+        - name: alerts_to
+          value: data-hub-alerts@redhat.com
+    workflowTemplateRef:
+      name: s3-backup

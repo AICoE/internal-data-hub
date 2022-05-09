@@ -11,3 +11,5 @@ resources:
   - s3-sync-rhods-usage-metrics-dev-cron-workflow.yaml
   - s3-sync-floorist-cron-workflow.yaml
   - s3-sync-cost-management-cron-workflow.yaml
+  - s3-sync-markeplace2psi-cron-workflow.yaml
+  - s3-sync-markeplace2ibm-cron-workflow.yaml
