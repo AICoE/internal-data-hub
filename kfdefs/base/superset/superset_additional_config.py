@@ -35,7 +35,10 @@ AUTH_ROLES_MAPPING = {
           'ccx-pm': ['CCX Sensitive', 'CCX'],
           'ccx-datalake-access': ['CCX'],
           'ccx-sensitive-datalake-access': ['CCX', 'CCX Sensitive'],
-          'assisted-lakers': ['CCX', 'CCX Sensitive'] # Note that, as agreed upon by the CCX team, Rom Freiman and Liat Gamliel are responsible for maintaining membership of this group.
+          'assisted-lakers': ['CCX', 'CCX Sensitive'], # Note that, as agreed upon by the CCX team, Rom Freiman and Liat Gamliel are responsible for maintaining membership of this group.
+          'cide-insights': ['CIDE', 'CIDE Digests', 'CIDE Warehouse'],
+          'cide-digests-dashboard-access': ['CIDE Digests'],
+          'cide-warehouse-dashboard-access': ['CIDE Warehouse']
         }
 
 
