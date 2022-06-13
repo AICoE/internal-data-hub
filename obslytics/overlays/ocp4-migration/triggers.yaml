@@ -357,7 +357,7 @@
 
 - op: replace
   path: /spec/templates/3/parallelism
-  value: 5
+  value: 10
 
 - op: replace
   path: /spec/templates/1/steps/0/0/arguments/parameters/0/value
@@ -369,8 +369,4 @@
 
 - op: replace
   path: /spec/templates/3/steps/0/0/arguments/parameters/0/value
-  value: '20'
-
-# No active xl metrics so remove this step
-- op: remove
-  path: /spec/templates/0/steps/3
+  value: '5'
