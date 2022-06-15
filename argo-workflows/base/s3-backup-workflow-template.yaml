@@ -39,7 +39,7 @@ spec:
                   value: "{{workflow.parameters.rclone_params}}"
 
     - name: backup-worker
-      activeDeadlineSeconds: 18000
+      activeDeadlineSeconds: 36000
       inputs:
         parameters:
           - name: src_bucket

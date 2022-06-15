@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  generateName: s3-sync-usir-prod-
+  name: s3-sync-usir-prod
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: "Replace"
+  workflowSpec:
+    arguments:
+      parameters:
+        - name: sync_config
+          value: usir-prod-sync
+        - name: src_bucket
+          value: rhsm-subscriptions-egress-prod
+        - name: dest_bucket
+          value: DH-SECURE-USIR
+    workflowTemplateRef:
+      name: s3-backup
