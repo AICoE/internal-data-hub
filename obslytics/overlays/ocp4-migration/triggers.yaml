@@ -186,8 +186,6 @@
     - backfill_to: 2019-09-01T00:00:00Z
       name: node_role_os_version_machine:cpu_capacity_cores:sum
     - backfill_to: 2019-08-01T00:00:00Z
-      name: subscription_sync_total
-    - backfill_to: 2019-08-01T00:00:00Z
       name: workload:cpu_usage_cores:sum
     - backfill_to: 2019-08-01T00:00:00Z
       name: workload:memory_usage_bytes:sum
@@ -308,6 +306,8 @@
       name: cluster_operator_up
     - backfill_to: 2019-06-01T00:00:00Z
       name: cluster:cpu_usage_cores:sum
+    - backfill_to: 2019-08-01T00:00:00Z
+      name: subscription_sync_total
 
     # TODO: add the following metrics to this list (currently timeout or OOMKill)
     # - backfill_to: 2019-06-01T00:00:00Z
