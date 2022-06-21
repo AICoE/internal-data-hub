@@ -85,3 +85,19 @@ patchesJson6902:
       kind: ConfigMap
       name: trino-config
       version: v1
+  - patch: |
+      - op: replace
+        path: /data/hive_metastore_memory_request
+        value: '1Gi'
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
+  - patch: |
+      - op: replace
+        path: /data/hive_metastore_memory_limit
+        value: '2Gi'
+    target:
+      kind: ConfigMap
+      name: trino-config
+      version: v1
