@@ -294,26 +294,29 @@
 - op: replace
   path: /spec/templates/3/steps/0/0/withItems
   value:
-    - backfill_to: 2020-08-01T00:00:00Z
-      name: olm_resolution_duration_seconds
     - backfill_to: 2020-02-01T00:00:00Z
       name: count:up0
     - backfill_to: 2020-04-01T00:00:00Z
       name: insightsclient_request_send_total
-    - backfill_to: 2020-07-01T00:00:00Z
-      name: code:apiserver_request_total:rate:sum
-    - backfill_to: 2019-06-01T00:00:00Z
-      name: cluster_operator_up
     - backfill_to: 2019-06-01T00:00:00Z
       name: cluster:cpu_usage_cores:sum
     - backfill_to: 2019-08-01T00:00:00Z
       name: subscription_sync_total
 
     # TODO: add the following metrics to this list (currently timeout or OOMKill)
+    # TODO: even with very large pods these are still failing, so these are blocked
     # - backfill_to: 2019-06-01T00:00:00Z
     #   name: cluster_operator_conditions
     # - backfill_to: 2019-06-01T00:00:00Z
     #   name: up
+    # - backfill_to: 2019-06-01T00:00:00Z
+    #   name: alerts
+    # - backfill_to: 2019-06-01T00:00:00Z
+    #   name: cluster_operator_up
+    # - backfill_to: 2020-07-01T00:00:00Z
+    #   name: code:apiserver_request_total:rate:sum
+    # - backfill_to: 2020-08-01T00:00:00Z
+    #   name: olm_resolution_duration_seconds
 
 - op: replace
   path: /spec/templates/4/steps/0/0/withItems
