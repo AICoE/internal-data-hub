@@ -1,0 +1,13 @@
+apiVersion: pcjun97/v1
+kind: HashAnnotator
+metadata:
+  name: trino-coordinator-hash-annotator
+targets:
+  - kind: Deployment
+    name: trino-coordinator
+resources:
+  - kind: Secret
+    name: trino-config
+fieldSpecs:
+  - path: spec/template/metadata/annotations
+    create: true

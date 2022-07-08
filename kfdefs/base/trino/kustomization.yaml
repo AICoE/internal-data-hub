@@ -19,6 +19,9 @@ resources:
 generators:
 - ./secret-generator.yaml
 
+transformers:
+  - trino-coordinator-hash-annotator.yaml
+
 images:
   - name: quay.io/opendatahub/trino:361
     newName: quay.io/opendatahub/trino
