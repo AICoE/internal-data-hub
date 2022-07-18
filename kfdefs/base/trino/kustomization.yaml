@@ -8,7 +8,6 @@ bases:
 
 patchesStrategicMerge:
   - hive-config.yaml
-  - trino-config-secret.yaml
   - trino-coordinator-dc.yaml
   - trino-service.yaml
   - trino-worker-dc.yaml
