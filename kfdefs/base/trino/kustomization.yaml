@@ -23,3 +23,12 @@ images:
   - name: quay.io/opendatahub/trino:361
     newName: quay.io/opendatahub/trino
     newTag: '371'
+
+generatorOptions:
+  disableNameSuffixHash: true
+secretGenerator:
+  - name: trino-acls
+    files:
+      - trino-group-mapping.properties
+      - trino-acl-rules.json
+      - trino-service-accounts-passwords.db

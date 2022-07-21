@@ -56,6 +56,8 @@ spec:
                 path: group-provider.properties
               - key: group-mapping.properties
                 path: group-mapping.properties
+        - name: trino-acls-volume
+          secretName: trino-acls
         - name: trino-catalogs-volume
           secret:
             secretName: trino-catalog
@@ -132,3 +134,5 @@ spec:
               mountPath: /etc/trino/jvm-config
             - name: trino-telemetry-sa-token
               mountPath: /etc/trino/telemetry-sa-token
+            - name: trino-acls-volume
+              mountPath: /etc/trino-acls
