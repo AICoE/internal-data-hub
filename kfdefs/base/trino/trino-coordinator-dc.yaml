@@ -57,7 +57,8 @@ spec:
               - key: group-mapping.properties
                 path: group-mapping.properties
         - name: trino-acls-volume
-          secretName: trino-acls
+          secret:
+            secretName: trino-acls
         - name: trino-catalogs-volume
           secret:
             secretName: trino-catalog
