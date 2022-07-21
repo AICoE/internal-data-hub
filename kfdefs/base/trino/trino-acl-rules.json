@@ -1,0 +1,186 @@
+{
+    "impersonation": [
+    {
+        "original_user": "superset",
+        "new_user": ".*"
+    }
+    ],
+    "catalogs": [
+    {
+        "group": "data-hub-admins",
+        "allow": "all"
+    },
+    {
+        "user": "ccx-admin",
+        "allow": "all"
+    },
+    {
+        "allow": "read-only"
+    }
+    ],
+    "schemas": [
+    {
+        "group": "data-hub-admins",
+        "owner": true
+    },
+    {
+        "group": "eda",
+        "owner": true
+    },
+    {
+        "group": "ccx|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
+        "schema": "telemetry",
+        "owner": true
+    },
+    {
+        "user": "ccx-admin",
+        "schema": "(ccx|ccx_sensitive|ccx_srep)",
+        "owner": true
+    },
+    {
+        "group": "ccx-srep-data-access",
+        "schema": "ccx_srep",
+        "owner": true
+    },
+    {
+        "group": "cost-management",
+        "schema": "costmgmt",
+        "owner": true
+    },
+    {
+        "group": "ccx|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|usir|telemetry|cost-management",
+        "schema": "jdbc",
+        "owner": true
+    },
+    {
+        "group": "usir",
+        "schema": "usir",
+        "owner": true
+    },
+    {
+        "group": "insights-admins",
+        "schema": "insightsdig",
+        "owner": true
+    },
+    {
+        "group": "insights-admins",
+        "schema": "insightswh",
+        "owner": true
+    },
+    {
+        "group": "rhods",
+        "schema": "dhcuratedhive",
+        "owner": true
+    },
+    {
+        "group": "rhel-insights-admins",
+        "schema": "insights_(accounts|rules|systems)_analytics",
+        "owner": true
+    },
+    {
+        "owner": false
+    }
+    ],
+    "tables": [
+    {
+        "group": "data-hub-admins",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
+        "group": "eda",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "ccx|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
+        "schema": "telemetry",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "ccx|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
+        "schema": "telemetry_curated",
+        "privileges": ["SELECT"]
+    },
+    {
+        "schema": "jdbc",
+        "privileges": ["SELECT"]
+    },
+    {
+        "user": "ccx-admin",
+        "schema": "(ccx|ccx_sensitive|ccx_srep)",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
+        "user": "ccx-admin",
+        "schema": "telemetry",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "ccx|assisted-lakers|ccx-datalake-access",
+        "schema": "ccx",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "ccx|assisted-lakers|ccx-sensitive-datalake-access",
+        "schema": "ccx_sensitive",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "ccx-srep-data-access",
+        "schema": "ccx_srep",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "usir",
+        "schema": "usir",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "cost-management",
+        "schema": "costmgmt",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "rhods",
+        "schema": "dhcuratedhive",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "insights-admins",
+        "schema": "insightsdig",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
+        "group": "insights-admins",
+        "schema": "insightswh",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
+        "group": "insights-digests-viewers",
+        "schema": "insightsdig",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "insights-warehouse-viewers",
+        "schema": "insightswh",
+        "privileges": ["SELECT"]
+    },
+    {
+        "user": "superset-ray-parquet-compaction",
+        "schema": "parquetreads3",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "rhel-insights-admins",
+        "schema": "insights_(accounts|rules|systems)_analytics",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
+        "group": "rhel-insights-viewers",
+        "schema": "insights_(accounts|rules|systems)_analytics",
+        "privileges": ["SELECT"]
+    },
+    {
+        "privileges": []
+    }
+    ]
+}
