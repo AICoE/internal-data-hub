@@ -48,7 +48,6 @@
         "owner": true
     },
     {
-        "group": "ccx-dev|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|usir|telemetry|cost-management",
         "schema": "jdbc",
         "owner": true
     },
