@@ -3,6 +3,20 @@
 A repo housing deployment artifacts for components of the Internal
 Data Hub that are not managed by the ODH operator.
 
+## Updating Trino Group Membership
+
+We manage [Trino group membership](kfdefs/base/trino/trino-group-mapping.properties) by
+manually replicating LDAP group membership into the group membership file. To automate this
+process, we have a [Makefile](Makefile) that, when run, will sync all rover groups that
+we care about into the properties file.
+
+To update group membership, simply run the following command from the root of
+this repository:
+
+```bash
+make update-trino-groups
+```
+
 ## Development Instructions
 
 ### Running Pre-Commit Tests
