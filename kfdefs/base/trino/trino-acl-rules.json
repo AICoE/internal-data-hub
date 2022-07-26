@@ -78,6 +78,11 @@
         "owner": true
     },
     {
+        "group": "insights-admins",
+        "schema": "mg_attachment_data",
+        "owner": true
+    },
+    {
         "owner": false
     }
     ],
@@ -177,6 +182,16 @@
     {
         "group": "rhel-insights-viewers",
         "schema": "insights_(accounts|rules|systems)_analytics",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "insights-admins",
+        "schema": "mg_attachment_data",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
+        "group": "cide-must-gather-trino-access",
+        "schema": "mg_attachment_data",
         "privileges": ["SELECT"]
     },
     {
