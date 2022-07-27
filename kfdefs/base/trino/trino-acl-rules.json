@@ -28,7 +28,7 @@
         "owner": true
     },
     {
-        "group": "ccx-dev|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
+        "group": "(telemetry|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
         "schema": "telemetry",
         "owner": true
     },
@@ -48,7 +48,6 @@
         "owner": true
     },
     {
-        "group": "ccx-dev|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|usir|telemetry|cost-management",
         "schema": "jdbc",
         "owner": true
     },
@@ -96,12 +95,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "ccx-dev|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
+        "group": "(telemetry|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
         "schema": "telemetry",
         "privileges": ["SELECT"]
     },
     {
-        "group": "ccx-dev|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
+        "group": "(telemetry|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
         "schema": "telemetry_curated",
         "privileges": ["SELECT"]
     },

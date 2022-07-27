@@ -41,3 +41,6 @@ update-trino-groups: ## Update trino access groups from LDAP
 	@sed -i "s/^ccx-sensitive-datalake-access:.*$$/$(CCX_SENSITIVE)/" kfdefs/base/trino/trino-group-mapping.properties
 	@sed -i "s/^ccx-datalake-access:.*$$/$(CCX)/" kfdefs/base/trino/trino-group-mapping.properties
 	@sed -i "s/^ccx-srep-data-access:.*$$/$(CCX_SREP)/" kfdefs/base/trino/trino-group-mapping.properties
+	$(call updatemembers,telemeter-auth)
+	$(call updatemembers,telemeter-manual-approval)
+	$(call updatemembers,telemeter-auto-approval)
