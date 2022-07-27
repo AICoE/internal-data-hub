@@ -28,7 +28,7 @@
         "owner": true
     },
     {
-        "group": "ccx|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
+        "group": "ccx-dev|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
         "schema": "telemetry",
         "owner": true
     },
@@ -48,7 +48,7 @@
         "owner": true
     },
     {
-        "group": "ccx|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|usir|telemetry|cost-management",
+        "group": "ccx-dev|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|usir|telemetry|cost-management",
         "schema": "jdbc",
         "owner": true
     },
@@ -96,12 +96,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "ccx|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
+        "group": "ccx-dev|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
         "schema": "telemetry",
         "privileges": ["SELECT"]
     },
     {
-        "group": "ccx|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
+        "group": "ccx-dev|grokket|product-marketing|openshift|openshift-community-enablement|acm-observability|openshift-qe|ansible-engineering|openshift-analytics|telemetry|rhods-pxe",
         "schema": "telemetry_curated",
         "privileges": ["SELECT"]
     },
@@ -120,12 +120,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "ccx|assisted-lakers|ccx-datalake-access",
+        "group": "ccx-dev|assisted-lakers|ccx-datalake-access",
         "schema": "ccx",
         "privileges": ["SELECT"]
     },
     {
-        "group": "ccx|assisted-lakers|ccx-sensitive-datalake-access",
+        "group": "ccx-dev|assisted-lakers|ccx-sensitive-datalake-access",
         "schema": "ccx_sensitive",
         "privileges": ["SELECT"]
     },

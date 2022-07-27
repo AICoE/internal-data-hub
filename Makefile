@@ -37,6 +37,7 @@ CCX_SREP := $(shell \
 
 update-trino-groups: ## Update trino access groups from LDAP
 	$(call updatemembers,data-hub-openshift-admins)
+	$(call updatemembers,ccx-dev)
 	@sed -i "s/^ccx-sensitive-datalake-access:.*$$/$(CCX_SENSITIVE)/" kfdefs/base/trino/trino-group-mapping.properties
 	@sed -i "s/^ccx-datalake-access:.*$$/$(CCX)/" kfdefs/base/trino/trino-group-mapping.properties
 	@sed -i "s/^ccx-srep-data-access:.*$$/$(CCX_SREP)/" kfdefs/base/trino/trino-group-mapping.properties
