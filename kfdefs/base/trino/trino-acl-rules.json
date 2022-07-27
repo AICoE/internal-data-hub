@@ -129,6 +129,11 @@
         "privileges": ["SELECT"]
     },
     {
+        "user": "telemetry-automated",
+        "schema": "ccx|ccx_sensitive",
+        "privileges": ["SELECT"]
+    },
+    {
         "group": "ccx-srep-data-access",
         "schema": "ccx_srep",
         "privileges": ["SELECT"]
