@@ -119,12 +119,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "ccx-dev|assisted-lakers|ccx-datalake-access",
+        "group": "ccx-dev|assisted-lakers|ccx-datalake-access|ceeandpe|na-cs-tam-auto|apac-cs-tam-auto|latam-cs-tam-auto|emea-cs-tam-auto|na-ps-cs-tam-auto|emea-cs-csm-auto|emea-cs-cse-auto|emea-cs-managers|apac-cs-csm-auto|apac-cs-cse-auto|na-cs-csm-auto|na-cs-cse-auto|na-ps-cs-cse-auto|latam-cs-csm-auto|ccx-pm|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval",
         "schema": "ccx",
         "privileges": ["SELECT"]
     },
     {
-        "group": "ccx-dev|assisted-lakers|ccx-sensitive-datalake-access",
+        "group": "ccx-dev|assisted-lakers|ccx-sensitive-datalake-access|ceeandpe|na-cs-tam-auto|apac-cs-tam-auto|latam-cs-tam-auto|emea-cs-tam-auto|na-ps-cs-tam-auto|emea-cs-csm-auto|emea-cs-cse-auto|emea-cs-managers|apac-cs-csm-auto|apac-cs-cse-auto|na-cs-csm-auto|na-cs-cse-auto|na-ps-cs-cse-auto|latam-cs-csm-auto|ccx-pm",
         "schema": "ccx_sensitive",
         "privileges": ["SELECT"]
     },
