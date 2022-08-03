@@ -67,6 +67,11 @@
         "owner": true
     },
     {
+        "group": "insights-admins",
+        "schema": "mg_rules_data",
+        "owner": true
+    },
+    {
         "group": "rhods",
         "schema": "dhcuratedhive",
         "owner": true
@@ -196,6 +201,16 @@
     {
         "group": "cide-must-gather-trino-access",
         "schema": "mg_attachment_data",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "insights-admins",
+        "schema": "mg_rules_data",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
+        "group": "cide-must-gather-trino-access",
+        "schema": "mg_rules_data",
         "privileges": ["SELECT"]
     },
     {
