@@ -134,7 +134,7 @@
         "privileges": ["SELECT"]
     },
     {
-        "user": "telemetry-automated",
+        "user": "telemetry-automated|telemetry-edmund-abbot",
         "schema": "ccx|ccx_sensitive",
         "privileges": ["SELECT"]
     },
