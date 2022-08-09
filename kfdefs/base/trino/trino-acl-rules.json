@@ -7,7 +7,7 @@
     ],
     "catalogs": [
     {
-        "group": "data-hub-admins",
+        "group": "data-hub-openshift-admins",
         "allow": "all"
     },
     {
@@ -20,7 +20,7 @@
     ],
     "schemas": [
     {
-        "group": "data-hub-admins",
+        "group": "data-hub-openshift-admins",
         "owner": true
     },
     {
@@ -92,7 +92,7 @@
     ],
     "tables": [
     {
-        "group": "data-hub-admins",
+        "group": "data-hub-openshift-admins",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {

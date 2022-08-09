@@ -22,7 +22,7 @@ generators:
 images:
   - name: quay.io/opendatahub/trino:361
     newName: quay.io/opendatahub/trino
-    newTag: '371'
+    newTag: '393'
 
 generatorOptions:
   disableNameSuffixHash: true
