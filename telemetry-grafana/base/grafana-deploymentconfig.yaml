@@ -112,7 +112,7 @@ spec:
             - '--https-address=:8443'
             - '--openshift-service-account=grafana'
             - '--upstream=http://localhost:3001'
-            - '--openshift-delegate-urls={"/": {"resource": "route", "verb": "get", "name": "grafana"}}'
+            - '--openshift-delegate-urls={"/": {"resource": "services", "verb": "get", "name": "grafana"}}'
             - '--tls-cert=/etc/tls/private/tls.crt'
             - '--tls-key=/etc/tls/private/tls.key'
             - '-cookie-secret-file=/etc/proxy/secrets/session_secret'

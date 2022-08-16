@@ -41,3 +41,12 @@ patchesJson6902:
         value:
           kind: ServiceAccount
           name: data-foundation-pms
+  - target:
+      kind: DeploymentConfig
+      group: apps.openshift.io
+      version: v1
+      name: grafana
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/2/args/-
+        value: --openshift-sar={"namespace":"dh-sandbox-telemetry-grafana","resource":"services","resourceName":"grafana","verb":"get"}

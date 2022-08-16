@@ -29,3 +29,12 @@ patchesJson6902:
       - op: add
         path: /spec/namespaceSelector/matchNames/0
         value: dh-prod-telemetry-grafana
+  - target:
+      kind: DeploymentConfig
+      group: apps.openshift.io
+      version: v1
+      name: grafana
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/2/args/-
+        value: --openshift-sar={"namespace":"dh-prod-telemetry-grafana","resource":"services","resourceName":"grafana","verb":"get"}
