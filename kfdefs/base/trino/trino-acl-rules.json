@@ -7,7 +7,7 @@
     ],
     "catalogs": [
     {
-        "group": "data-hub-admins",
+        "group": "data-hub-openshift-admins",
         "allow": "all"
     },
     {
@@ -20,15 +20,20 @@
     ],
     "schemas": [
     {
-        "group": "data-hub-admins",
+        "group": "data-hub-openshift-admins",
         "owner": true
     },
     {
-        "group": "eda",
+        "user": "eda-admin",
         "owner": true
     },
     {
-        "group": "(telemetry|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "schema": "telemetry",
+        "owner": true
+    },
+    {
+        "user": "(superset-telemetry,telemetry-automated,telemetry-edmund-abbot)",
         "schema": "telemetry",
         "owner": true
     },
@@ -52,7 +57,7 @@
         "owner": true
     },
     {
-        "group": "usir",
+        "group": "subscription-watch-admins",
         "schema": "usir",
         "owner": true
     },
@@ -72,11 +77,6 @@
         "owner": true
     },
     {
-        "group": "rhods",
-        "schema": "dhcuratedhive",
-        "owner": true
-    },
-    {
         "group": "rhel-insights-admins",
         "schema": "insights_(accounts|rules|systems)_analytics",
         "owner": true
@@ -92,20 +92,30 @@
     ],
     "tables": [
     {
-        "group": "data-hub-admins",
+        "group": "data-hub-openshift-admins",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
-        "group": "eda",
+        "user": "eda-admin",
         "privileges": ["SELECT"]
     },
     {
-        "group": "(telemetry|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
         "schema": "telemetry",
         "privileges": ["SELECT"]
     },
     {
-        "group": "(telemetry|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "schema": "telemetry_curated",
+        "privileges": ["SELECT"]
+    },
+    {
+        "user": "(superset-telemetry,telemetry-automated,telemetry-edmund-abbot)",
+        "schema": "telemetry",
+        "privileges": ["SELECT"]
+    },
+    {
+        "user": "(superset-telemetry,telemetry-automated,telemetry-edmund-abbot)",
         "schema": "telemetry_curated",
         "privileges": ["SELECT"]
     },
@@ -134,7 +144,7 @@
         "privileges": ["SELECT"]
     },
     {
-        "user": "telemetry-automated|telemetry-edmund-abbot",
+        "user": "(superset-telemetry,telemetry-automated,telemetry-edmund-abbot)",
         "schema": "ccx|ccx_sensitive",
         "privileges": ["SELECT"]
     },
@@ -144,18 +154,18 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "usir",
+        "group": "subscription-watch-admins",
+        "schema": "usir",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "usir_viewers",
         "schema": "usir",
         "privileges": ["SELECT"]
     },
     {
         "group": "cost-management",
         "schema": "costmgmt",
-        "privileges": ["SELECT"]
-    },
-    {
-        "group": "rhods",
-        "schema": "dhcuratedhive",
         "privileges": ["SELECT"]
     },
     {
