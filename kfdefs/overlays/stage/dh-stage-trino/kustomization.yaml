@@ -9,6 +9,11 @@ resources:
 generators:
   - secret-generator.yaml
 
+images:
+  - name: quay.io/opendatahub/trino:371
+    newName: quay.io/opendatahub/trino
+    newTag: 'development'
+
 patchesJson6902:
   - patch: |
       - op: add
