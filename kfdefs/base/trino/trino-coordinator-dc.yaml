@@ -121,6 +121,11 @@ spec:
                 secretKeyRef:
                   name: trino-config-env-settings
                   key: query_max_memory
+            - name: INTERNAL_COMMUNICATION_SHARED_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: trino-config-env-settings
+                  key: internal_communication_shared_secret
           ports:
             - containerPort: 8080
               protocol: TCP
