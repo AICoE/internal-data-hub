@@ -48,7 +48,7 @@
         "owner": true
     },
     {
-        "group": "cost-management",
+        "group": "cost-management-team",
         "schema": "costmgmt",
         "owner": true
     },
@@ -164,7 +164,7 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "cost-management",
+        "group": "cost-management-team",
         "schema": "costmgmt",
         "privileges": ["SELECT"]
     },
