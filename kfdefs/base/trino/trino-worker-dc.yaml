@@ -61,6 +61,17 @@ spec:
           args:
             - --config=/etc/trino/config-worker.properties
             - --jvm-config=/etc/trino/jvm-config/jvm-worker.config
+          env:
+            - name: QUERY_MAX_MEMORY_PER_NODE
+              valueFrom:
+                secretKeyRef:
+                  name: trino-config-env-settings
+                  key: query_max_memory_per_node
+            - name: QUERY_MAX_MEMORY
+              valueFrom:
+                secretKeyRef:
+                  name: trino-config-env-settings
+                  key: query_max_memory
           volumeMounts:
             - name: trino-config-volume
               mountPath: /etc/trino

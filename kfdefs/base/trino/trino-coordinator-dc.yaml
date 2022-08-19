@@ -117,6 +117,16 @@ spec:
                 secretKeyRef:
                   name: $(s3_credentials_secret)
                   key: AWS_SECRET_ACCESS_KEY
+            - name: QUERY_MAX_MEMORY_PER_NODE
+              valueFrom:
+                secretKeyRef:
+                  name: trino-config-env-settings
+                  key: query_max_memory_per_node
+            - name: QUERY_MAX_MEMORY
+              valueFrom:
+                secretKeyRef:
+                  name: trino-config-env-settings
+                  key: query_max_memory
           ports:
             - containerPort: 8080
               protocol: TCP
