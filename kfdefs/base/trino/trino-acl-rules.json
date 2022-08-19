@@ -52,7 +52,7 @@
         "owner": true
     },
     {
-        "group": "usir",
+        "group": "subscription-watch-admins",
         "schema": "usir",
         "owner": true
     },
@@ -144,7 +144,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "usir",
+        "group": "subscription-watch-admins",
+        "schema": "usir",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "usir_viewers",
         "schema": "usir",
         "privileges": ["SELECT"]
     },
