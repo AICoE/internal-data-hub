@@ -77,11 +77,6 @@
         "owner": true
     },
     {
-        "group": "rhods",
-        "schema": "dhcuratedhive",
-        "owner": true
-    },
-    {
         "group": "rhel-insights-admins",
         "schema": "insights_(accounts|rules|systems)_analytics",
         "owner": true
@@ -171,11 +166,6 @@
     {
         "group": "cost-management",
         "schema": "costmgmt",
-        "privileges": ["SELECT"]
-    },
-    {
-        "group": "rhods",
-        "schema": "dhcuratedhive",
         "privileges": ["SELECT"]
     },
     {
