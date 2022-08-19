@@ -10,7 +10,6 @@ generators:
   - secret-generator.yaml
 
 patchesStrategicMerge:
-  - trino-config-secret.yaml
   - trino-worker-dc.yaml
 
 patchesJson6902:
