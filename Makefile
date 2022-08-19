@@ -62,3 +62,4 @@ update-trino-groups: ## Update trino access groups from LDAP
 	$(call updatemembers,latam-cs-csm-auto)
 	$(call updatemembers,ccx-pm)
 	$(call updatemembers,assisted-lakers)
+	$(call updatemembers,cide-insights)

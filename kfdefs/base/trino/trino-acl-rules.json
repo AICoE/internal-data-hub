@@ -57,17 +57,17 @@
         "owner": true
     },
     {
-        "group": "insights-admins",
+        "group": "cide-insights",
         "schema": "insightsdig",
         "owner": true
     },
     {
-        "group": "insights-admins",
+        "group": "cide-insights",
         "schema": "insightswh",
         "owner": true
     },
     {
-        "group": "insights-admins",
+        "group": "cide-insights",
         "schema": "mg_rules_data",
         "owner": true
     },
@@ -82,7 +82,7 @@
         "owner": true
     },
     {
-        "group": "insights-admins",
+        "group": "cide-insights",
         "schema": "mg_attachment_data",
         "owner": true
     },
@@ -159,12 +159,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "insights-admins",
+        "group": "cide-insights",
         "schema": "insightsdig",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
-        "group": "insights-admins",
+        "group": "cide-insights",
         "schema": "insightswh",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
@@ -194,7 +194,7 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "insights-admins",
+        "group": "cide-insights",
         "schema": "mg_attachment_data",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
@@ -204,7 +204,7 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "insights-admins",
+        "group": "cide-insights",
         "schema": "mg_rules_data",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
