@@ -64,3 +64,4 @@ update-trino-groups: ## Update trino access groups from LDAP
 	$(call updatemembers,assisted-lakers)
 	$(call updatemembers,cide-insights)
 	$(call updatemembers,cide-warehouse-trino-access)
+	$(call updatemembers,cide-digests-trino-access)

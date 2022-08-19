@@ -169,7 +169,7 @@
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
-        "group": "insights-digests-viewers",
+        "group": "cide-digests-trino-access",
         "schema": "insightsdig",
         "privileges": ["SELECT"]
     },
