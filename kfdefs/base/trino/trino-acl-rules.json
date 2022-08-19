@@ -28,7 +28,12 @@
         "owner": true
     },
     {
-        "group": "(telemetry|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "schema": "telemetry",
+        "owner": true
+    },
+    {
+        "user": "(superset-telemetry,telemetry-automated,telemetry-edmund-abbot)",
         "schema": "telemetry",
         "owner": true
     },
@@ -100,12 +105,22 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "(telemetry|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
         "schema": "telemetry",
         "privileges": ["SELECT"]
     },
     {
-        "group": "(telemetry|telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
+        "schema": "telemetry_curated",
+        "privileges": ["SELECT"]
+    },
+    {
+        "user": "(superset-telemetry,telemetry-automated,telemetry-edmund-abbot)",
+        "schema": "telemetry",
+        "privileges": ["SELECT"]
+    },
+    {
+        "user": "(superset-telemetry,telemetry-automated,telemetry-edmund-abbot)",
         "schema": "telemetry_curated",
         "privileges": ["SELECT"]
     },
@@ -134,7 +149,7 @@
         "privileges": ["SELECT"]
     },
     {
-        "user": "telemetry-automated|telemetry-edmund-abbot",
+        "user": "(superset-telemetry,telemetry-automated,telemetry-edmund-abbot)",
         "schema": "ccx|ccx_sensitive",
         "privileges": ["SELECT"]
     },
