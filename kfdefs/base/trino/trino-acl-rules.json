@@ -24,7 +24,7 @@
         "owner": true
     },
     {
-        "group": "eda",
+        "user": "eda-admin",
         "owner": true
     },
     {
@@ -96,7 +96,7 @@
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
-        "group": "eda",
+        "user": "eda-admin",
         "privileges": ["SELECT"]
     },
     {
