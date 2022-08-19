@@ -126,6 +126,26 @@ spec:
                 secretKeyRef:
                   name: trino-config-env-settings
                   key: internal_communication_shared_secret
+            - name: LDAP_BIND_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: trino_ldap_settings
+                  key: ldap_bind_password
+            - name: LDAP_USER_BASE_DN
+              valueFrom:
+                secretKeyRef:
+                  name: trino_ldap_settings
+                  key: ldap_user_base_dn
+            - name: LDAP_GROUP_BASE_DN
+              valueFrom:
+                secretKeyRef:
+                  name: trino_ldap_settings
+                  key: ldap_group_base_dn
+            - name: LDAP_BIND_DN
+              valueFrom:
+                secretKeyRef:
+                  name: trino_ldap_settings
+                  key: ldap_bind_dn
           ports:
             - containerPort: 8080
               protocol: TCP
