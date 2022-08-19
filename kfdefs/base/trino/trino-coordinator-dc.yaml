@@ -130,22 +130,22 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: trino_ldap_settings
-                  key: ldap_bind_password
+                  key: ldap-bind-password
             - name: LDAP_USER_BASE_DN
               valueFrom:
                 secretKeyRef:
                   name: trino_ldap_settings
-                  key: ldap_user_base_dn
+                  key: ldap-user-base-dn
             - name: LDAP_GROUP_BASE_DN
               valueFrom:
                 secretKeyRef:
                   name: trino_ldap_settings
-                  key: ldap_group_base_dn
+                  key: ldap-group-base-dn
             - name: LDAP_BIND_DN
               valueFrom:
                 secretKeyRef:
                   name: trino_ldap_settings
-                  key: ldap_bind_dn
+                  key: ldap-bind-dn
           ports:
             - containerPort: 8080
               protocol: TCP
