@@ -58,3 +58,20 @@ patchesJson6902:
       kind: ConfigMap
       name: trino-config
       version: v1
+  - patch: |
+      - op: replace
+        path: /stringData/group-provider.properties
+        value: |-
+          group-provider.name=ldap
+          ldap.url=ldaps://ldap.corp.redhat.com
+          ldap.ssl.truststore.path=/etc/certs/RH-IT-Root-CA.crt
+          ldap.user-base-dn=${ENV:LDAP_USER_BASE_DN}
+          ldap.group-base-dn=${ENV:LDAP_GROUP_BASE_DN}
+          ldap.user-bind-pattern=uid=${USER}
+          ldap.group-search-filter=uniqueMember=${USER}
+          ldap.bind-dn=${ENV:LDAP_BIND_DN}
+          ldap.bind-password=${ENV:LDAP_BIND_PASSWORD}
+    target:
+      kind: Secret
+      name: trino-config
+      version: v1
