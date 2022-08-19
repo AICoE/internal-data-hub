@@ -46,16 +46,10 @@ spec:
                 path: ldap-authenticator.properties
               - key: file-authenticator.properties
                 path: file-authenticator.properties
-              - key: password.db
-                path: password.db
               - key: access-control.properties
                 path: access-control.properties
-              - key: rules.json
-                path: rules.json
               - key: group-provider.properties
                 path: group-provider.properties
-              - key: group-mapping.properties
-                path: group-mapping.properties
         - name: trino-acls-volume
           secret:
             secretName: trino-acls
