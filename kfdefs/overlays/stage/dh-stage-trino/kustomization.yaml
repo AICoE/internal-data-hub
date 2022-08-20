@@ -75,3 +75,15 @@ patchesJson6902:
       kind: Secret
       name: trino-config
       version: v1
+  - patch: |
+      - op: replace
+        path: /stringData/ldap-authenticator.properties
+        value: |-
+          password-authenticator.name=ldap
+          ldap.url=ldaps://ldap.corp.redhat.com
+          ldap.ssl.truststore.path=/etc/certs/RH-IT-Root-CA.crt
+          ldap.user-bind-pattern=uid=${USER},ou=Users,dc=redhat,dc=com
+    target:
+      kind: Secret
+      name: trino-config
+      version: v1
