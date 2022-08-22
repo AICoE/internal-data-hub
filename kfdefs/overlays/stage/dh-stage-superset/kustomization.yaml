@@ -99,6 +99,17 @@ patchesJson6902:
       kind: Route
       name: superset
       version: v1
+  - patch: |
+      - op: replace
+        path: /spec/resources/requests/storage
+        value: 10Gi
+      - op: replace
+        path: /spec/resources/limits/storage
+        value: 10Gi
+    target:
+      kind: PersistentVolumeClaim
+      name: supersetdb-data
+      version: v1
 
 images:
   - name: quay.io/opendatahub/superset:1.4.1-ubi
