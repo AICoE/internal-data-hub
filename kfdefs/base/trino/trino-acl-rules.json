@@ -1,7 +1,7 @@
 {
     "impersonation": [
     {
-        "original_user": "superset",
+        "original_user": "superset|trino-admin",
         "new_user": ".*"
     }
     ],
