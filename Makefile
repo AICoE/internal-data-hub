@@ -68,3 +68,5 @@ update-trino-groups: ## Update trino access groups from LDAP
 	$(call updatemembers,cide-must-gather-trino-access)
 	$(call updatemembers,subscription-watch-admins)
 	$(call updatemembers,cost-management-team)
+	$(call updatemembers,insights-statistics-owners)
+	$(call updatemembers,insights-statistics)
