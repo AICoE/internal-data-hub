@@ -77,7 +77,7 @@
         "owner": true
     },
     {
-        "group": "rhel-insights-admins",
+        "group": "insights-statistics-owners",
         "schema": "insights_(accounts|rules|systems)_analytics",
         "owner": true
     },
@@ -194,12 +194,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "rhel-insights-admins",
+        "group": "insights-statistics-owners",
         "schema": "insights_(accounts|rules|systems)_analytics",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
-        "group": "rhel-insights-viewers",
+        "group": "insights-statistics",
         "schema": "insights_(accounts|rules|systems)_analytics",
         "privileges": ["SELECT"]
     },
