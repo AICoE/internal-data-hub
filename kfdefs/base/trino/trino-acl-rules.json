@@ -159,7 +159,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "usir_viewers",
+        "group": "candlepin-posix|ceeandpe",
+        "schema": "usir",
+        "privileges": ["SELECT"]
+    },
+    {
+        "user": "superset-usir",
         "schema": "usir",
         "privileges": ["SELECT"]
     },
