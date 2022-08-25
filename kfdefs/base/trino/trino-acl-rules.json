@@ -92,6 +92,11 @@
     ],
     "tables": [
     {
+        "catalog": "system",
+        "schema": "metadata",
+        "privileges": ["SELECT"]
+    },
+    {
         "group": "data-hub-openshift-admins",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
