@@ -1,7 +1,7 @@
 {
     "impersonation": [
     {
-        "original_user": "superset|trino-admin|data-hub-superset-trino",
+        "original_user": "data-hub-superset-trino",
         "new_user": ".*"
     }
     ],
@@ -33,7 +33,7 @@
         "owner": true
     },
     {
-        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
+        "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
         "schema": "telemetry",
         "owner": true
     },
@@ -115,12 +115,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
+        "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
         "schema": "telemetry",
         "privileges": ["SELECT"]
     },
     {
-        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
+        "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
         "schema": "telemetry_curated",
         "privileges": ["SELECT"]
     },
@@ -159,7 +159,7 @@
         "privileges": ["SELECT"]
     },
     {
-        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
+        "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
         "schema": "ccx|ccx_sensitive",
         "privileges": ["SELECT"]
     },
@@ -175,11 +175,6 @@
     },
     {
         "group": "candlepin-posix|ceeandpe",
-        "schema": "usir",
-        "privileges": ["SELECT"]
-    },
-    {
-        "user": "superset-usir",
         "schema": "usir",
         "privileges": ["SELECT"]
     },
@@ -206,11 +201,6 @@
     {
         "group": "cide-warehouse-trino-access",
         "schema": "insightswh",
-        "privileges": ["SELECT"]
-    },
-    {
-        "user": "superset-ray-parquet-compaction",
-        "schema": "parquetreads3",
         "privileges": ["SELECT"]
     },
     {
