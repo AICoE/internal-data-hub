@@ -33,7 +33,7 @@
         "owner": true
     },
     {
-        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot)",
+        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
         "schema": "telemetry",
         "owner": true
     },
@@ -115,12 +115,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot)",
+        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
         "schema": "telemetry",
         "privileges": ["SELECT"]
     },
     {
-        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot)",
+        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
         "schema": "telemetry_curated",
         "privileges": ["SELECT"]
     },
@@ -159,7 +159,7 @@
         "privileges": ["SELECT"]
     },
     {
-        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot)",
+        "user": "(superset-telemetry|telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
         "schema": "ccx|ccx_sensitive",
         "privileges": ["SELECT"]
     },
