@@ -11,7 +11,7 @@
         "allow": "all"
     },
     {
-        "user": "ccx-admin",
+        "user": "ccx-admin|ccx-reporting-pipeline-trino",
         "allow": "all"
     },
     {
@@ -38,7 +38,7 @@
         "owner": true
     },
     {
-        "user": "ccx-admin",
+        "user": "ccx-admin|ccx-reporting-pipeline-trino",
         "schema": "(ccx|ccx_sensitive|ccx_srep)",
         "owner": true
     },
@@ -129,12 +129,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "user": "ccx-admin",
+        "user": "ccx-admin|ccx-reporting-pipeline-trino",
         "schema": "(ccx|ccx_sensitive|ccx_srep)",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
-        "user": "ccx-admin",
+        "user": "ccx-admin|ccx-reporting-pipeline-trino",
         "schema": "telemetry",
         "privileges": ["SELECT"]
     },
