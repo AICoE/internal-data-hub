@@ -11,3 +11,5 @@ subjects:
     name: telemeter-auto-approval
   - kind: Group
     name: telemeter-manual-approval
+  - kind: Group
+    name: telemeter-cs-tam-auto
