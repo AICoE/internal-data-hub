@@ -9,54 +9,15 @@ Data Hub that are not managed by the ODH operator.
 
 To configure access for a dataset in Trino, perform the following:
 
-1. We use Trino groups to manage access. Create any necessary groups
-   by following the instructions below in
-   [adding a new group to Trino](#adding-a-new-group-to-trino).
+1. We use Rover (LDAP) groups to manage access to datasets in Trino. For
+   most data sets, we have one group (or multiple) with admin level
+   privileges on a given dataset, and another group (or multiple) with
+   readonly permissions. Come up with a plan for how you want to align
+   access to groups. The data hub team does not take ownership
+   responsibility for these rover groups.
 2. Grant the desired level of access to the group(s) by following the
    instructions below in
    [granting a group access to a Trino data set](#granting-a-group-access-to-a-trino-data-set)
-
-### Syncing Trino group membership with LDAP
-
-We manage [Trino group membership](kfdefs/base/trino/trino-group-mapping.properties) by
-manually replicating LDAP group membership into the group membership file. To automate this
-process, we have a [Makefile](Makefile) that, when run, will sync all rover groups that
-we care about into the properties file.
-
-To update group membership, simply run the following command from the root of
-this repository:
-
-```bash
-make update-trino-groups
-```
-
-### Adding a new group to Trino
-
-Access rules in Trino are based on groups. These groups are currently defined in
-[trino-group-mapping.properties](kfdefs/base/trino/trino-group-mapping.properties).
-
-By convention, we prefer to use groups that align with Red Hat LDAP groups. We
-replicate LDAP group membership into the Trino groups using a [Makefile](Makefile)
-(see the above section for instruction for updating the groups). In the very near
-future, we are in the process of adding support for dynamically querying LDAP for
-group membership, at which point this manual replication will no longer be necessary.
-
-To add a new group to Trino, perform the following:
-
-1. Update [trino-group-mapping.properties](kfdefs/base/trino/trino-group-mapping.properties)
-   to include the name of the group. If the group _does not_ align to a Red Hat LDAP group,
-   add individual user names separated by a comma. If the group _does_ align to an LDAP group,
-   continue to the next step.
-2. If the group aligns to an LDAP group, add an entry in the [Makefile](Makefile)
-   in the `update-trino-groups` target to sync the group's membership. The line should be
-   of the format:
-
-   `$(call updatemembers,$GROUP_NAME)`
-3. If the group aligns to an LDAP group, run `make update-trino-groups` from the root
-   of this repository. This will update the trino group membership file so that the
-   group matches the set of users in LDAP.
-4. Commit any changes to the trino-group-mapping.properties and Makefile files and
-   open up a pull request for these changes.
 
 ### Granting a group access to a Trino data set
 
