@@ -39,7 +39,7 @@
     },
     {
         "user": "ccx-admin|ccx-reporting-pipeline-trino",
-        "schema": "(ccx|ccx_sensitive|ccx_srep)",
+        "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal)",
         "owner": true
     },
     {
@@ -130,7 +130,7 @@
     },
     {
         "user": "ccx-admin|ccx-reporting-pipeline-trino",
-        "schema": "(ccx|ccx_sensitive|ccx_srep)",
+        "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal)",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
