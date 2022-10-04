@@ -73,6 +73,11 @@
     },
     {
         "group": "cide-insights",
+        "schema": "insightswh_obfuscated",
+        "owner": true
+    },
+    {
+        "group": "cide-insights",
         "schema": "mg_rules_data",
         "owner": true
     },
@@ -194,6 +199,11 @@
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
+        "group": "cide-insights",
+        "schema": "insightswh_obfuscated",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
         "group": "cide-digests-trino-access",
         "schema": "insightsdig",
         "privileges": ["SELECT"]
@@ -201,6 +211,11 @@
     {
         "group": "cide-warehouse-trino-access",
         "schema": "insightswh",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "cide-wh-obfuscated-trino-access|telemeter-auth",
+        "schema": "insightswh_obfuscated",
         "privileges": ["SELECT"]
     },
     {
