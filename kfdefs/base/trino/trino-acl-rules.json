@@ -57,7 +57,7 @@
         "owner": true
     },
     {
-        "group": "subscription-watch-admins",
+        "group": "subscription-watch-admins|subscription-watch-ro",
         "schema": "usir",
         "owner": true
     },
@@ -174,7 +174,7 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "subscription-watch-admins",
+        "group": "subscription-watch-admins|subscription-watch-ro",
         "schema": "usir",
         "privileges": ["SELECT"]
     },
