@@ -139,6 +139,11 @@
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
+        "user": "ccx-reporting-pipeline-trino-readonly",
+        "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal)",
+        "privileges": ["SELECT"]
+    },
+    {
         "user": "ccx-admin|ccx-reporting-pipeline-trino",
         "schema": "telemetry",
         "privileges": ["SELECT"]
