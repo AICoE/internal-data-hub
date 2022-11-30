@@ -15,3 +15,4 @@ resources:
   - jupyterhub-blackbox-service-monitor.yaml
   - cvp-s3-webserver-blackbox-service-monitor.yaml
   - telemeter-lts-dashboards-blackbox-service-monitor.yaml
+  - telemeter-lts-blackbox-service-monitor.yaml
