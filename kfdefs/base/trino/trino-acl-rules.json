@@ -254,6 +254,16 @@
         "privileges": ["SELECT"]
     },
     {
+        "group": "cide-insights",
+        "schema": "sos_rules_data",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
+        "group": "cide-sos-trino-access",
+        "schema": "sos_rules_data",
+        "privileges": ["SELECT"]
+    },
+    {
         "privileges": []
     }
     ]
