@@ -2,7 +2,7 @@ import ldap
 import logging
 import os
 
-RED_HAT_CERT_BUNDLE = '/tmp/red-hat-cert-bundle.crt'
+RED_HAT_CERT_BUNDLE = '/etc/certs/redHatRootCA.crt'
 os.environ['CURL_CA_BUNDLE'] = RED_HAT_CERT_BUNDLE
 
 FEATURE_FLAGS = {
