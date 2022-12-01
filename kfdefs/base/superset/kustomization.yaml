@@ -21,6 +21,6 @@ configMapGenerator:
       - superset_additional_config.py
 
 images:
-  - name: quay.io/opendatahub/superset:1.4.1-ubi
+  - name: quay.io/opendatahub/superset:1.5.0-ubi
     newName: quay.io/opendatahub/superset
     newTag: 1.5.2-ubi
