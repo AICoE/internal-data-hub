@@ -2,17 +2,7 @@ import ldap
 import logging
 import os
 
-COMBINED_CERT_BUNDLE = '/tmp/superset-combined-cert-bundle.crt'
-RED_HAT_ROOT_CERT = '/etc/certs/redHatRootCA.crt'
 RED_HAT_CERT_BUNDLE = '/tmp/red-hat-cert-bundle.crt'
-
-with open(RED_HAT_CERT_BUNDLE, 'a+') as combined:
-    with open(COMBINED_CERT_BUNDLE) as combined_bundle:
-        combined.write(combined_bundle.read())
-
-    with open(RED_HAT_ROOT_CERT) as rhat_cert:
-        combined.write(rhat_cert.read())
-
 os.environ['CURL_CA_BUNDLE'] = RED_HAT_CERT_BUNDLE
 
 FEATURE_FLAGS = {
