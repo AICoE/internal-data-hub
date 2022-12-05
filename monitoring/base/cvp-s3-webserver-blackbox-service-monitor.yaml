@@ -12,13 +12,13 @@ spec:
         - sourceLabels:
             - __param_target
           targetLabel: instance
-        - replacement: 'http://external-ci-coldstorage.datahub.redhat.com/foo.txt'
+        - replacement: 'http://external-ci-coldstorage.datahub.redhat.com/foo'
           targetLabel: target
       params:
         module:
           - http_2xx
         target:
-          - 'http://external-ci-coldstorage.datahub.redhat.com/foo.txt'
+          - 'http://external-ci-coldstorage.datahub.redhat.com/foo'
       path: /probe
       targetPort: 9115
   jobLabel: prometheus.io/joblabel
