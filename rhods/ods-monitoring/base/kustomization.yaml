@@ -1,5 +1,7 @@
 namespace: redhat-ods-monitoring
 resources:
   - ../../common
+  - ./redhat-rhods-smtp-secret.yaml
+
 generators:
   - ./secrets/secret-generator.yaml
