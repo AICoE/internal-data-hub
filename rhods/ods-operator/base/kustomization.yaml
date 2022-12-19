@@ -2,3 +2,4 @@ namespace: redhat-ods-operator
 resources:
   - ../../common
   - addon-managed-odh.yaml
+  - addon-managed-odh-parameters-secret.yaml
