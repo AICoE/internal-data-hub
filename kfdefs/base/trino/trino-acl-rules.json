@@ -92,6 +92,11 @@
         "owner": true
     },
     {
+        "group": "ade",
+        "schema": "ceeacdata",
+        "owner": true
+    },
+    {
         "owner": false
     }
     ],
@@ -264,19 +269,9 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "ade",
-        "schema": "ceeacdata",
-        "owner": true
-    },
-    {
         "group": "ade-trino-access",
         "schema": "ceeacdata",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
-    },
-    {
-        "group": "ade-trino-access",
-        "schema": "ceeacdata",
-        "privileges": ["SELECT"]
     },
     {
         "privileges": []
