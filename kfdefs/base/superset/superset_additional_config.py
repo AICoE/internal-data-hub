@@ -10,7 +10,7 @@ FEATURE_FLAGS = {
     'DASHBOARD_RBAC': True,
     'DASHBOARD_CROSS_FILTERS': True,
     'DASHBOARD_NATIVE_FILTERS': True,
-    'DASHBOARD_NATIVE_FILTERS_SET': False  # Set this to True once the flag is stable
+    'DASHBOARD_NATIVE_FILTERS_SET': True
 }
 
 AUTH_USER_REGISTRATION_ROLE = 'Datahub'
