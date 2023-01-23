@@ -18,33 +18,34 @@ spec:
         type: Source
         sourceStrategy:
             env:
-            -   name: GIT_SSL_NO_VERIFY
-                value: "true"
-            -   name: CONTENT_URLS
-                value: https://gitlab.cee.redhat.com/data-hub/dh-docs.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/cja-topic-modeling.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/openshift-sme-mailing-list-analysis.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/insights-drift-analysis-baselines.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/data-science-workflows.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/ocp4-anomaly-detection.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/sentiment-analysis-demo.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/insights-configuration-files-analysis.git#master,https://gitlab.corp.redhat.com/aicoe-aiops/categorical-encoding-internal.git#master
+                - name: GIT_SSL_NO_VERIFY
+                  value: "true"
+                - name: CONTENT_URLS
+                  value: https://gitlab.cee.redhat.com/data-hub/dh-docs.git#master
             from:
                 kind: ImageStreamTag
                 name: nodejs-10-centos7:latest
     triggers:
-    -   type: GitHub
-        github:
+        - type: GitHub
+          github:
             secret: ENC[AES256_GCM,data:PKbvSPDHYSibcFNY8ZKvCutTeCA=,iv:paJapy7nJbbPIoiF8XtTU4c6N5kxzJSHrcc+x/ocrlQ=,tag:hm2FJ82ryMV1dfvww/xd8w==,type:str]
-    -   type: Generic
-        generic:
+        - type: Generic
+          generic:
             secret: ENC[AES256_GCM,data:F5icT+w3IDS9vxB5c1zJlLK9jIs=,iv:n+jdohmskedfnPvkWKsO6/MNL/5/OyZ1YRektsO6Oos=,tag:SBcmyaFSrLaurW1deCOfzw==,type:str]
-    -   type: ConfigChange
-    -   type: ImageChange
-        imageChange: {}
+        - type: ConfigChange
+        - type: ImageChange
+          imageChange: {}
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
-    lastmodified: '2021-11-11T01:22:08Z'
-    mac: ENC[AES256_GCM,data:mRzm1B8lS8F1lYF9dg8Nd6rjgc7oas44sklnKNMmPDzrNIetfSuXgtjpyWNKp4uAe5f1XvFmFgqduIoZPGApS6BDwigAtz5s+NYu4XPItX8j+BO54WJ7kC6v0FL6ccx5fOrAREym9F/Q1rZ7XuYvkwq1KQbAh3eHlhlmnwKGGag=,iv:csuvOIFGzYyLdq4EeE4KmRuqsMNW/4mu9njR/6dOM2Q=,tag:EX+NeWHtt70RYInW3FWlpA==,type:str]
+    age: []
+    lastmodified: "2023-01-23T19:40:47Z"
+    mac: ENC[AES256_GCM,data:mKz+7UaPA5weJ/eCbeENGwoOQ2jbO/UoBT46Z2Vu96CXBubHWpng8t4+ZRjd7sz7EGZn/3D6fNY9lT0J/iWirCfv824FBzPzGyCqtevbTu5SHq/yWgrPfPcUkTuw3a1dzABxZx6KdwJYXMo3iDVZOI/RtSGkd51H9HP36mME6f0=,iv:6uXbosd8GTcsyQ9yWQPL2rUf1QAP1kM2M01tRIHIRm4=,tag:QVH660StcFoJYB5FziLphA==,type:str]
     pgp:
-    -   created_at: '2021-11-11T01:22:07Z'
-        enc: |
+        - created_at: "2021-11-11T01:22:07Z"
+          enc: |
             -----BEGIN PGP MESSAGE-----
 
             hQEMA/irrHa183bxAQf8CbGC6NSqKsDWQNqgih3MzDshSCqGl7fm2uA0WabdEMhY
@@ -57,6 +58,6 @@ sops:
             u9R25zGoidgjqLkCoyn6scWk8SWHfOVOchTwX2MDuw==
             =GUHY
             -----END PGP MESSAGE-----
-        fp: EFDB9AFBD18936D9AB6B2EECBD2C73FF891FBC7E
+          fp: EFDB9AFBD18936D9AB6B2EECBD2C73FF891FBC7E
     encrypted_regex: ^(data|stringData|tls|secret|WebHookSecretKey)$
-    version: 3.6.1
+    version: 3.7.1
