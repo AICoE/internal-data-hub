@@ -1,4 +1,0 @@
-namespace: redhat-ods-monitoring
-resources:
-  - ../../base
-  - ../../privileged

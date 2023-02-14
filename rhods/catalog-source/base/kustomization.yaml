@@ -1,5 +1,0 @@
-namespace: redhat-ods-operator
-resources:
-  - catalog-source.yaml
-generators:
-  - ./secrets/secret-generator.yaml
