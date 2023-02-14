@@ -1,3 +1,0 @@
-namespace: redhat-ods-applications
-resources:
-  - namespace.yaml

@@ -1,9 +1,0 @@
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: addon-managed-odh
-spec:
-  channel: beta
-  name: rhods-operator
-  source: addon-managed-odh-catalog
-  sourceNamespace: redhat-ods-operator
