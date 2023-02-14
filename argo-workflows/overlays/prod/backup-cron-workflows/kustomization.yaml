@@ -7,8 +7,6 @@ resources:
   - s3-backup-marketplace-metering.yaml
   - s3-sync-tower-analytics-cron-workflow.yaml
   - s3-sync-tower-analytics-stage-cron-workflow.yaml
-  - s3-sync-rhods-usage-metrics-cron-workflow.yaml
-  - s3-sync-rhods-usage-metrics-dev-cron-workflow.yaml
   - s3-sync-floorist-cron-workflow.yaml
   - s3-sync-cost-management-cron-workflow.yaml
   - s3-sync-markeplace2psi-cron-workflow.yaml

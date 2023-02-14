@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - alert-template.yaml
   - s3-backup-workflow-template.yaml
-  - ./backup-cron-workflows
 
 generators:
   - secrets/secret-generator.yaml
