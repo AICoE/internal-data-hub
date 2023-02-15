@@ -50,8 +50,3 @@ patchesJson6902:
       - op: add
         path: /spec/template/spec/containers/2/args/-
         value: --openshift-sar={"namespace":"dh-sandbox-telemetry-grafana","resource":"services","resourceName":"grafana","verb":"get"}
-
-images:
-  - name: quay.io/app-sre/grafana:6.7.4
-    newName: quay.io/app-sre/grafana
-    newTag: 9.3.6
