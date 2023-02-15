@@ -42,7 +42,7 @@ spec:
         - name: grafana
           args:
             - -config=/etc/grafana/grafana.ini
-          image: quay.io/app-sre/grafana:6.7.4
+          image: quay.io/app-sre/grafana:9.3.6
           imagePullPolicy: Always
           env:
             - name: GF_INSTALL_PLUGINS
