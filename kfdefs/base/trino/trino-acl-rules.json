@@ -120,18 +120,8 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
-        "schema": "telemetry_curated",
-        "privileges": ["SELECT"]
-    },
-    {
         "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
         "schema": "telemetry",
-        "privileges": ["SELECT"]
-    },
-    {
-        "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
-        "schema": "telemetry_curated",
         "privileges": ["SELECT"]
     },
     {
