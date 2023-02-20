@@ -1,0 +1,37 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: floorist-sync
+spec:
+  schedule: "0 5 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: quay.io/rhn_support_sreber/curl
+            args: ["curl", "-X", "POST", "--data", "{}", "el-floorist-sync-listener:8080"]
+          restartPolicy: Never
+
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: floorist-listener
+spec:
+  serviceAccountName: s3-sync
+  triggers:
+    - name: s3-sync
+      bindings:
+        - name: src_bucket
+          value: insights-metrics-export-prod
+        - name: dest_bucket
+          value: DH-PROD-RH-INSIGHTS-DATA-EXPORT
+        - name: rclone_params
+          value: ""
+        - name: sync_config_secret_name
+          value: floorist-sync
+      template:
+        ref: s3-sync

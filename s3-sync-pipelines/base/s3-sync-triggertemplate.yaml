@@ -1,0 +1,28 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: s3-sync
+spec:
+  params:
+    - name: src_bucket
+    - name: dest_bucket
+    - name: rclone_params
+      default: ""
+    - name: sync_config_secret_name
+  resourceTemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: "s3-sync-test-sync-"
+      spec:
+        pipelineRef:
+          name: s3-sync
+        params:
+          - name: src_bucket
+            value: "$(tt.params.src_bucket)"
+          - name: dest_bucket
+            value: "$(tt.params.dest_bucket)"
+          - name: rclone_params
+            value: "$(tt.params.rclone_params)"
+          - name: sync_config_secret_name
+            value: "$(tt.params.sync_config_secret_name)"
