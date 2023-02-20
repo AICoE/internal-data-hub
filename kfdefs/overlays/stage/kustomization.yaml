@@ -5,4 +5,3 @@ kind: Kustomization
 resources:
   - dh-stage-trino
   - dh-stage-superset
-  - dh-stage-message-bus

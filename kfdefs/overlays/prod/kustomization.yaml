@@ -5,4 +5,3 @@ kind: Kustomization
 resources:
   - dh-prod-trino
   - dh-prod-superset
-  - dh-prod-message-bus
