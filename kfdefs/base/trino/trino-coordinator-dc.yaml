@@ -62,10 +62,6 @@ spec:
                 path: hive.properties
               - key: jmx.properties
                 path: jmx.properties
-              - key: prometheus.properties
-                path: prometheus.properties
-              - key: iceberg.properties
-                path: iceberg.properties
         - name: trino-jvm-coordinator-config
           secret:
             secretName: trino-jvm-coordinator-config
