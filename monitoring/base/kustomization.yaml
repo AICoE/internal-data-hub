@@ -9,7 +9,6 @@ resources:
   - blackbox-alerting-rules.yaml
   - blackbox-exporter.yaml
   - blackbox-recording-rules.yaml
-  - datahub-help-blackbox-service-monitor.yaml
   - trino-blackbox-service-monitor.yaml
   - superset-blackbox-service-monitor.yaml
   - cvp-s3-webserver-blackbox-service-monitor.yaml
