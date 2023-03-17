@@ -10,7 +10,7 @@ spec:
       template:
         spec:
           containers:
-          - name: hello
+          - name: trigger
             image: quay.io/rhn_support_sreber/curl
             args: ["curl", "-X", "POST", "--data", "{}", "el-usir-stage-sync-listener:8080"]
           restartPolicy: Never
