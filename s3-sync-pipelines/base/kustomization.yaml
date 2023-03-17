@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - s3-sync-pipeline.yaml
+  - s3-sync-task.yaml
+  - s3-sync-serviceaccount.yaml
+  - s3-sync-eventlistener-rolebinding.yaml
+  - s3-sync-eventlistener-clusterrolebinding.yaml
+  - s3-sync-triggertemplate.yaml

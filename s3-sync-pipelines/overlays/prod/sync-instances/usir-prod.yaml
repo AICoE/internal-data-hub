@@ -1,0 +1,37 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: usir-prod-sync
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: trigger
+            image: quay.io/rhn_support_sreber/curl
+            args: ["curl", "-X", "POST", "--data", "{}", "el-usir-prod-sync-listener:8080"]
+          restartPolicy: Never
+
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: usir-prod-sync-listener
+spec:
+  serviceAccountName: s3-sync
+  triggers:
+    - name: s3-sync
+      bindings:
+        - name: src_bucket
+          value: rhsm-subscriptions-egress-prod
+        - name: dest_bucket
+          value: DH-SECURE-USIR
+        - name: rclone_params
+          value: ""
+        - name: sync_config_secret_name
+          value: usir-prod-sync
+      template:
+        ref: s3-sync

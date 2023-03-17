@@ -11,5 +11,3 @@ resources:
   - s3-sync-cost-management-cron-workflow.yaml
   - s3-sync-markeplace2psi-cron-workflow.yaml
   - s3-sync-markeplace2ibm-cron-workflow.yaml
-  - s3-sync-usir-stage-cron-workflow.yaml
-  - s3-sync-usir-prod-cron-workflow.yaml
