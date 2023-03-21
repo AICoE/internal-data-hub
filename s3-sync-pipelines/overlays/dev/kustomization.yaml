@@ -5,3 +5,4 @@ namespace: "dh-dev-s3-sync-pipelines"
 
 resources:
   - ../../base/
+  - s3-sync-eventlistener-clusterrolebinding.yaml

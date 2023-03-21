@@ -6,5 +6,4 @@ resources:
   - s3-sync-task.yaml
   - s3-sync-serviceaccount.yaml
   - s3-sync-eventlistener-rolebinding.yaml
-  - s3-sync-eventlistener-clusterrolebinding.yaml
   - s3-sync-triggertemplate.yaml
