@@ -9,7 +9,7 @@ spec:
     - name: rclone_params
       default: ""
     - name: sync_config_secret_name
-  resourceTemplates:
+  resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:

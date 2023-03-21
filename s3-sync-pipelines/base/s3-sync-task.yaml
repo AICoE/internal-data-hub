@@ -15,7 +15,7 @@ spec:
   steps:
     - name: s3-sync
       image: quay.io/internaldatahub/rclone:latest
-      timeout: 10h
+      timeout: 10h0m0s
       resources:
         limits:
           memory: 2Gi
