@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - usir-prod.yaml
   - usir-stage.yaml
-  # - tower-analytics.yaml
-  # - tower-analytics-stage.yaml
+  - tower-analytics.yaml
+  - tower-analytics-stage.yaml
   # - floorist.yaml
   # - cost-management.yaml
   # - marketplace2psi.yaml
