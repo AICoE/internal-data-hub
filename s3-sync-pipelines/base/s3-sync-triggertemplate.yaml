@@ -15,6 +15,8 @@ spec:
       metadata:
         generateName: "s3-sync-test-sync-"
       spec:
+        timeouts:
+          pipeline: "10h"
         pipelineRef:
           name: s3-sync
         params:
