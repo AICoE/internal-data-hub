@@ -12,7 +12,7 @@ spec:
           containers:
           - name: trigger
             image: quay.io/rhn_support_sreber/curl
-            args: ["curl", "-X", "POST", "--data", "{}", "el-cost-management-sync-listener:8080"]
+            args: ["curl", "-X", "POST", "--data", "{}", "el-cost-management-listener:8080"]
           restartPolicy: Never
 
 ---
