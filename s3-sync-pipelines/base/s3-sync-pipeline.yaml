@@ -11,6 +11,7 @@ spec:
     - name: sync_config_secret_name
   tasks:
     - name: s3-sync
+      timeout: 10h0m0s
       taskRef:
         name: s3-sync
       params:
