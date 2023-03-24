@@ -11,4 +11,3 @@ resources:
   - marketplace2psi.yaml
   - marketplace2ibm.yaml
   - marketplacemetering.yaml
-  - thanos-obslytics.yaml
