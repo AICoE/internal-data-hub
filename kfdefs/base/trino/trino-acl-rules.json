@@ -102,6 +102,11 @@
         "owner": true
     },
     {
+        "group": "data-hub-rhel-admins",
+        "schema": "rhel_reference_data",
+        "owner": true
+    },
+    {
         "owner": false
     }
     ],
@@ -276,6 +281,16 @@
     {
         "group": "ade-trino-access",
         "schema": "ceeacdata",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "data-hub-rhel-admins",
+        "schema": "rhel_reference_data",
+        "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
+    },
+    {
+        "group": "telemeter-auth",
+        "schema": "rhel_reference_data",
         "privileges": ["SELECT"]
     },
     {
