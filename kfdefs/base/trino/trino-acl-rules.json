@@ -39,7 +39,7 @@
     },
     {
         "user": "ccx-admin|ccx-reporting-pipeline-trino",
-        "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal)",
+        "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal|ccx_workloads)",
         "owner": true
     },
     {
@@ -145,12 +145,12 @@
     },
     {
         "user": "ccx-admin|ccx-reporting-pipeline-trino",
-        "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal)",
+        "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal|ccx_workloads)",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
         "user": "ccx-reporting-pipeline-trino-readonly",
-        "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal)",
+        "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal|ccx_workloads)",
         "privileges": ["SELECT"]
     },
     {
@@ -191,6 +191,11 @@
     {
         "group": "ccx-srep-data-access",
         "schema": "ccx_srep",
+        "privileges": ["SELECT"]
+    },
+    {
+        "group": "ccx-workloads-datalake-access",
+        "schema": "ccx_workloads",
         "privileges": ["SELECT"]
     },
     {
