@@ -7,7 +7,3 @@ resources:
   - tower-analytics.yaml
   - tower-analytics-stage.yaml
   - floorist.yaml
-  - cost-management.yaml
-  - marketplace2psi.yaml
-  - marketplace2ibm.yaml
-  - marketplacemetering.yaml
