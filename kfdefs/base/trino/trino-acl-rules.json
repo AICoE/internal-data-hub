@@ -197,7 +197,7 @@
         "group": "ccx-workloads-datalake-access",
         "schema": "ccx_workloads",
         "privileges": ["SELECT"]
-    },    
+    },
     {
         "group": "subscription-watch-admins|subscription-watch-ro",
         "schema": "usir",
