@@ -189,8 +189,6 @@
       name: workload:cpu_usage_cores:sum
     - backfill_to: 2019-08-01T00:00:00Z
       name: workload:memory_usage_bytes:sum
-    - backfill_to: 2019-08-01T00:00:00Z
-      name: subscription_labels
     - backfill_to: 2021-01-01T00:00:00Z
       name: ebs_account_account_type_email_domain_internal
     - backfill_to: 2021-01-01T00:00:00Z
@@ -302,6 +300,8 @@
       name: cluster:cpu_usage_cores:sum
     - backfill_to: 2019-08-01T00:00:00Z
       name: subscription_sync_total
+    - backfill_to: 2019-08-01T00:00:00Z
+      name: subscription_labels
 
     # TODO: add the following metrics to this list (currently timeout or OOMKill)
     # TODO: even with very large pods these are still failing, so these are blocked
