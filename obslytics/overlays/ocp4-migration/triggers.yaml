@@ -197,8 +197,6 @@
       name: acm_managed_cluster_info
     - backfill_to: 2021-03-01T00:00:00Z
       name: cluster:usage:consumption:rhods:cpu:seconds:rate5m
-    - backfill_to: 2019-06-01T00:00:00Z
-      name: csv_succeeded
     - backfill_to: 2021-07-01T00:00:00Z
       name: rhods_total_users
     - backfill_to: 2021-07-01T00:00:00Z
@@ -302,6 +300,8 @@
       name: subscription_sync_total
     - backfill_to: 2019-08-01T00:00:00Z
       name: subscription_labels
+    - backfill_to: 2019-06-01T00:00:00Z
+      name: csv_succeeded
 
     # TODO: add the following metrics to this list (currently timeout or OOMKill)
     # TODO: even with very large pods these are still failing, so these are blocked
