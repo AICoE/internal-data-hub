@@ -1,0 +1,16 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: hive-metastore
+spec:
+  template:
+    spec:
+      volumes:
+        - name: red-hat-ca-cert
+          secret:
+            secretName: root-ca
+      containers:
+        - name: metastore
+          volumeMounts:
+            - name: red-hat-ca-cert
+              mountPath: /s3-compatible-ca
