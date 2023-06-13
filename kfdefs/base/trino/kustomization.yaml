@@ -12,6 +12,7 @@ patchesStrategicMerge:
   - trino-coordinator-dc.yaml
   - trino-service.yaml
   - trino-worker-dc.yaml
+  - hive-metastore-statefulset.yaml
 
 resources:
   - trino-service-monitor.yaml
