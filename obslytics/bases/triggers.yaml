@@ -30,14 +30,6 @@ spec:
                   value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
             continueOn:
               failed: true
-        - - name: small-metrics
-            template: small-metrics-backfill
-            arguments:
-              parameters:
-                - name: backfill_from_timestamp
-                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
-            continueOn:
-              failed: true
         - - name: xl-metrics
             template: xl-metrics-backfill
             arguments:
