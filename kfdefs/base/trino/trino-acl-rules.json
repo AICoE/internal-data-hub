@@ -28,16 +28,6 @@
         "owner": true
     },
     {
-        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
-        "schema": "telemetry",
-        "owner": true
-    },
-    {
-        "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
-        "schema": "telemetry",
-        "owner": true
-    },
-    {
         "user": "ccx-admin|ccx-reporting-pipeline-trino",
         "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal|ccx_workloads)",
         "owner": true
@@ -135,16 +125,6 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
-        "schema": "telemetry",
-        "privileges": ["SELECT"]
-    },
-    {
-        "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
-        "schema": "telemetry",
-        "privileges": ["SELECT"]
-    },
-    {
         "schema": "jdbc",
         "privileges": ["SELECT"]
     },
@@ -161,11 +141,6 @@
     {
         "user": "ccx-research-pipeline-trino",
         "schema": "(ccx|ccx_sensitive)",
-        "privileges": ["SELECT"]
-    },
-    {
-        "user": "ccx-admin|ccx-reporting-pipeline-trino",
-        "schema": "telemetry",
         "privileges": ["SELECT"]
     },
     {
