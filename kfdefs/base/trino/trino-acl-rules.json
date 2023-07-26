@@ -140,11 +140,6 @@
         "privileges": ["SELECT"]
     },
     {
-        "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
-        "schema": "telemetry",
-        "privileges": ["SELECT"]
-    },
-    {
         "schema": "jdbc",
         "privileges": ["SELECT"]
     },
