@@ -28,16 +28,6 @@
         "owner": true
     },
     {
-        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
-        "schema": "telemetry",
-        "owner": true
-    },
-    {
-        "user": "(telemetry-automated|telemetry-edmund-abbot|telemetry-analytics)",
-        "schema": "telemetry",
-        "owner": true
-    },
-    {
         "user": "ccx-admin|ccx-reporting-pipeline-trino",
         "schema": "(ccx|ccx_sensitive|ccx_srep|ccx_internal|ccx_workloads)",
         "owner": true
@@ -132,11 +122,6 @@
     },
     {
         "user": "eda-admin",
-        "privileges": ["SELECT"]
-    },
-    {
-        "group": "(telemeter-auth|telemeter-auto-approval|telemeter-manual-approval)",
-        "schema": "telemetry",
         "privileges": ["SELECT"]
     },
     {
