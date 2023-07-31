@@ -379,7 +379,7 @@ spec:
           from
               hive.information_schema.tables
           where
-              table_schema <> 'information_schema' and table_schema <> 'telemetry_iceberg' and table_schema <> 'kafka' and table_schema not like 'ccx%';
+              table_schema <> 'information_schema' and table_schema <> 'telemetry_iceberg' and table_schema <> 'kafka' and table_schema not like 'ccx%'
           """
 
           conn = trino.dbapi.connect(
