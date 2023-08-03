@@ -22,4 +22,3 @@ presubmits:
             - "pre-commit"
             - "run"
             - "--all-files"
-
