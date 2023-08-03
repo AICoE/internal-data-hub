@@ -1,0 +1,17 @@
+name: Kustomize-Build
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  kustomize-build:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/operate-first/opf-toolbox:v0.3.2
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run kustomize build
+        run: test-kustomize-build
