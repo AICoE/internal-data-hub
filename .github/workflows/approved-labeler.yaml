@@ -11,8 +11,6 @@ jobs:
     steps:
       - uses: Amwam/issue-comment-action@v1.3.1
         with:
-          keywords:
-            - /approve
-          labels:
-            - approved
+          keywords: '["/approve"]'
+          labels: '["approved"]'
           github-token: "${{ secrets.GITHUB_TOKEN }}"
