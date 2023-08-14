@@ -22,12 +22,6 @@ patchesJson6902:
       version: v1alpha1
       kind: CronWorkflow
       name: obslytics-data-exporter-verification-cron-workflows
-  - path: triggers.yaml
-    target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: WorkflowTemplate
-      name: obslytics-data-exporter-workflow-triggers
   - path: workflow-templates.yaml
     target:
       group: argoproj.io
