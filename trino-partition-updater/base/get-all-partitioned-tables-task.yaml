@@ -1,0 +1,96 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: get-all-partitioned-tables
+spec:
+  results:
+    - name: tables-list
+      description: The list of trino tables that are partitioned
+  steps:
+    - name: get-tables-list
+      image: quay.io/opendatahub/trino:356
+      env:
+        - name: TRINO_USER
+          valueFrom:
+            secretKeyRef:
+              name: trino-admin-credentials
+              key: TRINO_USER
+        - name: TRINO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: trino-admin-credentials
+              key: TRINO_PASSWORD
+        - name: TRINO_HOST
+          valueFrom:
+            secretKeyRef:
+              name: trino-admin-credentials
+              key: TRINO_HOST
+      script: |
+        #! /bin/python
+        import trino
+        import json
+        import urllib3
+        import os
+
+        # Temporarily disabling warnings from urllib3
+        urllib3.disable_warnings()
+
+        SHOW_CREATE_TABLES="""
+        select
+            table_schema,
+            table_name,
+            'show create table '||table_catalog||'.'||table_schema||'.'||table_name
+        from
+            hive.information_schema.tables
+        where
+            table_schema <> 'information_schema' and table_schema <> 'telemetry_iceberg' and table_schema <> 'kafka' and table_schema not like 'ccx%'
+        """
+
+        conn = trino.dbapi.connect(
+            host=os.environ["TRINO_HOST"],
+            port=443,
+            user=os.environ["TRINO_USER"],
+            catalog='hive',
+            http_scheme='https',
+            verify=False,
+            auth=trino.auth.BasicAuthentication(os.environ["TRINO_USER"], os.environ["TRINO_PASSWORD"])
+        )
+        cur = conn.cursor()
+        cur.execute(SHOW_CREATE_TABLES)
+        rows = cur.fetchall()
+
+        schemas = []
+
+        failures_detected = False
+        for row in rows:
+            try:
+                create_table_sql = cur.execute(row[2])
+                if "partitioned_by" in cur.fetchall()[0][0]:
+                    print("Adding {}.{} to the list of partitioned tables...".format(row[0],row[1]))
+
+                    schema = next((item for item in schemas if item["name"] == row[0]), None)
+
+
+                    if schema:
+                        schema["tables"].append(row[1])
+                    else:
+                        schema = {}
+                        schema["name"] = row[0]
+                        schema["tables"] = []
+                        schema["tables"].append(row[1])
+                        schemas.append(schema)
+            except Exception as e:
+                failures_detected = True
+                print("Error adding {}.{} to list of partitioned tables. Caused by:".format(row[0], row[1]))
+                print(e)
+
+        with open('$(results.tables-list.path)','w') as f:
+            print("Dumping table list as json data...")
+            json.dump(schemas, f)
+
+        with open('$(results.tables-list.path)') as f:
+            print(f.read())
+
+        if failures_detected:
+            print("Some failures detected.  Returning non-zero exit status")
+            exit(1)
