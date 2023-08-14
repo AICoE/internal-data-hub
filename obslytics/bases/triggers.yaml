@@ -22,22 +22,6 @@ spec:
             templateRef:
               name: obslytics-data-exporter-workflow-template
               template: normalize-timestamps
-        - - name: large-metrics
-            template: large-metrics-backfill
-            arguments:
-              parameters:
-                - name: backfill_from_timestamp
-                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
-            continueOn:
-              failed: true
-        - - name: xl-metrics
-            template: xl-metrics-backfill
-            arguments:
-              parameters:
-                - name: backfill_from_timestamp
-                  value: "{{steps.normalize-timestamps.outputs.parameters.backfill_from_timestamp}}"
-            continueOn:
-              failed: true
         - - name: get-all-partitioned-tables
             continueOn:
               failed: true
