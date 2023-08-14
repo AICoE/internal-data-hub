@@ -5,6 +5,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: trino-partition-updater
+    namespace: dh-prod-trino
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
