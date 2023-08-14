@@ -1,0 +1,10 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: trino-partition-updater
+spec:
+  serviceAccountName: trino-partition-updater
+  triggers:
+    - name: trino-partition-updater
+      template:
+        ref: trino-partition-updater
