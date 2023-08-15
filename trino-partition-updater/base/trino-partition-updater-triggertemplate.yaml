@@ -9,5 +9,6 @@ spec:
       metadata:
         generateName: "trino-partition-updater-"
       spec:
+        timeout: 10h0m0s
         pipelineRef:
           name: trino-partition-updater
