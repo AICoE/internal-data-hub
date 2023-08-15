@@ -8,6 +8,7 @@ spec:
       taskRef:
         name: get-all-partitioned-tables
     - name: update-partition-metadata
+      timeout: 10h0m0s
       taskRef:
         name: update-partition-metadata
       params:
