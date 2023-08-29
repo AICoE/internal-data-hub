@@ -92,7 +92,7 @@
         "owner": true
     },
     {
-        "group": "insights-statistics-owners",
+        "group": "insights-analytics-owners",
         "schema": "insights_(accounts|rules|systems|adoption)_analytics",
         "owner": true
     },
@@ -259,12 +259,12 @@
         "privileges": ["SELECT"]
     },
     {
-        "group": "insights-statistics-owners",
+        "group": "insights-analytics-owners",
         "schema": "insights_(accounts|rules|systems|adoption)_analytics",
         "privileges": ["SELECT", "INSERT", "DELETE", "OWNERSHIP", "GRANT_SELECT"]
     },
     {
-        "group": "insights-statistics",
+        "group": "insights-analytics-users",
         "schema": "insights_(accounts|rules|systems|adoption)_analytics",
         "privileges": ["SELECT"]
     },
