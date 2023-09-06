@@ -14,7 +14,7 @@ patchesStrategicMerge:
 
 replicas:
   - name: trino-worker
-    count: 4
+    count: 5
 
 patchesJson6902:
   - patch: |
