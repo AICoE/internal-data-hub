@@ -11,6 +11,7 @@ generators:
 
 patchesStrategicMerge:
   - trino-db-pvc.yaml
+  - hive-metastore-statefulset.yaml
 
 replicas:
   - name: trino-worker
@@ -87,7 +88,7 @@ patchesJson6902:
   - patch: |
       - op: replace
         path: /data/hive_metastore_memory_request
-        value: '1Gi'
+        value: '4Gi'
     target:
       kind: ConfigMap
       name: trino-config
@@ -95,7 +96,7 @@ patchesJson6902:
   - patch: |
       - op: replace
         path: /data/hive_metastore_memory_limit
-        value: '2Gi'
+        value: '8Gi'
     target:
       kind: ConfigMap
       name: trino-config
