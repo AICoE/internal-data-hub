@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: dh-prod-superset
 
 resources:
-  - ../../../base/superset
+  - ../../base/
   - supersetdb-route.yaml
   - bareos-fd-deploymentconfig.yaml
   - bareos-fd-imagestream.yaml

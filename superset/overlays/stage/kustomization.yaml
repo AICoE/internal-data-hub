@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: dh-stage-superset
 
 resources:
-  - ../../../base/superset
+  - ../../base/
 
 generators:
   - secret-generator.yaml
