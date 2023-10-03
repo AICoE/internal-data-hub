@@ -89,10 +89,10 @@ spec:
             memory: $(superset_memory_limits)
       serviceAccountName: superset
       volumes:
+        - name: trino-route-certificate-secret
+          secret:
+            secretName: trino-route-certificate-secret
         - name: superset-config
           configMap:
             name: superset-config-py
             defaultMode: 420
-        - name: trino-route-certificate-secret
-          secret:
-            secretName: trino-route-certificate-secret
