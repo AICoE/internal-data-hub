@@ -12,3 +12,7 @@ spec:
         timeout: 10h0m0s
         pipelineRef:
           name: trino-partition-updater
+        workspaces:
+          - name: tables-list
+            persistentVolumeClaim:
+              claimName: tables-list-pvc
