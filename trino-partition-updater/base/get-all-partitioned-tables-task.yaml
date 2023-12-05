@@ -83,11 +83,11 @@ spec:
                 print("Error adding {}.{} to list of partitioned tables. Caused by:".format(row[0], row[1]))
                 print(e)
 
-        with open('$(workspaces.tables-list.path)','w') as f:
+        with open('$(workspaces.tables-list.path)/tables-list.txt','w') as f:
             print("Dumping table list as json data...")
             json.dump(schemas, f)
 
-        with open('$(workspaces.tables-list.path)') as f:
+        with open('$(workspaces.tables-list.path)/tables-list.txt') as f:
             print(f.read())
 
         if failures_detected:
