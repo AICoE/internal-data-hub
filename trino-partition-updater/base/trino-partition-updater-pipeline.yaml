@@ -5,6 +5,7 @@ metadata:
 spec:
   workspaces:
     - name: tables-list
+
   tasks:
     - name: get-all-partitioned-tables
       taskRef:
@@ -17,3 +18,5 @@ spec:
         name: update-partition-metadata
       workspaces:
         - name: tables-list
+          persistentVolumeClaim:
+            claimName: tables-list-pvc
