@@ -5,6 +5,8 @@ metadata:
 spec:
   workspaces:
     - name: tables-list
+      persistentVolumeClaim:
+        claimName: tables-list-pvc
   steps:
     - name: update-partition-metadata
       image: quay.io/opendatahub/trino:356
@@ -35,7 +37,7 @@ spec:
         # Disable warnings from urllib3
         urllib3.disable_warnings()
 
-        with open('$(workspaces.messages.path)') as f:
+        with open('$(workspaces.tables-list.path)') as f:
             TABLE_DEFS = f.read()
 
         UPDATE_PARTITION = "call hive.system.sync_partition_metadata('{}','{}','FULL')"

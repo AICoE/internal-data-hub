@@ -18,5 +18,3 @@ spec:
         name: update-partition-metadata
       workspaces:
         - name: tables-list
-          persistentVolumeClaim:
-            claimName: tables-list-pvc
