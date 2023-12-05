@@ -5,8 +5,6 @@ metadata:
 spec:
   workspaces:
     - name: tables-list
-      persistentVolumeClaim:
-        claimName: tables-list-pvc
   steps:
     - name: get-tables-list
       image: quay.io/opendatahub/trino:356
