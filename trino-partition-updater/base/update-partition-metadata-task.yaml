@@ -35,7 +35,7 @@ spec:
         # Disable warnings from urllib3
         urllib3.disable_warnings()
 
-        with open('$(workspaces.tables-list.path)') as f:
+        with open('$(workspaces.tables-list.path)/tables-list.txt') as f:
             TABLE_DEFS = f.read()
 
         UPDATE_PARTITION = "call hive.system.sync_partition_metadata('{}','{}','FULL')"
