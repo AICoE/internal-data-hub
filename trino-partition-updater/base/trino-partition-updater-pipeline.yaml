@@ -15,5 +15,7 @@ spec:
       timeout: 10h0m0s
       taskRef:
         name: update-partition-metadata
+      runAfter:
+        - get-all-partitioned-tables
       workspaces:
         - name: tables-list
