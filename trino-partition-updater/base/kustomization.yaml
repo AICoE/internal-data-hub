@@ -10,6 +10,7 @@ resources:
   - trino-partition-updater-cronjob.yaml
   - trino-partition-updater-serviceaccount.yaml
   - trino-partition-updater-eventlistener-rolebinding.yaml
+  - tables-list-pvc.yaml
 
 generators:
   - secrets/secret-generator.yaml
