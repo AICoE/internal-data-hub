@@ -3,14 +3,17 @@ kind: Pipeline
 metadata:
   name: trino-partition-updater
 spec:
+  workspaces:
+    - name: tables-list
   tasks:
     - name: get-all-partitioned-tables
       taskRef:
         name: get-all-partitioned-tables
+      workspaces:
+        - name: tables-list
     - name: update-partition-metadata
       timeout: 10h0m0s
       taskRef:
         name: update-partition-metadata
-      params:
-        - name: tables_list
-          value: $(tasks.get-all-partitioned-tables.results.tables-list)
+      workspaces:
+        - name: tables-list

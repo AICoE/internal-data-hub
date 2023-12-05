@@ -3,9 +3,8 @@ kind: Task
 metadata:
   name: update-partition-metadata
 spec:
-  params:
-    - name: tables_list
-      type: string
+  workspaces:
+    - name: tables-list
   steps:
     - name: update-partition-metadata
       image: quay.io/opendatahub/trino:356
@@ -36,7 +35,8 @@ spec:
         # Disable warnings from urllib3
         urllib3.disable_warnings()
 
-        TABLE_DEFS = '$(params.tables_list)'
+        with open('$(workspaces.messages.path)') as f:
+            TABLE_DEFS = f.read()
 
         UPDATE_PARTITION = "call hive.system.sync_partition_metadata('{}','{}','FULL')"
 
