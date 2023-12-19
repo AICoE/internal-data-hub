@@ -344,6 +344,11 @@
         "privileges": ["SELECT"]
     },
     {
+        "group": "it-data-platforms-enablement",
+        "schema": "usir",
+        "privileges": ["SELECT"]
+    },
+    {
         "privileges": []
     }
     ]
