@@ -5,4 +5,4 @@ kind: Kustomization
 resources:
   - ../../base
 
-namespace: dh-prod-s3-webserver
+namespace: internal-data-hub--s3-webserver-prod
