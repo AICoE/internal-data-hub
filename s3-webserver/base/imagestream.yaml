@@ -8,3 +8,6 @@ metadata:
 spec:
   tags:
     - name: latest
+      from:
+        kind: DockerImage
+        name: 'quay.io/internaldatahub/s3-webserver:latest'
