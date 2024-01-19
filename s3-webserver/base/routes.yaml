@@ -8,7 +8,9 @@ metadata:
   labels:
     app: s3webserver
     template: s3webserver
+    shard: internal
 spec:
+  host: cvp-webserver-internal-data-hub--s3-webserver-prod.apps.int.gpc.ocp-hub.prod.psi.redhat.com
   to:
     kind: Service
     name: cvp-webserver-s3webserver
