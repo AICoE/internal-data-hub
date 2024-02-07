@@ -4,6 +4,7 @@ metadata:
   name: superset
   labels:
     app: superset
+    shard: internal
 spec:
   port:
     targetPort: 8088-tcp
