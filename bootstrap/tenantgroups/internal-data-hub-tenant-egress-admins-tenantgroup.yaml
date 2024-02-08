@@ -1,0 +1,9 @@
+apiVersion: tenant.paas.redhat.com/v1
+kind: TenantGroup
+metadata:
+  name: internal-data-hub-tenant-egress-admins
+  namespace: internal-data-hub--config
+spec:
+  ldapDN: cn=data-hub-openshift-admins,ou=adhoc,ou=managedGroups,dc=redhat,dc=com
+  roles:
+    - tenant-egress-admin

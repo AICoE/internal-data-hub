@@ -1,0 +1,47 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dh-sandbox-telemetry-grafana
+  namespace: internal-data-hub--argocd
+spec:
+  destination:
+    namespace: dh-sandbox-telemetry-grafana
+    server: https://api.datahub-ocp4.prod.psi.redhat.com:6443
+  project: internal-data-hub
+  source:
+    path: telemetry-grafana/overlays/sandbox
+    repoURL: https://github.com/AICoE/internal-data-hub.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - Validate=false
+    automated:
+      prune: true
+      selfHeal: true
+  ignoreDifferences:
+    - kind: ServiceAccount
+      name: grafana
+      jsonPointers:
+        - /imagePullSecrets
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: telemetry-dashboards-sandbox
+  namespace: internal-data-hub--argocd
+spec:
+  destination:
+    namespace: dh-sandbox-telemetry-grafana
+    server: https://api.datahub-ocp4.prod.psi.redhat.com:6443
+  project: internal-data-hub
+  source:
+    path: overlays/sandbox
+    repoURL: https://gitlab.cee.redhat.com/data-hub/telemeter-ocp-dashboards.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - Validate=false
+    automated:
+      prune: true
+      selfHeal: true

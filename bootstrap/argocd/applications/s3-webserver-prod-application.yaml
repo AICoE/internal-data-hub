@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: s3-webserver-prod
+  namespace: internal-data-hub--argocd
+spec:
+  destination:
+    namespace: internal-data-hub--s3-webserver-prod
+    server: https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+  project: internal-data-hub
+  source:
+    path: s3-webserver/overlays/prod
+    repoURL: 'https://github.com/AICoE/internal-data-hub.git'
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - Validate=false
