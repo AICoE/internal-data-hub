@@ -1,0 +1,259 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: internal-data-hub-argocd
+  namespace: internal-data-hub--argocd
+spec:
+  extraConfig:
+    kustomize.buildOptions: "--enable-alpha-plugins"
+  controller:
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 2048Mi
+      requests:
+        cpu: 250m
+        memory: 1024Mi
+  resourceInclusions: |
+    - apiGroups:
+      - ''
+      kinds:
+      - Binding
+      - ConfigMap
+      - Endpoints
+      - Event
+      - LimitRange
+      - PersistentVolumeClaim
+      - Pod
+      - ReplicationController
+      - ResourceQuota
+      - Secret
+      - ServiceAccount
+      - Service
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - apps
+      kinds:
+      - ControllerRevision
+      - Deployment
+      - StatefulSet
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - apps.openshift.io
+      kinds:
+      - DeploymentConfig
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - authorization.openshift.io
+      kinds:
+      - RoleBindingRestriction
+      - RoleBinding
+      - Role
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - build.openshift.io
+      kinds:
+      - BuildConfig
+      - Build
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - extensions
+      kinds:
+      - Deployment
+      - Ingress
+      - NetworkPolicy
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - image.openshift.io
+      kinds:
+      - ImageStreamImage
+      - ImageStreamMapping
+      - ImageStream
+      - ImageStreamTag
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - policy
+      kinds:
+      - PodDisruptionBudget
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - rbac.authorization.k8s.io
+      kinds:
+      - RoleBinding
+      - Role
+      - ClusterRoleBinding
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - route.openshift.io
+      kinds:
+      - Route
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - template.openshift.io
+      kinds:
+      - Template
+      - TemplateInstance
+      - Template
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - image.openshift.io
+      kinds:
+      - ImageStreamImage
+      - ImageStreamMapping
+      - ImageStream
+      - ImageStreamTag
+      - ImageTag
+      clusters:
+      - https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - monitoring.coreos.com
+      kinds:
+        - ServiceMonitor
+        - PrometheusRule
+        - PodMonitor
+      clusters:
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - triggers.tekton.dev
+      kinds:
+        - TriggerTemplate
+        - EventListener
+      clusters:
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    - apiGroups:
+      - tekton.dev
+      kinds:
+        - Task
+        - Pipeline
+      clusters:
+    - apiGroups:
+      - batch
+      kinds:
+        - CronJob
+      clusters:
+      - https://api.datahub-ocp4.prod.psi.redhat.com:6443
+  ha:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+    enabled: false
+  rbac:
+    defaultPolicy: ""
+    policy: |
+      g, system:cluster-admins, role:admin
+      g, data-hub-openshift-admins, role:admin
+    scopes: "[email, groups]"
+  redis:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  repo:
+    env:
+      - name: GNUPGHOME
+        value: /.gnupg
+      - name: XDG_CONFIG_HOME
+        value: /.config
+      - name: SOPS_PGP_FP
+        value: EFDB9AFBD18936D9AB6B2EECBD2C73FF891FBC7E
+    volumes:
+      - name: custom-tools
+        emptyDir: {}
+      - name: gpghome
+        emptyDir: {}
+      - name: ksops-pgp-key
+        secret:
+          secretName: ksops-pgp-key
+    initContainers:
+      - name: install-ksops
+        image: quay.io/viaductoss/ksops:v3.0.2
+        command: ["/bin/sh", "-c"]
+        env:
+          - name: GNUPGHOME
+            value: /.gnupg
+        args:
+          - 'echo "Installing KSOPS..."; cp ksops /custom-tools/; cp $GOPATH/bin/kustomize /custom-tools/; gpg --import /.config/sops/pgp/*; echo "Done.";'
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
+          - mountPath: /.gnupg
+            name: gpghome
+          - mountPath: /.config/sops/pgp/private.key
+            name: ksops-pgp-key
+            subPath: private.key
+    volumeMounts:
+      - mountPath: /usr/local/bin/kustomize
+        name: custom-tools
+        subPath: kustomize
+      - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+        name: custom-tools
+        subPath: ksops
+      - mountPath: /.config/sops/pgp/private.key
+        name: ksops-pgp-key
+        subPath: private.key
+      - mountPath: /.gnupg
+        name: gpghome
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1024Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+  server:
+    host: internal-data-hub-argocd.apps.int.gpc.ocp-hub.prod.psi.redhat.com
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 125m
+        memory: 128Mi
+    route:
+      labels:
+        shard: internal
+      enabled: true
+      tls:
+        termination: reencrypt
+        insecureEdgeTerminationPolicy: Redirect
+  sso:
+    dex:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 128Mi
+      openShiftOAuth: true
+    provider: dex

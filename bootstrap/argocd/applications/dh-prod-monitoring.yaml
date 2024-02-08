@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dh-prod-monitoring
+  namespae: internal-data-hub-argocd
+spec:
+  destination:
+    namespace: dh-prod-monitoring
+    server: https://api.datahub-ocp4.prod.psi.redhat.com:6443
+  project: internal-data-hub
+  source:
+    path: monitoring/overlays/prod
+    repoURL: https://github.com/AICoE/internal-data-hub.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - Validate=false
