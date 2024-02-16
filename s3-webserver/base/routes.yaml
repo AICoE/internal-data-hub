@@ -23,6 +23,7 @@ metadata:
   annotations:
     haproxy.router.openshift.io/timeout: 10m
   labels:
+    shard: internal
     app: s3webserver
     template: s3webserver
 spec:
