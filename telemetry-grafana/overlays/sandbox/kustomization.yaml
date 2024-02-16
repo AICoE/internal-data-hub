@@ -9,7 +9,7 @@ resources:
 generators:
   - ./secret-generator.yaml
 
-namespace: dh-sandbox-telemetry-grafana
+namespace: internal-data-hub--telemetry-grafana-sandbox
 
 patchesJson6902:
   - target:
