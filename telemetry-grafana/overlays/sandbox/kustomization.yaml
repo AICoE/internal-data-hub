@@ -12,6 +12,14 @@ generators:
 namespace: internal-data-hub--telemetry-grafana-sandbox
 
 patchesJson6902:
+  - patch: |
+      - op: add
+        path: "/spec/host"
+        value: "grafana-internal-data-hub--telemetry-grafana-sandbox.apps.int.gpc.ocp-hub.prod.psi.redhat.com"
+    target:
+      kind: Route
+      name: grafana
+      version: v1
   - target:
       kind: DeploymentConfig
       name: grafana
