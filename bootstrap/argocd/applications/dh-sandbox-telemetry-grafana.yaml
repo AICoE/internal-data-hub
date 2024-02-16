@@ -6,8 +6,8 @@ metadata:
   namespace: internal-data-hub--argocd
 spec:
   destination:
-    namespace: dh-sandbox-telemetry-grafana
-    server: https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    namespace: internal-data-hub--telemetry-grafana-sandbox
+    server: https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
   project: internal-data-hub
   source:
     path: telemetry-grafana/overlays/sandbox
@@ -32,8 +32,8 @@ metadata:
   namespace: internal-data-hub--argocd
 spec:
   destination:
-    namespace: dh-sandbox-telemetry-grafana
-    server: https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    namespace: internal-data-hub--telemetry-grafana-sandbox
+    server: https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
   project: internal-data-hub
   source:
     path: overlays/sandbox
