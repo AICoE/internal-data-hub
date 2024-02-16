@@ -1,0 +1,7 @@
+apiVersion: tenant.paas.redhat.com/v1alpha1
+kind: LdapGroup
+metadata:
+  name: telemeter-cs-tam-auto
+  namespace: internal-data-hub--config
+spec:
+  ldapDN: 'cn=telemeter-cs-tam-auto,ou=adhoc,ou=managedGroups,dc=redhat,dc=com'

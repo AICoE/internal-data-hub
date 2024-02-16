@@ -1,0 +1,7 @@
+apiVersion: tenant.paas.redhat.com/v1alpha1
+kind: LdapGroup
+metadata:
+  name: cs-csa-auto-ccx
+  namespace: internal-data-hub--config
+spec:
+  ldapDN: 'cn=cs-csa-auto-ccx,ou=adhoc,ou=managedGroups,dc=redhat,dc=com'
