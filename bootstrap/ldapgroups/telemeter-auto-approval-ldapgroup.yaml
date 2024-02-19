@@ -1,0 +1,7 @@
+apiVersion: tenant.paas.redhat.com/v1alpha1
+kind: LdapGroup
+metadata:
+  name: telemeter-auto-approval
+  namespace: internal-data-hub--config
+spec:
+  ldapDN: 'cn=telemeter-auto-approval,ou=adhoc,ou=managedGroups,dc=redhat,dc=com'
