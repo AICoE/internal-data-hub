@@ -97,7 +97,7 @@ patchesJson6902:
           haproxy.router.openshift.io/timeout: 200s
       - op: add
         path: "/spec/host"
-        value: "superset-internal-data-hub--s3-webserver-stage.apps.int.gpc.ocp-hub.prod.psi.redhat.com"
+        value: "superset-internal-data-hub--superset-stage.apps.int.gpc.ocp-hub.prod.psi.redhat.com"
     target:
       kind: Route
       name: superset
