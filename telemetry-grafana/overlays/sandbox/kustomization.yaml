@@ -57,4 +57,4 @@ patchesJson6902:
     patch: |
       - op: add
         path: /spec/template/spec/containers/2/args/-
-        value: --openshift-sar={"namespace":"dh-sandbox-telemetry-grafana","resource":"services","resourceName":"grafana","verb":"get"}
+        value: --openshift-sar={"namespace":"internal-data-hub--telemetry-grafana-sandbox","resource":"services","resourceName":"grafana","verb":"get"}
