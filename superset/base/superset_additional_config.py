@@ -2,8 +2,8 @@ import ldap
 import logging
 import os
 
-RED_HAT_CERT_BUNDLE = '/etc/certs/redHatRootCA.crt'
-os.environ['CURL_CA_BUNDLE'] = RED_HAT_CERT_BUNDLE
+# RED_HAT_CERT_BUNDLE = '/etc/certs/redHatRootCA.crt'
+# os.environ['CURL_CA_BUNDLE'] = RED_HAT_CERT_BUNDLE
 
 # Force users to re-auth after 24 hours of inactivity (to keep roles in sync)
 PERMANENT_SESSION_LIFETIME = 86400
