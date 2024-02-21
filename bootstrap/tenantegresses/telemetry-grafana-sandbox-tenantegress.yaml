@@ -726,5 +726,8 @@ spec:
       cidrSelector: 34.120.177.193/32
     type: Allow
   - to:
+      dnsName: infogw-proxy.api.openshift.com
+    type: Allow
+  - to:
       cidrSelector: 0.0.0.0/0
     type: Deny
