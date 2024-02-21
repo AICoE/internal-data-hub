@@ -43,18 +43,26 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 # Set Webserver timeout to 30 minutes to wait for the queries to be executed
 SUPERSET_WEBSERVER_TIMEOUT = 1800
 
-SYSTEM_CERT_BUNDLE = '/etc/ssl/certs/ca-bundle.crt'
-CLUSTER_CERT_BUNDLE = '/run/secrets/kubernetes.io/serviceaccount/ca.crt'
-COMBINED_CERT_BUNDLE = '/tmp/superset-combined-cert-bundle.crt'
+def create_combined_cert():
+    #SYSTEM_CERT_BUNDLE = '/etc/ssl/certs/ca-certificates.crt' # Works for Superset 3.1
+    SYSTEM_CERT_BUNDLE = '/etc/ssl/certs/ca-bundle.crt' # Works for Superset 1.5
+    CLUSTER_CERT_BUNDLE = '/run/secrets/kubernetes.io/serviceaccount/ca.crt'
+    RED_HAT_CERT_BUNDLE = '/etc/certs/redHatRootCA.crt'
+    COMBINED_CERT_BUNDLE = '/tmp/superset-combined-cert-bundle.crt'
 
-with open(COMBINED_CERT_BUNDLE, 'a+') as combined:
-    with open(SYSTEM_CERT_BUNDLE) as sys_bundle:
-        combined.write(sys_bundle.read())
+    with open(COMBINED_CERT_BUNDLE, 'a+') as combined:
+        with open(SYSTEM_CERT_BUNDLE) as sys_bundle:
+            combined.write(sys_bundle.read())
 
-    with open(CLUSTER_CERT_BUNDLE) as clus_bundle:
-        combined.write(clus_bundle.read())
+        with open(CLUSTER_CERT_BUNDLE) as clus_bundle:
+            combined.write(clus_bundle.read())
 
-os.environ['CURL_CA_BUNDLE'] = COMBINED_CERT_BUNDLE
+        with open(RED_HAT_CERT_BUNDLE) as rht_bundle:
+            combined.write(rht_bundle.read())
+
+    os.environ['CURL_CA_BUNDLE'] = COMBINED_CERT_BUNDLE
+
+# create_combined_cert()
 
 AUTH_TYPE = AUTH_OAUTH
 
@@ -80,6 +88,7 @@ OAUTH_PROVIDERS = [
             'api_base_url': 'https://openshift.default.svc.cluster.local:443',
             'client_kwargs': {
                 'scope': 'user:info',
+                'verify': False
             },
             'access_token_url': f'{auth_api_url}/oauth/token',
             'authorize_url': f'{auth_api_url}/oauth/authorize',
@@ -113,7 +122,7 @@ class CustomSecurityManager(SupersetSecurityManager):
     def oauth_user_info(self, provider, response=None):
         me = self.appbuilder.sm.oauth_remotes[provider].get(
             "apis/user.openshift.io/v1/users/~",
-            verify=COMBINED_CERT_BUNDLE
+            verify=False
         )
         data = me.json()
         username = data.get('metadata').get('name')
