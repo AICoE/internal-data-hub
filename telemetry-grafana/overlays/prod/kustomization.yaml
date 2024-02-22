@@ -8,7 +8,7 @@ resources:
 generators:
   - ./secret-generator.yaml
 
-namespace: dh-prod-telemetry-grafana
+namespace: internal-data-hub--telemetry-grafana-prod
 
 patchesJson6902:
   - target:
@@ -37,4 +37,4 @@ patchesJson6902:
     patch: |
       - op: add
         path: /spec/template/spec/containers/2/args/-
-        value: --openshift-sar={"namespace":"dh-prod-telemetry-grafana","resource":"services","resourceName":"grafana","verb":"get"}
+        value: --openshift-sar={"namespace":"internal-data-hub--telemetry-grafana-prod","resource":"services","resourceName":"grafana","verb":"get"}
