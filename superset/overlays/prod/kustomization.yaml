@@ -1,7 +1,7 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: dh-prod-superset
+namespace: internal-data-hub--superset-prod
 
 resources:
   - ../../base/
@@ -131,6 +131,9 @@ patchesJson6902:
         path: "/metadata/annotations"
         value:
           haproxy.router.openshift.io/timeout: 200s
+      - op: add
+        path: "/spec/host"
+        value: "superset-internal-data-hub--superset-prod.apps.int.gpc.ocp-hub.prod.psi.redhat.com"
     target:
       kind: Route
       name: superset

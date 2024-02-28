@@ -5,6 +5,7 @@ metadata:
         haproxy.router.openshift.io/timeout: 1800s
     labels:
         app: superset
+        shard: internal
     name: superset-datahub
 spec:
     host: superset.datahub.redhat.com
@@ -24,8 +25,8 @@ sops:
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2024-02-27T18:31:22Z"
-    mac: ENC[AES256_GCM,data:WJpDBruSjMB6uNnuii4lTm4V/zppx9L3A9KUqJX3Vw60bZRQrEC1qPv4MB8cYb34ZfnYnD7SjT7YRrZSJiXpTWG+sqyeoJvjgGPWdzZ5CZTlh8NlE9zUKWrr0OEw9i8xAVOUMQ0pENMcR6ZDsptjXjex7db29SQnSukFYGvwnBc=,iv:ofxFGMLGTej1CFA89Ee6qAcyyYd0RIpZk2d9dB+r+A8=,tag:Tb4GSHJxeLZ13PRPCcL7rQ==,type:str]
+    lastmodified: "2024-02-28T13:05:07Z"
+    mac: ENC[AES256_GCM,data:aZ0y1R4skDvaFA6oK66YZx9GkdTrQbM0NjseRP7KaCsZf02AG/I8VaKaYYKl65899Nb4o+MhVkNcCBsjBNKBDgbYVif1nDCsrFDkhFrhTNj++kGG7SfPnvUwNdrXYeEph0IkbqIideXoRlhWkLKNbrze4nuqU4ZqNRUwPPwYLAg=,iv:KYxGNWcmPoqdolKq4IlRKCpVoqQrrN6vSE3DvvP555I=,tag:byLoRZ1/kMvGQerkmXg2dw==,type:str]
     pgp:
         - created_at: "2021-09-08T20:35:36Z"
           enc: |
