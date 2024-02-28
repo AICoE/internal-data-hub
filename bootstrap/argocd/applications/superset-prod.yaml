@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ocp4.dh-prod-superset
+  name: superset-prod
   namespace: internal-data-hub--argocd
 spec:
   destination:
-    namespace: dh-prod-superset
-    server: https://api.datahub-ocp4.prod.psi.redhat.com:6443
+    namespace: internal-data-hub--superset-prod
+    server: https://api.gpc.ocp-hub.prod.psi.redhat.com:6443
   project: internal-data-hub
   source:
     path: superset/overlays/prod
