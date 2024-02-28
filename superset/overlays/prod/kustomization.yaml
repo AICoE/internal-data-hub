@@ -121,7 +121,7 @@ patchesJson6902:
   - patch: |
       - op: add
         path: "/spec/storageClassName"
-        value: dynamic-nfs
+        value: rh-internal-nfs
     target:
       kind: PersistentVolumeClaim
       name: postgresql
