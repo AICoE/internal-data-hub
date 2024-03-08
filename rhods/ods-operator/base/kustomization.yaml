@@ -1,3 +1,0 @@
-namespace: redhat-ods-operator
-resources:
-  - rhods-operator-subscription.yaml

@@ -1,4 +1,0 @@
-namespace: redhat-ods-operator
-resources:
-  - redhat-layer-product-og.yaml
-  - namespace.yaml
