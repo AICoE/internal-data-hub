@@ -1,5 +1,5 @@
-apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: cvp-webserver
   labels:
@@ -7,6 +7,10 @@ metadata:
     template: s3webserver
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: s3webserver
+      component: cvp-webserver-s3webserver
   template:
     metadata:
       name: s3webserver
@@ -18,6 +22,7 @@ spec:
       containers:
         - name: s3webserver
           imagePullPolicy: Always
+          image: quay.io/internaldatahub/s3-webserver:latest
           resources:
             limits:
               cpu: 100m
@@ -47,13 +52,3 @@ spec:
         - name: config
           configMap:
             name: cvp-webserver-s3webserver-config
-  triggers:
-    - type: ConfigChange
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        from:
-          kind: ImageStreamTag
-          name: s3webserver:latest
-        containerNames:
-          - s3webserver
