@@ -1,0 +1,7 @@
+apiVersion: tenant.paas.redhat.com/v1alpha1
+kind: LdapGroup
+metadata:
+  name: cvp-ops-admin
+  namespace: internal-data-hub--config
+spec:
+  ldapDN: 'cn=cvp-ops-admin,ou=adhoc,ou=managedGroups,dc=redhat,dc=com'

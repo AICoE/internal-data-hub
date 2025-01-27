@@ -4,5 +4,6 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - cvp-ops-admin-rolebinding.yaml
 
 namespace: internal-data-hub--s3-webserver-prod
