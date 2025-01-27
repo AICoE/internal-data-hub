@@ -169,6 +169,7 @@ spec:
     policy: |
       g, system:cluster-admins, role:admin
       g, data-hub-openshift-admins, role:admin
+      g, cvp-ops-admins, role:admin
     scopes: "[email, groups]"
   redis:
     resources:
