@@ -3,8 +3,6 @@ kind: RoleBinding
 metadata:
   name: cvp-ops-admin
 roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
   name: admin
 subjects:
   - kind: Group
