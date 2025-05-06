@@ -1,9 +1,0 @@
-apiVersion: tenant.paas.redhat.com/v1alpha1
-kind: TenantNamespace
-metadata:
-  name: superset-prod
-  namespace: internal-data-hub--config
-spec:
-  type: runtime
-  network:
-    security-zone: internal
