@@ -29,11 +29,6 @@ spec:
             - --oidc.issuer-url=$(OIDC_ISSUER_URL)
             - --url=https://rhobs.us-east-1.api.openshift.com/api/metrics/v1/telemeter
           env:
-            - name: OIDC_AUDIENCE
-              valueFrom:
-                secretKeyRef:
-                  key: audience
-                  name: token-refresher-oidc
             - name: OIDC_CLIENT_ID
               valueFrom:
                 secretKeyRef:
