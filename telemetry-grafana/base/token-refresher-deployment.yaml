@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - args:
-            - --log.level=info
+            - --log.level=debug
             - --log.format=logfmt
             - --web.listen=0.0.0.0:8080
             - --web.internal.listen=0.0.0.0:8081
@@ -28,6 +28,7 @@ spec:
             - --oidc.client-secret=$(OIDC_CLIENT_SECRET)
             - --oidc.issuer-url=$(OIDC_ISSUER_URL)
             - --url=https://rhobs.us-east-1.api.openshift.com/api/metrics/v1/telemeter
+            - --scope=profile
           env:
             - name: OIDC_CLIENT_ID
               valueFrom:
@@ -44,7 +45,7 @@ spec:
                 secretKeyRef:
                   key: issuerUrl
                   name: token-refresher-oidc
-          image: quay.io/observatorium/token-refresher:master-2021-03-05-b34376b
+          image: quay.io/observatorium/token-refresher:master-2023-09-20-f5e3403
           name: token-refresher
           ports:
             - containerPort: 8081
