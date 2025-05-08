@@ -7,7 +7,7 @@ resources:
   - grafana-proxy-config-secret.yaml
   - grafana-cluster-role-binding.yaml
 
-namespace: dh-dev-telemetry-grafana
+namespace: internal-data-hub--telemetry-grafana-dev
 
 patchesJson6902:
   - target:
