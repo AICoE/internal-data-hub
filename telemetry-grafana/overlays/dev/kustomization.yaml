@@ -27,4 +27,13 @@ patchesJson6902:
     patch: |
       - op: add
         path: /spec/template/spec/containers/2/args/-
-        value: --openshift-sar={"namespace":"dh-dev-telemetry-grafana","resource":"services","resourceName":"grafana","verb":"get"}
+        value: --openshift-sar={"namespace":"internal-data-hub--telemetry-grafana-dev","resource":"services","resourceName":"grafana","verb":"get"}
+  - target:
+      kind: DeploymentConfig
+      name: grafana
+      group: apps.openshift.io
+      version: v1
+    patch: |
+      - op: replace
+        path: /spec/template/spec/containers/1/env/1/value
+        value: Admin
