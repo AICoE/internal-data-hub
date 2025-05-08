@@ -729,5 +729,8 @@ spec:
       dnsName: infogw-proxy.api.openshift.com
     type: Allow
   - to:
+      dnsName: sso.redhat.com
+    type: Allow
+  - to:
       cidrSelector: 0.0.0.0/0
     type: Deny
