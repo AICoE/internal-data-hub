@@ -12,6 +12,8 @@ resources:
   - grafana-config-configmap.yaml
   - grafana-deploymentconfig.yaml
   - telemeter-groups-rolebinding.yaml
+  - token-refresher-deployment.yaml
+  - token-refresher-service.yaml
 
 generators:
   - ./secret-generator.yaml
