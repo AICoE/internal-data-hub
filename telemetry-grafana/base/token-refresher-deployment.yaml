@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - args:
-            - --log.level=debug
+            - --log.level=info
             - --log.format=logfmt
             - --web.listen=0.0.0.0:8080
             - --web.internal.listen=0.0.0.0:8081
