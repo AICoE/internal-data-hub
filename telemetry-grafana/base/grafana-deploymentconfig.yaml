@@ -137,9 +137,9 @@ spec:
         - emptyDir: {}
           name: grafana-notifiers
         - name: grafana-datasources
-          secret:
+          configMap:
             defaultMode: 420
-            secretName: grafana-datasources
+            name: grafana-datasources
         - configMap:
             defaultMode: 420
             name: grafana-dashboards
