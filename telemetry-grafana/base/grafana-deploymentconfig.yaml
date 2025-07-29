@@ -25,6 +25,7 @@ spec:
       containers:
         - name: dashboard-discovery
           image: quay.io/app-sre/k8s-sidecar:0.1.178
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: grafana-dashboard-definitions
               mountPath: /grafana-dashboard-definitions
@@ -43,7 +44,7 @@ spec:
           args:
             - -config=/etc/grafana/grafana.ini
           image: quay.io/app-sre/grafana:9.3.6
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: GF_INSTALL_PLUGINS
               value: "grafana-piechart-panel"
