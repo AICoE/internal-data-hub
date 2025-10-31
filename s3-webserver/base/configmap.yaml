@@ -9,7 +9,7 @@ data:
     s3:
         access_key_env: AWS_ACCESS_KEY
         secret_key_env: AWS_SECRET_KEY
-        endpoint_url: "https://s3.upshift.redhat.com/"
+        endpoint_url: "http://psi-prod-ceph-osd-087.infra.prod.upshift.rdu2.redhat.com:8080/"
         buckets: ["DH-PROD-EXTERNAL-CI-DATA"]
         region: "us-east-1"
         root_prefix: ""
