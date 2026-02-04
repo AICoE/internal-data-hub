@@ -1,9 +1,0 @@
-apiVersion: authorization.openshift.io/v1
-kind: RoleBinding
-metadata:
-  name: cvp-ops-admin
-roleRef:
-  name: admin
-subjects:
-  - kind: Group
-    name: cvp-ops-admin
